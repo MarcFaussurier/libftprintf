@@ -8,7 +8,6 @@ AR	Makefile	/^AR			:= ar rcs$/;"	m
 AR	libft/Makefile	/^AR			:= ar rcs$/;"	m
 BONUSOBJ	Makefile	/^BONUSOBJ	:= $(BONUSSRC:.c=.o)$/;"	m
 BONUSOBJ	libft/Makefile	/^BONUSOBJ	:= $(BONUSSRC:.c=.o)$/;"	m
-BONUSSRC	Makefile	/^BONUSSRC		:=.\/ft_lstadd_back_bonus.c\\$/;"	m
 BONUSSRC	libft/Makefile	/^BONUSSRC		:=.\/ft_lstadd_back_bonus.c\\$/;"	m
 CC	Makefile	/^CC			:= gcc$/;"	m
 CC	libft/Makefile	/^CC			:= gcc$/;"	m
@@ -18,7 +17,7 @@ CFLAGS	libft/Makefile	/^CFLAGS		:= $(CFLAGS) -I$(INC)$/;"	m
 CFLAGS	libft/Makefile	/^CFLAGS		:= -Werror -Wextra -Wall -Wparentheses$/;"	m
 COBJ	Makefile	/^COBJ		:= $(CSRC:.c=.o)$/;"	m
 COBJ	libft/Makefile	/^COBJ		:= $(CSRC:.c=.o)$/;"	m
-CSRC	Makefile	/^CSRC			:=.\/ft_strnstr.c\\$/;"	m
+CSRC	Makefile	/^CSRC			:=.\/ft_printf.c$/;"	m
 CSRC	libft/Makefile	/^CSRC			:=.\/ft_strnstr.c\\$/;"	m
 DEBUG	Makefile	/^DEBUG		:= 0$/;"	m
 DEBUG	libft/Makefile	/^DEBUG		:= 0$/;"	m
@@ -29,13 +28,24 @@ INC	Makefile	/^INC			:= .\/$/;"	m
 INC	libft/Makefile	/^INC			:= .\/$/;"	m
 LIBFTPRINTF_H	libftprintf.h	/^# define LIBFTPRINTF_H$/;"	d
 LIBFT_H	libft/libft.h	/^# define LIBFT_H$/;"	d
-NAME	Makefile	/^NAME		:= libft.a$/;"	m
+NAME	Makefile	/^NAME		:= libftprintf.a$/;"	m
 NAME	libft/Makefile	/^NAME		:= libft.a$/;"	m
 RM	Makefile	/^RM			:= rm -rf$/;"	m
 RM	libft/Makefile	/^RM			:= rm -rf$/;"	m
 TRUE	libft/libft.h	/^#  define TRUE /;"	d
+argument_end	libftprintf.h	/^	unsigned int	argument_end;$/;"	m	struct:s_flst
+argument_start	libftprintf.h	/^	unsigned int	argument_start;$/;"	m	struct:s_flst
+argument_type	libftprintf.h	/^	t_type			argument_type;$/;"	m	struct:s_flst
 content	libft/libft.h	/^	void				*content;$/;"	m	struct:s_list
 e_bool	libft/libft.h	/^typedef enum			e_bool$/;"	g
+e_bool	libftprintf.h	/^typedef enum 		e_bool$/;"	g
+e_type	libftprintf.h	/^typedef enum		e_type$/;"	g
+false	libftprintf.h	/^	false,$/;"	e	enum:e_bool
+fill_zero	libftprintf.h	/^	t_bool			fill_zero;$/;"	m	struct:s_flst
+flst_clr	ft_printf.c	/^void				flst_clr(t_flst **root)$/;"	f
+flst_del	ft_printf.c	/^void				flst_del(t_flst **root, t_flst *node)$/;"	f
+flst_new	ft_printf.c	/^t_flst				*flst_new()$/;"	f
+flst_push	ft_printf.c	/^void				flst_push(t_flst **root, t_flst *node)$/;"	f
 ft_atoi	libft/ft_atoi.c	/^int				ft_atoi(const char *str)$/;"	f
 ft_bytes_digits	libft/ft_bytes_digits.c	/^unsigned int		ft_bytes_digits(size_t bytes)$/;"	f
 ft_bzero	libft/ft_bzero.c	/^void		ft_bzero(void *s, size_t n)$/;"	f
@@ -69,6 +79,7 @@ ft_memcpy	libft/ft_memcpy.c	/^void						*ft_memcpy(void *dest, const void *src, 
 ft_memmove	libft/ft_memmove.c	/^void				*ft_memmove(void *dst, const void *src, size_t n)$/;"	f
 ft_memset	libft/ft_memset.c	/^void				*ft_memset(void *s, int c, size_t len)$/;"	f
 ft_numlen	libft/ft_numlen.c	/^unsigned short			ft_numlen(int n)$/;"	f
+ft_printf	ft_printf.c	/^int					ft_printf(const char *str, ...)$/;"	f
 ft_putchar	libft/ft_putchar.c	/^void		ft_putchar(char c)$/;"	f
 ft_putchar_fd	libft/ft_putchar_fd.c	/^void		ft_putchar_fd(char c, int fd)$/;"	f
 ft_putendl	libft/ft_putendl.c	/^void		ft_putendl(char *s)$/;"	f
@@ -102,14 +113,43 @@ ft_toupper	libft/ft_toupper.c	/^int			ft_toupper(int c)$/;"	f
 g_false	libft/libft.h	/^{g_false, g_true}		t_bool;$/;"	e	enum:e_bool
 g_true	libft/libft.h	/^{g_false, g_true}		t_bool;$/;"	e	enum:e_bool
 i	libft/libft.h	/^	unsigned int		i;$/;"	m	struct:s_split_state
+left_justify	libftprintf.h	/^	t_bool			left_justify;$/;"	m	struct:s_flst
+main	test.c	/^int main()$/;"	f
 nb_words	libft/libft.h	/^	unsigned int		nb_words;$/;"	m	struct:s_split_state
 next	libft/libft.h	/^	struct s_list		*next;$/;"	m	struct:s_list	typeref:struct:s_list::s_list
+next	libftprintf.h	/^	struct s_flst	*next;$/;"	m	struct:s_flst	typeref:struct:s_flst::s_flst
 out	libft/libft.h	/^	char				**out;$/;"	m	struct:s_split_state
+padding	libftprintf.h	/^	unsigned int	padding;$/;"	m	struct:s_flst
+parsef_str	ft_printf.c	/^t_flst				*parsef_str(char *str)$/;"	f
+plus	libftprintf.h	/^	t_bool			plus;$/;"	m	struct:s_flst
+precision	libftprintf.h	/^	unsigned int	precision;$/;"	m	struct:s_flst
+s_flst	libftprintf.h	/^typedef struct		s_flst$/;"	s
 s_len	libft/libft.h	/^	unsigned int		s_len;$/;"	m	struct:s_split_state
 s_list	libft/libft.h	/^typedef struct			s_list$/;"	s
 s_split_state	libft/libft.h	/^typedef struct			s_split_state$/;"	s
+sharp	libftprintf.h	/^	t_bool			sharp;$/;"	m	struct:s_flst
 t_bool	libft/libft.h	/^{g_false, g_true}		t_bool;$/;"	t	typeref:enum:e_bool
+t_bool	libftprintf.h	/^}					t_bool;$/;"	t	typeref:enum:e_bool
+t_char	libftprintf.h	/^	t_char,$/;"	e	enum:e_type
+t_double	libftprintf.h	/^	t_double,$/;"	e	enum:e_type
+t_float	libftprintf.h	/^	t_float,$/;"	e	enum:e_type
+t_flst	libftprintf.h	/^}					t_flst;$/;"	t	typeref:struct:s_flst
+t_int	libftprintf.h	/^	t_int,$/;"	e	enum:e_type
+t_ldouble	libftprintf.h	/^	t_ldouble$/;"	e	enum:e_type
+t_lint	libftprintf.h	/^	t_lint,$/;"	e	enum:e_type
 t_list	libft/libft.h	/^}						t_list;$/;"	t	typeref:struct:s_list
+t_llint	libftprintf.h	/^	t_llint,$/;"	e	enum:e_type
+t_luint	libftprintf.h	/^	t_luint,$/;"	e	enum:e_type
+t_percent	libftprintf.h	/^	t_percent,$/;"	e	enum:e_type
+t_ptr	libftprintf.h	/^	t_ptr,$/;"	e	enum:e_type
+t_sint	libftprintf.h	/^	t_sint,$/;"	e	enum:e_type
 t_split_state	libft/libft.h	/^}						t_split_state;$/;"	t	typeref:struct:s_split_state
+t_string	libftprintf.h	/^	t_string,$/;"	e	enum:e_type
+t_type	libftprintf.h	/^}					t_type;$/;"	t	typeref:enum:e_type
+t_uchar	libftprintf.h	/^	t_uchar,$/;"	e	enum:e_type
+t_ullint	libftprintf.h	/^	t_ullint,$/;"	e	enum:e_type
+t_usint	libftprintf.h	/^	t_usint,$/;"	e	enum:e_type
 tmp	libft/libft.h	/^	char				*tmp;$/;"	m	struct:s_split_state
+true	libftprintf.h	/^	true$/;"	e	enum:e_bool
+value	libftprintf.h	/^	void			*value;$/;"	m	struct:s_flst
 y	libft/libft.h	/^	unsigned int		y;$/;"	m	struct:s_split_state

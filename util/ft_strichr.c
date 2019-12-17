@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_printf.c                                      .::    .:/ .      .::   */
+/*   ft_strichr.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/08 08:41:56 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 12:44:35 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/17 12:51:23 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/17 12:53:17 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "./libftprintf.h"
+#include "libftprintf.h"
 
-t_list					*ft_register_callable(void)
+int						ft_strichr(const char *str, char c)
 {
-	t_list				*output;
+	int					i;
 
-	
-}
-
-t_arg						*ft_format(const char *format, va_list args)
-{
-	t_arg					*output;
-	unsigned int			i;
-
-	if (!format)
-		return (NULL);
-
+	i = -1;
+	while (str[++i] && str[i] != c)
+		;
+	return (str[i] ? i : -1);
 }

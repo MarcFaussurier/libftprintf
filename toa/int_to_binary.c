@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_printf.c                                      .::    .:/ .      .::   */
+/*   int_to_binary.c                                  .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/08 08:41:56 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 12:44:35 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/12/17 14:41:34 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2019/12/17 17:33:18 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "./libftprintf.h"
+#include "libft/libft.h"
+#include "libftprintf.h"
 
-t_list					*ft_register_callable(void)
+static char					*ft_reccursive_itoba(int i, unsigned char index)
 {
-	t_list				*output;
+	char					*out;
 
-	
+	if (index >= sizeof(int) * 8)
+	{
+		printf("\n");
+		out = malloc((index + 1) * sizeof(char));
+		out[index] = '\0';
+		return (out);
+	}
+	out = ft_reccursive_itoba(i >> 1, index + 1);
+	out[sizeof(int) * 8 - index - 1] = (i & 1 ? 1 : 0) + '0';
+	return (out);
 }
 
-t_arg						*ft_format(const char *format, va_list args)
+char						*ft_itoba(void *arg)
 {
-	t_arg					*output;
-	unsigned int			i;
-
-	if (!format)
-		return (NULL);
-
+	return (ft_reccursive_itoba(*((int*) arg), 0));
 }

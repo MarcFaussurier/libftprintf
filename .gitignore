@@ -1,0 +1,6 @@
+*.out
+*.a
+*.ghc
+*.gch
+tags
+*.o

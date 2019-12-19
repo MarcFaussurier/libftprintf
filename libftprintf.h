@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 18:25:45 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/19 14:06:10 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -63,11 +63,11 @@ typedef struct				s_arg
 /*
 ** UTILS
 */
-int							ft_strichr(const char *str, char c);
+int							ft_strichr(const char *, char);
 /*
 ** TO STRING CONVERSIONS
 */
-char						*ft_itoba(void *arg);
+char						*ft_itoba(void *);
 /*
 ** SOURCES
 */
@@ -75,7 +75,11 @@ char						*ft_itoba(void *arg);
 ** t_list<t_callable> *ft_register_callable(...)
 */
 t_list						*ft_register_callable(void);
-convertor					ft_resolve(t_callable resolvables, t_arg arg);
+t_bool						ft_match_flag(t_flag, t_flag);
+/*
+** ... ft_resolve(t_list<t_callable> resolables, t_arg arg)
+*/
+convertor					ft_resolve(t_list, t_arg);
 /*
 ** t_list<t_arg> *ft_format(...)
 */

@@ -1,4 +1,4 @@
-CSRC		:= $(shell ls ./wrapper/*.c ./source/*.c ./toa/*.c ./util/*.c)
+CSRC		:= $(shell ls ./utils/*.c ./sources/*.c ./wrappers/*.c)
 NAME		:= libftprintf.a
 DEBUG		:= 0
 RM			:= rm -rf
@@ -18,7 +18,7 @@ all:		$(NAME)
 clean:
 	$(RM) $(COBJ) $(BONUSOBJ)
 fclean:		clean
-	$(RM) $(NAME) test.out
+	$(RM) $(NAME) *.out tags *.dSYM
 re:			fclean all
 norme:
 	norminette
@@ -30,5 +30,9 @@ $(NAME):	$(COBJ)
 	make -C libft
 	mv libft/libft.a .
 	$(AR) $(NAME) $(COBJ) libft.a
+school:
+	nvim -S school_workspace.vim
+home:
+	nvim -S home_workspace.vim
 .PHONY:
 		all fclean clean re bonus test

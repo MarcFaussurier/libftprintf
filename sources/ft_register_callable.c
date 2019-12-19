@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 13:21:35 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/17 17:48:37 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/19 17:15:23 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ t_list						*ft_register_callable(void)
 
 	output = NULL;
 	if ((addme = ft_lstnew(malloc(sizeof(t_callable)))))
-		*((t_callable*)addme->content) = (t_callable) { (t_flag){0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, NULL};
+		addme->content = ft_calloc(1, sizeof(t_callable)); 
 	((t_callable*)addme->content)->flags.str = 1;
 	((t_callable*)addme->content)->callback = ft_stoa;
 	if (!addme || !(addme->content))

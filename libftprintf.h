@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2019/12/19 14:06:10 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/12/19 17:16:58 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -71,6 +71,8 @@ char						*ft_itoba(void *);
 /*
 ** SOURCES
 */
+void						ft_dump_flag(t_flag);
+void						ft_dump_arg(t_arg);
 /*
 ** t_list<t_callable> *ft_register_callable(...)
 */
@@ -84,6 +86,7 @@ convertor					ft_resolve(t_list, t_arg);
 ** t_list<t_arg> *ft_format(...)
 */
 t_list						*ft_format(const char *format, va_list);
+char						*ft_render_styles(char *, t_arg);
 char						*ft_render_arg(t_list resolables, t_arg arg);
 int							ft_vasprintf(char **, const char *, va_list);
 /*

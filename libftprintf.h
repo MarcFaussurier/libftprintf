@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 14:33:13 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 16:37:07 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,9 @@
 # include <libft/libft.h>
 # include <stdarg.h>
 
-t_list					fmtid_lst;
+t_list					*fmtid_lst;
+t_list					*fmtidhash_lst;
+
 typedef struct			s_flag
 {
 	int					zero: 1;
@@ -30,12 +32,15 @@ typedef struct			s_flag
 }						t_flag;
 typedef struct			s_fmt_state
 {
+	int					output_len;
 	char				*output;
 	const char			*fmt;
 	va_list				*args;
 	t_flag				flags;
+	int					precision;
+	int					field_width;
 	unsigned int		i;
-	char				qualifier;
+	char				qualifiers[2];
 	char				identifier;
 }						t_fmt_state;
 typedef char*			(*t_convertor)(t_fmt_state *state);
@@ -45,15 +50,16 @@ typedef struct			s_fmt_id
 	char				identifier;
 	t_convertor			callback;
 }						t_fmt_id;
-void					ft_register_fmt_id(t_fmt_id);
-t_convertor				*ft_match_id(t_fmt_state);
+t_bool					ft_register_fmt_id(t_fmt_id);
+t_bool					ft_register_defaults();
+t_convertor				ft_match_fmt_id(t_fmt_state);
 char					*ft_itob(int i);
 char					*ft_uitob(unsigned int i);
 char					*ft_ltob(long i);
 char					*ft_ultob(unsigned long i);
 char					*ft_ulltob(unsigned long i);
-int						vasprintf(char **strp, const char *fmt, va_list ap);
-int						asprintf(char **strp, const char *fmt, ...);
-int						vprintf(const char *format, va_list ap);
-int						printf(const char *format, ...);
+int						ft_vasprintf(char **strp, const char *fmt, va_list ap);
+int						ft_asprintf(char **strp, const char *fmt, ...);
+int						ft_vprintf(const char *format, va_list ap);
+int						ft_printf(const char *format, ...);
 #endif

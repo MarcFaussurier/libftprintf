@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/12 15:50:28 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 20:34:40 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 23:04:28 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,13 +41,22 @@ static void					ft_parse_width(t_fmt_state *state)
 
 	if (ft_isdigit(state->fmt[state->i]))
 	{
-		// TODO: manage *
 		begin = &state->fmt[state->i];
 		width_len = 1;
 		while (++(state->i) && ft_isdigit(state->fmt[state->i]))
 			width_len += 1;
 		width_str = ft_substr(begin, 0, width_len);
 		state->field_width = ft_atoi(width_str);
+	} else if (state->fmt[state->i] == '*')
+	{
+		state->i += 1;
+		state->field_width = va_arg(state->args, int);
+		if (state->field_width < 0)
+		{
+			state->field_width = -state->field_width;
+			state->flags.minus = 1;
+			// TODO: better manage negative numbers
+		}
 	}
 }
 
@@ -59,7 +68,6 @@ static void				ft_parse_precision(t_fmt_state *state)
 
 	if (state->fmt[state->i] == '.')
 	{
-		// TODO: manage *
 		state->i += 1;
 		begin = &state->fmt[state->i];
 		precision_len = 0;
@@ -67,6 +75,14 @@ static void				ft_parse_precision(t_fmt_state *state)
 			precision_len += 1;
 		precision_str = ft_substr(begin, 0, precision_len);
 		state->precision = ft_atoi(precision_str);
+	} else if (state->fmt[state->i] == '*')
+	{
+		state->i += 1;
+		state->precision = va_arg(state->args, int);
+	}
+	if (state->precision < 0)
+	{
+		state->precision = 0;
 	}
 }
 
@@ -97,21 +113,21 @@ static void				ft_parse_letters(t_fmt_state *state)
 		}
 		if (!noteq && content->identifier == state->fmt[state->i + iterno])
 		{
-			printf("id: %c callback addr: %p\n", content->identifier, content->callback);
+			state->i += iterno;
 			generated = (*(content->callback))(state);
 			if (!generated)
 			{
-				printf("unsupported flags // qualifiers...\n");
+				ft_putendl("[ft_printf] ERROR: unsupported flags // qualifiers...\n");
 			}
 			else
 			{
-				printf("|<generated: %s %p>|", generated, state->output);
-				if (state->output && generated && state->dstsize)
+				if (state->output && state->dstsize)
 				{
 					ft_strlcat(state->output, generated, state->dstsize);
 				}
 				state->output_len += ft_strlen(generated);
 			}
+			state->i += 1;
 		}
 		current = current->next;
 	}
@@ -120,12 +136,16 @@ static void				ft_parse_letters(t_fmt_state *state)
 
 static void				ft_free_one(void *content)
 {
-	free(content);
+	if (content)
+		free(content);
 }
 static void				ft_free_fmtid_lst()
 {
-	ft_lstclear(&fmtid_lst, ft_free_one);
-	fmtid_lst = NULL;
+	if (fmtid_lst)
+	{
+		ft_lstclear(&fmtid_lst, ft_free_one);
+		fmtid_lst = NULL;
+	}
 }
 
 int						ft_vasprintf(char **strp, const char *fmt, va_list ap)
@@ -138,7 +158,8 @@ int						ft_vasprintf(char **strp, const char *fmt, va_list ap)
 	{
 		if (!ft_register_defaults())
 		{
-			// errors ...
+			ft_free_fmtid_lst();
+			ft_putendl("[ft_printf] ERROR: unable to init base identifiers..");
 		}
 #if USE_AT_EXIT == 1
 		atexit(ft_free_fmtid_lst);
@@ -148,26 +169,24 @@ int						ft_vasprintf(char **strp, const char *fmt, va_list ap)
 	state = ft_calloc(1, sizeof(t_fmt_state));
 	if (strp && !*strp)
 	{
-		printf("counting malloc size..\n");
 		state->dstsize = ft_vasprintf(NULL, fmt, ap);
-		*strp = malloc(state->dstsize * sizeof(char) + 128);
-		printf("malloced\n");
+		*strp = malloc(state->dstsize * sizeof(char));
 		freelst = TRUE;
 	} 
 	else
+	{
+		state->dstsize = 0;
 		freelst = FALSE;
-
+	}
 	state->output = strp != NULL ? *strp : NULL;
 	if (state->output)
 	{
 		printf("malloc succeed\n");
 	}
 	state->fmt = fmt;
-	state->dstsize = 0;
 	va_copy(state->args, ap);
 	while (fmt[state->i])
 	{
-		ft_putchar(fmt[state->i]);
 		if (fmt[state->i] == '%')
 		{
 			state->i += 1;
@@ -183,8 +202,8 @@ int						ft_vasprintf(char **strp, const char *fmt, va_list ap)
 				state->output[state->output_len] = state->fmt[state->i];
 			}
 			state->output_len += 1;
+			state->i += 1;
 		}
-		state->i += 1;
 	}
 	state->output_len = state->output_len;
 	output = state->output_len;

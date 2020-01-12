@@ -1,4 +1,4 @@
-CSRC		:= ft_itob.c ft_register_defaults.c ft_vasprintf.c ft_asprintf.c ft_register_fmt_id.c
+CSRC		:= ft_itob.c ft_register_defaults.c ft_vasprintf.c ft_asprintf.c ft_register_fmt_id.c ft_base.c
 NAME		:= libftprintf.a
 DEBUG		:= 0
 RM			:= rm -rf

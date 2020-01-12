@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 16:37:07 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 20:05:40 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,11 +16,10 @@
 # ifndef USE_AT_EXIT
 #  define USE_AT_EXIT 0
 # endif
-# include <libft/libft.h>
+# include "libft/libft.h"
 # include <stdarg.h>
 
 t_list					*fmtid_lst;
-t_list					*fmtidhash_lst;
 
 typedef struct			s_flag
 {
@@ -32,10 +31,11 @@ typedef struct			s_flag
 }						t_flag;
 typedef struct			s_fmt_state
 {
+	size_t				dstsize;
 	int					output_len;
 	char				*output;
 	const char			*fmt;
-	va_list				*args;
+	va_list				args;
 	t_flag				flags;
 	int					precision;
 	int					field_width;
@@ -52,7 +52,6 @@ typedef struct			s_fmt_id
 }						t_fmt_id;
 t_bool					ft_register_fmt_id(t_fmt_id);
 t_bool					ft_register_defaults();
-t_convertor				ft_match_fmt_id(t_fmt_state);
 char					*ft_itob(int i);
 char					*ft_uitob(unsigned int i);
 char					*ft_ltob(long i);

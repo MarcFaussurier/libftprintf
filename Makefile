@@ -1,10 +1,10 @@
-CSRC		:= $(shell ls ./utils/*.c ./sources/*.c ./wrappers/*.c)
+CSRC		:= ft_itob.c ft_register_defaults.c ft_vasprintf.c ft_asprintf.c ft_register_fmt_id.c
 NAME		:= libftprintf.a
 DEBUG		:= 0
 RM			:= rm -rf
 AR			:= ar rcs
 CC			:= gcc
-CFLAGS		:= -Werror -Wextra -Wall -Wparentheses
+CFLAGS		:= -Werror -Wextra -Wall -Wparentheses -g
 COBJ		:= $(CSRC:.c=.o)
 BONUSOBJ	:= $(BONUSSRC:.c=.o)
 DEBUGFLAGS	:= -g #-fsanitize=address -fno-omit-frame-pointer
@@ -27,8 +27,7 @@ norme:
 test:		$(NAME)
 	gcc -g test.c libftprintf.a libft.a -o test.out && valgrind ./test.out
 $(NAME):	$(COBJ)
-	make -C libft
-	mv libft/libft.a .
+	cd libft && make bonus && mv libft.a ..
 	$(AR) $(NAME) $(COBJ) libft.a
 school:
 	nvim -S school_workspace.vim

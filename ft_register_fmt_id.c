@@ -6,12 +6,13 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/12 15:29:26 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 15:36:18 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 19:17:50 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include "libft/libft.h"
 
 t_bool				ft_register_fmt_id(t_fmt_id fmt_id)
 {

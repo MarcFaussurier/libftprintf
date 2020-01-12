@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/12 15:50:28 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 16:37:10 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 20:34:40 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,6 +41,7 @@ static void					ft_parse_width(t_fmt_state *state)
 
 	if (ft_isdigit(state->fmt[state->i]))
 	{
+		// TODO: manage *
 		begin = &state->fmt[state->i];
 		width_len = 1;
 		while (++(state->i) && ft_isdigit(state->fmt[state->i]))
@@ -58,6 +59,7 @@ static void				ft_parse_precision(t_fmt_state *state)
 
 	if (state->fmt[state->i] == '.')
 	{
+		// TODO: manage *
 		state->i += 1;
 		begin = &state->fmt[state->i];
 		precision_len = 0;
@@ -70,37 +72,102 @@ static void				ft_parse_precision(t_fmt_state *state)
 
 static void				ft_parse_letters(t_fmt_state *state)
 {
+	t_fmt_id			*content;
 	t_list				*current;
-	char				letters[3];
 	unsigned char		iterno;
+	int					noteq;
+	char				*generated;
 
-	current = fmtidhash_lst;
+	iterno = 0;
+	noteq = 0;
+	current = fmtid_lst;
 	while (current)
 	{
+		content = current->content;
+		noteq = 0;
 		iterno = 0;
-		while (iterno < 3 && letters[iterno] == state->fmt[state->i + iterno])
+		while (iterno < 2 && content->qualifiers[iterno])
 		{
-		
+			if (content->qualifiers[iterno] != state->fmt[state->i + iterno])
+			{
+				noteq = 1;
+				break;
+			}
+			iterno += 1;
+		}
+		if (!noteq && content->identifier == state->fmt[state->i + iterno])
+		{
+			printf("id: %c callback addr: %p\n", content->identifier, content->callback);
+			generated = (*(content->callback))(state);
+			if (!generated)
+			{
+				printf("unsupported flags // qualifiers...\n");
+			}
+			else
+			{
+				printf("|<generated: %s %p>|", generated, state->output);
+				if (state->output && generated && state->dstsize)
+				{
+					ft_strlcat(state->output, generated, state->dstsize);
+				}
+				state->output_len += ft_strlen(generated);
+			}
 		}
 		current = current->next;
 	}
 }
 
+
+static void				ft_free_one(void *content)
+{
+	free(content);
+}
+static void				ft_free_fmtid_lst()
+{
+	ft_lstclear(&fmtid_lst, ft_free_one);
+	fmtid_lst = NULL;
+}
+
 int						ft_vasprintf(char **strp, const char *fmt, va_list ap)
 {
 	t_fmt_state			*state;
-	int					output_len;
+	int					output;
+	t_bool				freelst;
 
-	state = calloc(1, sizeof(t_fmt_state));
+	if (!fmtid_lst)
+	{
+		if (!ft_register_defaults())
+		{
+			// errors ...
+		}
+#if USE_AT_EXIT == 1
+		atexit(ft_free_fmtid_lst);
+#endif
+	}
+	printf("fmtid_lst: %p\n", fmtid_lst);
+	state = ft_calloc(1, sizeof(t_fmt_state));
 	if (strp && !*strp)
 	{
-		output_len = vasprintf(NULL, fmt, ap);
-		*strp = malloc(output_len * sizeof(char));
+		printf("counting malloc size..\n");
+		state->dstsize = ft_vasprintf(NULL, fmt, ap);
+		*strp = malloc(state->dstsize * sizeof(char) + 128);
+		printf("malloced\n");
+		freelst = TRUE;
+	} 
+	else
+		freelst = FALSE;
+
+	state->output = strp != NULL ? *strp : NULL;
+	if (state->output)
+	{
+		printf("malloc succeed\n");
 	}
-	state->output = *strp;
 	state->fmt = fmt;
+	state->dstsize = 0;
+	va_copy(state->args, ap);
 	while (fmt[state->i])
 	{
+		ft_putchar(fmt[state->i]);
 		if (fmt[state->i] == '%')
 		{
 			state->i += 1;
@@ -109,9 +176,22 @@ int						ft_vasprintf(char **strp, const char *fmt, va_list ap)
 			ft_parse_precision(state);
 			ft_parse_letters(state);
 		}
+		else
+		{
+			if (state->output)
+			{
+				state->output[state->output_len] = state->fmt[state->i];
+			}
+			state->output_len += 1;
+		}
 		state->i += 1;
 	}
-	output_len = state->output_len;
+	state->output_len = state->output_len;
+	output = state->output_len;
 	free(state);
-	return (output_len);
+#if USE_AT_EXIT == 0
+	if (freelst)
+		ft_free_fmtid_lst();
+#endif
+	return (output);
 }

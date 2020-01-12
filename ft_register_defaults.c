@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/12 15:37:30 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 00:22:46 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 00:45:03 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,6 +88,22 @@ static char			*ft_fmt_hexac(t_fmt_state *state)
 t_bool				ft_register_defaults()
 {
 	if (!ft_register_fmt_id((t_fmt_id){{'\0', '\0'},'i', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'\0', '\0'},'d', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'\0', '\0'},'u', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'l', '\0'},'i', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'l', '\0'},'d', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'l', '\0'},'u', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'l', 'l'},'i', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'l', 'l'},'d', &ft_fmt_int}))
+		return (FALSE);
+	if (!ft_register_fmt_id((t_fmt_id){{'l', 'l'},'u', &ft_fmt_int}))
 		return (FALSE);
 	if (!ft_register_fmt_id((t_fmt_id){{'\0', '\0'}, 's', &ft_fmt_str}))
 		return (FALSE);

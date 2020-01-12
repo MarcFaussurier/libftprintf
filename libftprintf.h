@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 14:25:44 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/12 14:33:13 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,7 @@ typedef struct			s_fmt_state
 	char				qualifier;
 	char				identifier;
 }						t_fmt_state;
-typedef char*			(*t_convertor)(t_fmt_state *state)
+typedef char*			(*t_convertor)(t_fmt_state *state);
 typedef struct			s_fmt_id
 {
 	char				qualifiers[2];
@@ -47,6 +47,11 @@ typedef struct			s_fmt_id
 }						t_fmt_id;
 void					ft_register_fmt_id(t_fmt_id);
 t_convertor				*ft_match_id(t_fmt_state);
+char					*ft_itob(int i);
+char					*ft_uitob(unsigned int i);
+char					*ft_ltob(long i);
+char					*ft_ultob(unsigned long i);
+char					*ft_ulltob(unsigned long i);
 int						vasprintf(char **strp, const char *fmt, va_list ap);
 int						asprintf(char **strp, const char *fmt, ...);
 int						vprintf(const char *format, va_list ap);

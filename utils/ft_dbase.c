@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test.c                                           .::    .:/ .      .::   */
+/*   ft_dbase.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 19:01:44 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 13:28:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/13 11:22:57 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/13 11:58:36 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "stdio.h"
 
-int main()
+char					*ft_dbase(const char *base, double num)
 {
-	char	*out;
+	unsigned int		base_len;
+	long long			n;
+	char				*r;
+	char				*s;
 
-	out = NULL;
-	ft_asprintf(&out, "lol %i %s %c %p %o f:%f end", 43, "hello world", 'q', 200121, 9, 1);
-	printf("generated: [%s]\n", out);
-	out = ft_ubase(B16, 4202446464454434, ULONG_LONG_MAX);
-	printf("out: %s\n", out);
-	printf("%e %f\n", 2.5, 2.5);
-//	printf("%lli\n", 45);
+	base_len = ft_strlen(base);
+	if (num == 0)
+	{
+		return (ft_strdup(""));
+	}
+	r = ft_dbase(base, num / base_len);
+	if (num / base_len < 1 && num >= 1)
+	{
+		s = ft_strjoin(".", r);
+		free(r);
+	}
+	else
+		s = r;
+	while (num < 1)
+		num *= base_len;
+	n = num;
+	r = ft_strjoin((char[2]){base[n % base_len],'\0'}, s);
+	free(s);
+	return (r);
 }

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/13 10:08:21 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 10:08:34 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 11:13:38 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,6 +27,5 @@
 		free(o);
 		o = swp;
 	}
-	state->output_len += ft_strlen(o);
 	return (o);
 }

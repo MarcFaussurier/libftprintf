@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 10:06:16 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 11:32:52 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,6 +21,8 @@
 # include "libft/libft.h"
 # define b8 "01234567"
 # define B8 b8
+# define b10 "0123456789"
+# define B10 b10
 # define b16 "0123456789abcdef"
 # define B16 "0123456789ABCDEF"
 
@@ -56,6 +58,7 @@ typedef struct			s_fmt_id
 }						t_fmt_id;
 char					*ft_base(const char *base, long long i, long long max);
 char					*ft_ubase(const char *base, unsigned long long i, unsigned long long max);
+char					*ft_dbase(const char *base, double i);
 t_bool					ft_register_fmt_id(t_fmt_id);
 t_bool					ft_register_defaults();
 char					*ft_itob(int i);

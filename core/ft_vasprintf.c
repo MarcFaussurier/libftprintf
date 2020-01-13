@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/01/12 15:50:28 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 23:04:28 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 11:03:19 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -93,6 +93,7 @@ static void				ft_parse_letters(t_fmt_state *state)
 	unsigned char		iterno;
 	int					noteq;
 	char				*generated;
+	char				*swp;
 
 	iterno = 0;
 	noteq = 0;
@@ -113,11 +114,13 @@ static void				ft_parse_letters(t_fmt_state *state)
 		}
 		if (!noteq && content->identifier == state->fmt[state->i + iterno])
 		{
-			state->i += iterno;
+			state->i += iterno + 1;
 			generated = (*(content->callback))(state);
 			if (!generated)
 			{
-				ft_putendl("[ft_printf] ERROR: unsupported flags // qualifiers...\n");
+				if (!state->output)
+					ft_putendl("[ft_printf] ERROR: unsupported flags // qualifiers...\n");				
+				break;
 			}
 			else
 			{
@@ -126,10 +129,17 @@ static void				ft_parse_letters(t_fmt_state *state)
 					ft_strlcat(state->output, generated, state->dstsize);
 				}
 				state->output_len += ft_strlen(generated);
+				return ;
 			}
-			state->i += 1;
 		}
 		current = current->next;
+	}
+	if (!state->output)
+	{
+		ft_putstr("[ft_printf] ERROR: unknow flag // qualifiers: ");
+		swp = ft_substr(state->fmt, state->i, 3);
+		ft_putendl(swp);
+		free(swp);
 	}
 }
 

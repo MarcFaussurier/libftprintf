@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test.c                                           .::    .:/ .      .::   */
+/*   ft_fmt_uint.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 19:01:44 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 13:28:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/13 11:16:57 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/13 11:18:24 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "stdio.h"
 
-int main()
+ char			*ft_fmt_uint(t_fmt_state *state)
 {
-	char	*out;
+	unsigned int			n;
+	char					*o;
 
-	out = NULL;
-	ft_asprintf(&out, "lol %i %s %c %p %o f:%f end", 43, "hello world", 'q', 200121, 9, 1);
-	printf("generated: [%s]\n", out);
-	out = ft_ubase(B16, 4202446464454434, ULONG_LONG_MAX);
-	printf("out: %s\n", out);
-	printf("%e %f\n", 2.5, 2.5);
-//	printf("%lli\n", 45);
+	n = (unsigned int) va_arg(state->args, unsigned int);
+	o = ft_ubase(b10, n, UINT_MAX);
+	return (o);
 }
+

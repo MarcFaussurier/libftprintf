@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test.c                                           .::    .:/ .      .::   */
+/*   ft_fmt_char.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 19:01:44 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 00:48:14 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/13 10:07:09 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/13 10:07:36 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "stdio.h"
 
-int main()
+char			*ft_fmt_char(t_fmt_state *state)
 {
-	char	*out;
+	char			c;
+	char			*output;
 
-	out = NULL;
-	ft_asprintf(&out, "lol %i %s %c %p end", 43, "hello world", 'q', 2001215);
-	printf("generated: [%s]\n", out);
-	out = ft_ubase(B16, 4202446464454434, ULONG_LONG_MAX);
-	printf("out: %s", out);
-
-//	printf("%lli\n", 45);
+	c = va_arg(state->args, int);
+	output = malloc(2 * sizeof(char));
+	if (!output)
+		return (output);
+	output[0] = c;
+	output[1] = '\0';
+	return (output);
 }

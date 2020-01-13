@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test.c                                           .::    .:/ .      .::   */
+/*   ft_fmt_int.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 19:01:44 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 00:48:14 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/13 10:04:31 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/13 10:05:36 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "stdio.h"
 
-int main()
+char 		*ft_fmt_int(t_fmt_state *state)
 {
-	char	*out;
+	int				i;
 
-	out = NULL;
-	ft_asprintf(&out, "lol %i %s %c %p end", 43, "hello world", 'q', 2001215);
-	printf("generated: [%s]\n", out);
-	out = ft_ubase(B16, 4202446464454434, ULONG_LONG_MAX);
-	printf("out: %s", out);
-
-//	printf("%lli\n", 45);
+	i = va_arg(state->args, int);
+	return (ft_itoa(i));
 }

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 23:58:59 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/01/13 10:06:16 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,16 +16,15 @@
 # ifndef USE_AT_EXIT
 #  define USE_AT_EXIT 0
 # endif
-# include "libft/libft.h"
 # include <stdarg.h>
 # include <limits.h>
+# include "libft/libft.h"
 # define b8 "01234567"
 # define B8 b8
 # define b16 "0123456789abcdef"
 # define B16 "0123456789ABCDEF"
 
 t_list					*fmtid_lst;
-
 typedef struct			s_flag
 {
 	int					zero: 1;
@@ -68,4 +67,5 @@ int						ft_vasprintf(char **strp, const char *fmt, va_list ap);
 int						ft_asprintf(char **strp, const char *fmt, ...);
 int						ft_vprintf(const char *format, va_list ap);
 int						ft_printf(const char *format, ...);
+# include "format_identifiers.h"
 #endif

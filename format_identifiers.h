@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test.c                                           .::    .:/ .      .::   */
+/*   format_identifiers.h                             .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 19:01:44 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 00:48:14 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/13 09:54:01 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/13 10:06:19 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include "stdio.h"
+#ifndef FORMAT_IDENTIFIERS_H
+# define FORMAT_IDENTIFIERS_H
 
-int main()
-{
-	char	*out;
+char					*ft_fmt_int(t_fmt_state *);
+char					*ft_fmt_str(t_fmt_state *);
+char					*ft_fmt_char(t_fmt_state *);
+char					*ft_fmt_ptr(t_fmt_state *);
+char					*ft_fmt_hexa(t_fmt_state *);
+char					*ft_fmt_hexac(t_fmt_state *);
 
-	out = NULL;
-	ft_asprintf(&out, "lol %i %s %c %p end", 43, "hello world", 'q', 2001215);
-	printf("generated: [%s]\n", out);
-	out = ft_ubase(B16, 4202446464454434, ULONG_LONG_MAX);
-	printf("out: %s", out);
-
-//	printf("%lli\n", 45);
-}
+#endif

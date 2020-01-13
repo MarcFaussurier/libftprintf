@@ -1,4 +1,4 @@
-CSRC		:= ft_itob.c ft_register_defaults.c ft_vasprintf.c ft_asprintf.c ft_register_fmt_id.c ft_base.c
+CSRC		:= $(shell ls ./utils/*.c ./format_identifiers/*.c ./core/*.c)
 NAME		:= libftprintf.a
 DEBUG		:= 0
 RM			:= rm -rf

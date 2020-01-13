@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test.c                                           .::    .:/ .      .::   */
+/*   ft_fmt_hexac.c                                   .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 19:01:44 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 00:48:14 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/01/13 10:09:31 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/01/13 10:10:13 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "stdio.h"
 
-int main()
+ char			*ft_fmt_hexac(t_fmt_state *state)
 {
-	char	*out;
+	unsigned long long		addr;
+	char					*o;
 
-	out = NULL;
-	ft_asprintf(&out, "lol %i %s %c %p end", 43, "hello world", 'q', 2001215);
-	printf("generated: [%s]\n", out);
-	out = ft_ubase(B16, 4202446464454434, ULONG_LONG_MAX);
-	printf("out: %s", out);
-
-//	printf("%lli\n", 45);
+	addr = (unsigned long long) va_arg(state->args, void *);
+	o = ft_ubase(B16, addr, ULONG_LONG_MAX);
+	state->output_len += ft_strlen(o);
+	return (o);
 }

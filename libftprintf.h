@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 11:32:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 16:00:53 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,6 +56,8 @@ typedef struct			s_fmt_id
 	char				identifier;
 	t_convertor			callback;
 }						t_fmt_id;
+char					*ft_lltoa(long long n);
+size_t					ft_lllen(long long n);
 char					*ft_base(const char *base, long long i, long long max);
 char					*ft_ubase(const char *base, unsigned long long i, unsigned long long max);
 char					*ft_dbase(const char *base, double i);

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/01 12:21:24 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 16:04:53 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/01 16:59:49 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -121,4 +121,5 @@ int main(void) {
   printf("sign = %x\n", d2.parts.sign);
   printf("exponent = %i\n", d2.parts.exponent);
   printf("mantisa = %li\n", d2.parts.mantisa);
+  printf("exp notation test: %.50e %hhu %lf \n", (double)0.65, (unsigned char)100, DBL_MAX);
 }

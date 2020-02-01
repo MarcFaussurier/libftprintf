@@ -1,4 +1,4 @@
-CSRC		:= $(shell ls ./utils/*.c ./format_identifiers/*.c ./core/*.c)
+CSRC		:= $(shell ls ./misc/*.c ./fmt/*.c ./core/*.c)
 NAME		:= libftprintf.a
 DEBUG		:= 0
 RM			:= rm -rf
@@ -21,7 +21,7 @@ fclean:		clean
 	$(RM) $(NAME) *.out tags *.dSYM
 re:			fclean all
 norme:
-	norminette
+	norminette:e 
 %.o:		%.c libftprintf.h
 	$(CC) $(CFLAGS) -c $< -o $@
 test:		$(NAME)

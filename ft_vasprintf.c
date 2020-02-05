@@ -30,15 +30,16 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
 	char			*bob;
 	char			*gen;
 
-	if (ob && !g_convertors)
-	{
-		ft_boot_convertors();
-		if (AT_EXIT)
-			atexit(ft_free_gconvertor);
-	}
-	oi = ob ? ft_vasprintf(NULL, fmt, ap) : 0;
+	oi = 0;
 	if (ob)
 	{
+		if (!g_convertors)
+		{
+			ft_boot_convertors();
+			if (AT_EXIT)
+				atexit(ft_free_gconvertor);
+		}
+		oi = ft_vasprintf(NULL, fmt, ap)
 		bob = malloc(oi);
 		*ob = bob;
 	}
@@ -57,20 +58,18 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
 				oi += ft_strlen(gen);
 		}
 		else if (ob)
-		{
 			*(bob++) = *fmt;
-		}
 		else
 			oi += 1;
 		fmt += 1;
 	}
 	if (ob)
+	{
 		*bob = '\0';
+		if (!AT_EXIT)
+			ft_free_gconvertor();
+	}
 	else
 		oi += 1;
-	if (ob && !AT_EXIT)
-	{
-		ft_free_gconvertor();
-	}
 	return (oi);
 }

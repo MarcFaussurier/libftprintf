@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:39:04 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 13:27:11 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/05 13:35:17 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,31 +45,24 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
 	}
 	while (*fmt)
 	{
-		if (*fmt == '%')
+		if (*fmt == '%' && (fmt += 1))
 		{
-			fmt += 1;
 			gen = ft_argtoa(&fmt, ap);
 			if (ob)
-			{
 				while (*gen)
 					*(bob++) = *gen++;
-			}
 			else
 				oi += ft_strlen(gen);
 		}
-		else if (ob)
+		else if (ob || !(oi += 1))
 			*(bob++) = *fmt;
-		else
-			oi += 1;
 		fmt += 1;
 	}
-	if (ob)
+	if (ob || !(oi += 1))
 	{
 		*bob = '\0';
 		if (!AT_EXIT)
 			ft_free_gconvertor();
 	}
-	else
-		oi += 1;
 	return (oi);
 }

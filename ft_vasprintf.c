@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:39:04 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 12:46:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/05 13:27:11 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,7 +39,7 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
 			if (AT_EXIT)
 				atexit(ft_free_gconvertor);
 		}
-		oi = ft_vasprintf(NULL, fmt, ap)
+		oi = ft_vasprintf(NULL, fmt, ap);
 		bob = malloc(oi);
 		*ob = bob;
 	}

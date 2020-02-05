@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_fmt_hexac.c                                   .::    .:/ .      .::   */
+/*   ft_get_convertor.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/13 10:09:31 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 10:10:13 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 10:59:10 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 11:05:10 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <libftprintf.h>
 
- char			*ft_fmt_hexac(t_fmt_state *state)
+t_convertor				ft_get_convertor(char specifier)
 {
-	unsigned long long		addr;
-	char					*o;
+	t_list				*current;
+	t_assoc_convertor	*value;
 
-	addr = (unsigned long long) va_arg(state->args, void *);
-	o = ft_ubase(B16, addr, ULONG_LONG_MAX);
-	state->output_len += ft_strlen(o);
-	return (o);
+	current = g_convertors;
+	while (current)
+	{
+		value = (t_assoc_convertor*) current->content;
+		if (value->specifier == specifier)
+			return (value->convertor);
+		current = current->next;
+	}
+	return (not_found_convertor);
 }

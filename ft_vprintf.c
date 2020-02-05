@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_base.c                                        .::    .:/ .      .::   */
+/*   ft_vprintf.c                                     .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 23:21:31 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 11:15:02 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 08:31:04 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 10:07:27 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <libftprintf.h>
 
-char					*ft_ubase(const char *base, unsigned long long num, unsigned long long max)
+int				ft_vprintf(const char *fmt, va_list ap)
 {
+	int			oi;
+	char const	*ob;
 
-	unsigned long long	rest;
-	unsigned int		base_len;
-	char				c;
-	char				*r;
-	char				*s;
-
-	num = num > max ? 0 : num;
-	base_len = ft_strlen(base);
-	rest = num / base_len;
-	if (rest)
-		s = ft_ubase(base, rest, max);
-	else
-		s = ft_strdup("");
-	c = base[num % base_len];
-	r = ft_strjoin(s, (char[2]){c, '\0'});
-	free(s);
-	return (r);
+	oi = ft_vasprintf(&ob, fmt, ap);
+	ft_putstr((char*) ob);
+	return (oi);
 }
-
-

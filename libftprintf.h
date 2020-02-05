@@ -5,72 +5,54 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/12/17 12:21:54 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/01 16:00:53 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 12:23:47 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
-# ifndef USE_AT_EXIT
-#  define USE_AT_EXIT 0
-# endif
 # include <stdarg.h>
-# include <limits.h>
-# include "libft/libft.h"
-# define b8 "01234567"
-# define B8 b8
-# define b10 "0123456789"
-# define B10 b10
-# define b16 "0123456789abcdef"
-# define B16 "0123456789ABCDEF"
+# include <libft/libft.h>
+# define NO_PRECISION -424242
+# ifndef AT_EXIT
+#  define AT_EXIT 0
+# endif
 
-t_list					*fmtid_lst;
-typedef struct			s_flag
+int					ft_printf(const char *fmt, ...);
+int					ft_vprintf(const char *fmt, va_list ap);
+int					ft_vasprintf(char const **ob, const char *fmt, va_list ap);
+int					ft_asprintf(char const **ob, const char *fmt, ...);
+
+char				*ft_argtoa(char const **fmt, va_list ap);
+
+
+typedef struct		s_flags
 {
-	int					zero: 1;
-	int					plus: 1;
-	int					minus: 1;
-	int					space: 1;
-	int					sharp: 1;
-}						t_flag;
-typedef struct			s_fmt_state
+	char			zero:		1;
+	char			plus:		1;
+	char			minus:		1;
+	char			sharp:		1;
+}					t_flags;
+
+
+typedef char*(*t_convertor)(t_flags, int, int, char*);
+
+t_convertor			ft_get_convertor(char);
+
+typedef struct		s_assoc_convertor
 {
-	size_t				dstsize;
-	int					output_len;
-	char				*output;
-	const char			*fmt;
-	va_list				args;
-	t_flag				flags;
-	int					precision;
-	int					field_width;
-	unsigned int		i;
-	char				qualifiers[2];
-	char				identifier;
-}						t_fmt_state;
-typedef char*			(*t_convertor)(t_fmt_state *state);
-typedef struct			s_fmt_id
-{
-	char				qualifiers[2];
-	char				identifier;
-	t_convertor			callback;
-}						t_fmt_id;
-char					*ft_lltoa(long long n);
-size_t					ft_lllen(long long n);
-char					*ft_base(const char *base, long long i, long long max);
-char					*ft_ubase(const char *base, unsigned long long i, unsigned long long max);
-char					*ft_dbase(const char *base, double i);
-t_bool					ft_register_fmt_id(t_fmt_id);
-t_bool					ft_register_defaults();
-char					*ft_itob(int i);
-char					*ft_uitob(unsigned int i);
-char					*ft_ltob(long i);
-char					*ft_ultob(unsigned long i);
-char					*ft_ulltob(unsigned long i);
-int						ft_vasprintf(char **strp, const char *fmt, va_list ap);
-int						ft_asprintf(char **strp, const char *fmt, ...);
-int						ft_vprintf(const char *format, va_list ap);
-int						ft_printf(const char *format, ...);
-# include "format_identifiers.h"
+	char			specifier;
+	t_convertor		convertor;
+}					t_assoc_convertor;
+
+t_bool				ft_is_specifier(char);
+t_bool				ft_register_convertor(t_assoc_convertor);
+/*
+** t_list of <t_assoc_convertor>
+*/
+t_list				*g_convertors;
+void				*not_found_convertor;
+void				ft_boot_convertors();
 #endif

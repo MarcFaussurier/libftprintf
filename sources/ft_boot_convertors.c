@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_dbase.c                                       .::    .:/ .      .::   */
+/*   ft_boot_convertors.c                             .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/13 11:22:57 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 11:58:36 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 12:30:03 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 12:34:24 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <libftprintf.h>
 
-char					*ft_dbase(const char *base, double num)
+char			*ft_fmt_s(t_flags flags, int padding, int precision, char *qualifiers)
 {
-	unsigned int		base_len;
-	long long			n;
-	char				*r;
-	char				*s;
+	(void) flags;
+	(void) padding;
+	(void) precision;
+	(void) qualifiers;
+	return (ft_strdup("string test"));
+}
 
-	base_len = ft_strlen(base);
-	if (num == 0)
-	{
-		return (ft_strdup(""));
-	}
-	r = ft_dbase(base, num / base_len);
-	if (num / base_len < 1 && num >= 1)
-	{
-		s = ft_strjoin(".", r);
-		free(r);
-	}
-	else
-		s = r;
-	while (num < 1)
-		num *= base_len;
-	n = num;
-	r = ft_strjoin((char[2]){base[n % base_len],'\0'}, s);
-	free(s);
-	return (r);
+void			ft_boot_convertors()
+{
+	printf("registring convertors...\n");
+	ft_register_convertor((t_assoc_convertor){'s', &ft_fmt_s});
+	printf("convertors size: %i\n", ft_lstsize(g_convertors));
 }

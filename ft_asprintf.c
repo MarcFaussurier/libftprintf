@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_fmt_octal.c                                   .::    .:/ .      .::   */
+/*   ft_asprintf.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/13 11:06:55 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 11:17:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 10:16:20 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 10:18:01 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <libftprintf.h>
 
- char			*ft_fmt_octal(t_fmt_state *state)
+int					ft_asprintf(char const **ob, const char *fmt, ...)
 {
-	unsigned int			n;
-	char					*o;
+	int				output;
+	va_list			ap;
 
-	n = (unsigned int) va_arg(state->args, unsigned int);
-	o = ft_ubase(b8, n, UINT_MAX);
-	return (o);
+	va_start(ap, fmt);
+	output = ft_vasprintf(ob, fmt, ap);
+	va_end(ap);
+	return (output);
 }

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_fmt_double.c                                  .::    .:/ .      .::   */
+/*   ft_not_found_convertor.c                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/13 11:19:12 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 11:33:07 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 12:53:51 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 12:56:56 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <libftprintf.h>
 
-char			*ft_fmt_double(t_fmt_state *state)
+char			*ft_not_found_convertor(t_flags flags, int padding, int precision, char *qualifiers)
 {
-	double		n;
-	char					*o;
-
-	n = (double) va_arg(state->args, double);
-	o = ft_dbase(b10, n);
-	return (o);
+	(void) flags;
+	(void) padding;
+	(void) precision;
+	(void) qualifiers;
+	return (ft_strdup(""));
 }

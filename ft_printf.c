@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_register_fmt_id.c                             .::    .:/ .      .::   */
+/*   ft_printf.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/12 15:29:26 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/12 19:17:50 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 08:25:45 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 09:53:05 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
-#include "libft/libft.h"
+#include <libftprintf.h>
 
-t_bool				ft_register_fmt_id(t_fmt_id fmt_id)
+int					ft_printf(const char *fmt, ...)
 {
-	t_list			*new;
-	t_fmt_id		*content;
+	int				output;
+	va_list			ap;
 
-	if(!(content = malloc(1 * sizeof(t_fmt_id))))
-		return (FALSE);
-	*content = fmt_id;
-	if (!(new = ft_lstnew(content)))
-	{
-		free(content);
-		return (FALSE);
-	}
-	ft_lstadd_back(&fmtid_lst, new);
-	return (TRUE);
+	va_start(ap, fmt);
+	output = ft_vprintf(fmt, ap);
+	va_end(ap);
+	return (output);
 }

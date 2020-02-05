@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_fmt_char.c                                    .::    .:/ .      .::   */
+/*   ft_register_convertor.c                          .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/01/13 10:07:09 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/01/13 10:07:36 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 12:24:18 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 12:27:52 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include <libftprintf.h>
 
-char			*ft_fmt_char(t_fmt_state *state)
+t_bool			ft_register_convertor(t_assoc_convertor convertor)
 {
-	char			c;
-	char			*output;
+	t_assoc_convertor	*value;
+	t_list				*new;
 
-	c = va_arg(state->args, int);
-	output = malloc(2 * sizeof(char));
-	if (!output)
-		return (output);
-	output[0] = c;
-	output[1] = '\0';
-	return (output);
+	value = malloc(sizeof(t_assoc_convertor));
+	if (!value)
+		return (FALSE);
+	*value = (t_assoc_convertor) convertor;
+	new = ft_lstnew(value);
+	if (!new)
+	{
+		free(value);
+		return (FALSE);
+	}
+	ft_lstadd_back(&g_convertors, new);
+	return (TRUE);
 }

@@ -37,7 +37,7 @@ typedef struct		s_flags
 }					t_flags;
 
 
-typedef char*(*t_convertor)(t_flags, int, int, char*);
+typedef char*(*t_convertor)(t_flags, int, int, char*, va_list ap);
 
 t_convertor			ft_get_convertor(char);
 

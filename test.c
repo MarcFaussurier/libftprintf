@@ -15,6 +15,5 @@
 
 int main()
 {
-	printf("unsuported spec: %lllllllllt\n");
-	printf("[ft_printf  output: %+++--+-+-i]\n", ft_printf("[test %+874.8887llzX]\n", 42));
+	printf("[ft_printf  output: %+++--+-+-i]\n", ft_printf("[testt 99%+874.8887llzXn test", 42));
 }

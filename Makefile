@@ -26,6 +26,6 @@ norme:
 	$(CC) $(CFLAGS) -c $< -o $@
 $(NAME):	$(COBJ)
 	@cd libft && make bonus
-	$(AR) $(NAME) $(COBJ)
+	$(AR) $(NAME) $(COBJ) $(shell ls libft/*.o)
 .PHONY:
 		all fclean clean re bonus

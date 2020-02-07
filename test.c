@@ -15,5 +15,5 @@
 
 int main()
 {
-	printf("[ft_printf  output: %+++--+-+-i]\n", ft_printf("[testt 99%+874.8887llzXn test %s", "lol"));
+	printf("[ft_printf  output: %+++--+-+-i]\n", ft_printf("[testt 99%+874.8887llzXn test %88.88s", "lol"));
 }

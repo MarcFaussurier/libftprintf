@@ -105,5 +105,10 @@ char			*ft_argtoa(char const **fmt, va_list ap)
 		return (ft_strdup(""));
 	}
 	specifier = **fmt;
-	return ((ft_get_convertor(specifier))(flags, padding, precision, qualifiers ,ap));
+	return ((ft_get_convertor(specifier))((t_convertor_state) {
+                .flags=flags, 
+                padding, 
+                precision, 
+                qualifiers, 
+    }, ap));
 }

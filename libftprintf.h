@@ -37,7 +37,15 @@ typedef struct		s_flags
 }					t_flags;
 
 
-typedef char*(*t_convertor)(t_flags, int, int, char*, va_list ap);
+typedef struct      s_convertor_state
+{
+    t_flags         flags;
+    int             padding;
+    int             precision;
+    char            *qualifiers;
+}                   t_convertor_state;
+
+typedef char*(*t_convertor)(t_convertor_state, va_list);
 
 t_convertor			ft_get_convertor(char);
 
@@ -55,4 +63,7 @@ t_bool				ft_register_convertor(t_assoc_convertor);
 t_list				*g_convertors;
 void				*not_found_convertor;
 void				ft_boot_convertors();
+
+
+
 #endif

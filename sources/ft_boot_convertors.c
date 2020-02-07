@@ -12,9 +12,15 @@
 /* ************************************************************************** */
 
 #include <libftprintf.h>
+/*
+static  char    *ft_litoa(t_convertor_state state)
+{
+    (void) state;
+    return (NULL);
+}
 
-
-char			*ft_fmt_s(t_flags flags, int padding, int precision, char *qualifiers, va_list ap)
+*/
+char			*ft_fmt_s(t_convertor_state state, va_list ap)
 {
     char        *output;
     char        *s;
@@ -25,13 +31,12 @@ char			*ft_fmt_s(t_flags flags, int padding, int precision, char *qualifiers, va
     size_t      strsize;
     char        *str;
 
-    (void) qualifiers;
     s = va_arg(ap, char *);
     si = s;
-    len = ft_strnlen(s, precision);
-    field_width = padding;
+    len = ft_strnlen(s, state.precision);
+    field_width = state.padding;
     strsize = 0;
-    if (!(flags.minus))
+    if (!(state.flags.minus))
         while (len < field_width--)
             strsize += 1;
     i = 0;
@@ -49,9 +54,9 @@ char			*ft_fmt_s(t_flags flags, int padding, int precision, char *qualifiers, va
         return (NULL);
     }
     si = s;
-    field_width = padding;
+    field_width = state.padding;
     strsize = 0;
-    if (!(flags.minus))
+    if (!(state.flags.minus))
         while (len < field_width--)
             *str++ = ' ';
     i = 0;

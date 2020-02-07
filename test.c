@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:34:47 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 12:57:54 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:29:05 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,5 +15,6 @@
 
 int main()
 {
-	printf("[ft_printf  output: %+++--+-+-i]\n", ft_printf("[testt 99%+874.8887llzXn test %88.88s", "lol"));
+	ft_printf("[mine		: Hello %88.88s %1i ]\n", "world", 42);
+	printf("[origina	: Hello %88.88s %01.3i]\n", "world", 424242);
 }

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:39:04 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 13:35:17 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:09:46 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -117,7 +117,6 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
             
             ft_lstadd_back(&str, new);
             gen = ft_argtoa(&fmt, ap);
-            printf("gen: %s\n", gen);
             prev = (char*)fmt;
             if (!gen)
             {

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 12:42:25 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:15:06 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,28 +15,25 @@
 
 static t_flags	ft_read_flags(char const **fmt)
 {
-	char const	*bfmt;
 	t_flags		o;
 
 	o = (t_flags) {0, 0, 0, 0};
-	bfmt = *fmt;
-	while (*bfmt)
+	while (**fmt)
 	{
-		if (*bfmt == '0')
+		if (**fmt == '0')
 			o.zero = 1;
-		else if (*bfmt == '+')
+		else if (**fmt == '+')
 			o.zero = 1;
-		else if (*bfmt == '-')
+		else if (**fmt == '-')
 		{
 			o.zero = 0;
 			o.minus = 1;
 		}
-		else if (*bfmt == '#')
+		else if (**fmt == '#')
 			o.sharp = 1;
 		else
 			break;
 		*fmt += 1;
-		bfmt += 1;
 	}
 	return (o);
 }
@@ -74,12 +71,6 @@ static char*	ft_read_qualifiers(char const **fmt)
 	}
 	return (qualifiers);
 }
-/*
-static char		ft_read_specifier(char const **fmt)
-{
-	(void) fmt;
-	return ('l');
-}*/
 
 char			*ft_argtoa(char const **fmt, va_list ap)
 {
@@ -87,9 +78,7 @@ char			*ft_argtoa(char const **fmt, va_list ap)
 	int			precision;
 	int			padding;
 	char		*qualifiers;
-	char		specifier;
 
-	(void) ap;
 	flags = ft_read_flags(fmt);
 	padding = ft_read_num(fmt);
 	precision = NO_PRECISION;
@@ -104,8 +93,7 @@ char			*ft_argtoa(char const **fmt, va_list ap)
 		*fmt += 1;
 		return (ft_strdup(""));
 	}
-	specifier = **fmt;
-	return ((ft_get_convertor(specifier))((t_convertor_state) {
+	return ((ft_get_convertor(*(*fmt)++))((t_convertor_state) {
                 .flags=flags, 
                 padding, 
                 precision, 

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 12:23:47 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/07 11:06:06 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,6 +64,7 @@ t_list				*g_convertors;
 void				*not_found_convertor;
 void				ft_boot_convertors();
 
-
+char				*ft_fmt_s(t_convertor_state state, va_list ap);
+char				*ft_fmt_i(t_convertor_state state, va_list ap);
 
 #endif

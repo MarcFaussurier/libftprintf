@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 10:58:37 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/12 09:26:19 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/12 13:03:40 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,7 +53,7 @@ char			*ft_fmt_s(t_convertor_state state, va_list ap)
     strsize = 0;
     if (!(state.flags.minus))
         while (len < field_width--)
-            *str++ = ' ';
+            *str++ = state.flags.zero ? '0' : ' ';
     i = 0;
     while (i < len)
     {

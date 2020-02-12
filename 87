@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:39:04 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/12 10:59:04 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/12 10:53:40 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,20 +84,22 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
 		{
 			ft_boot_convertors();
 			if (AT_EXIT)
-				atexit((void(*)(void))ft_free_gconvertor);
+				atexit(ft_free_gconvertor);
 		}
 	}
     str = NULL;
     prev = (char*)fmt;
     while (*fmt)
     {
-        if (*fmt++ == '%')
+        if (*fmt == '%' && (fmt += 1))
         {
             gen = ft_substr(prev, 0, (fmt - 1) - prev);
             if (!gen)
             {
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
+                if (!AT_EXIT)
+                    ft_free_gconvertor();
+                return (-42);
             }
             
             new = ft_lstnew(gen);
@@ -105,8 +107,10 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
             {
                 free(gen);
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
-			}
+                if (!AT_EXIT)
+                    ft_free_gconvertor();
+                return (-42);
+            }
             
             ft_lstadd_back(&str, new);
             gen = ft_argtoa(&fmt, ap);
@@ -114,17 +118,22 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
             if (!gen)
             {
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
-			}
+                if (!AT_EXIT)
+                    ft_free_gconvertor();
+                return (-42);
+            }
             new = ft_lstnew(gen);
             if (!new)
             {
                 free(gen);
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
-			}
+                if (!AT_EXIT)
+                    ft_free_gconvertor();
+                return (-42);
+            }
             ft_lstadd_back(&str, new);
         }
+        fmt += 1;
     }
     
     if (!AT_EXIT)
@@ -146,8 +155,12 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
         }
         ft_lstadd_back(&str, new);
     }
+
     if (!(*ob = ft_lststrjoin(str)))
+    {
         oi = - 42;
+
+    }
     ft_lstclear(&str, &ft_free_str);
     return (ft_strlen(*ob));
 }

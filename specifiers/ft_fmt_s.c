@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 10:58:37 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/07 11:06:22 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/12 09:26:19 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,11 +25,14 @@ char			*ft_fmt_s(t_convertor_state state, va_list ap)
     char        *str;
 
     s = va_arg(ap, char *);
-    si = s;
-    len = ft_strnlen(s, state.precision);
+	if (s)
+    	si = s;
+    else
+		si = ft_strdup("(null)");
+	len = ft_strnlen(si, state.precision);
     field_width = state.padding;
     strsize = 0;
-    if (!(state.flags.minus))
+	if (!(state.flags.minus))
         while (len < field_width--)
             strsize += 1;
     i = 0;
@@ -46,7 +49,6 @@ char			*ft_fmt_s(t_convertor_state state, va_list ap)
     {
         return (NULL);
     }
-    si = s;
     field_width = state.padding;
     strsize = 0;
     if (!(state.flags.minus))
@@ -55,7 +57,7 @@ char			*ft_fmt_s(t_convertor_state state, va_list ap)
     i = 0;
     while (i < len)
     {
-        *str++ = *s++;
+        *str++ = *si++;
         i += 1;
     }
     while (len < field_width--)

@@ -12,14 +12,6 @@
 /* ************************************************************************** */
 
 #include <libftprintf.h>
-/*
-static  char    *ft_litoa(t_convertor_state state)
-{
-    (void) state;
-    return (NULL);
-}
-
-*/
 
 t_bool			ft_boot_convertors()
 {

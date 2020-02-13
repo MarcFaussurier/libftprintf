@@ -9,8 +9,17 @@ char           *ft_stoa(t_specifier_state state, char *input, t_bool enable_zero
 	size_t		i;
 	size_t		y;
 
+
 	if (!input)
 		input = ft_strdup("(null)");
+	if (enable_zero_padding)
+	{
+
+		if (state.padding < 0 && (state.flags.minus = 1))
+			state.padding = -state.padding;
+		if (state.precision < state.padding)
+			state.precision = ft_strlen(input);
+	}
 	if (state.precision < 0)
 		input_len = ft_strlen(input);
 	else if (state.precision > 0 && state.precision != NO_PRECISION)

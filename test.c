@@ -33,4 +33,8 @@ int 			main(void)
 	a = ft_printf("%*.*slol\n", -16, 3, NULL);
 	b = printf("%*.*slol\n", -16, 3, NULL);
 	printf("\n[outputs: %i %i]\n", a, b);
+
+	a = ft_printf("%*.*hilol\n", -16, 2, 4242);
+	b = printf("%*.*hilol\n", -16, 2, 4242);
+	printf("\n[outputs: %i %i]\n", a, b);
 }

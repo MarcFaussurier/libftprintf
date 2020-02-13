@@ -15,23 +15,28 @@
 
 char			*ft_fmt_i(t_specifier_state state, va_list ap)
 {
-	char		*output;
-	char		fillwith;
-	int			realwidth;
+	char		*num;
+	char		*out;
 
-	if (!ft_strlen(state.qualifiers))
-	{
-		output = ft_itoa(va_arg(ap, int));
-		fillwith = ' ';
-		realwidth = state.padding;
-		if (state.precision != NO_PRECISION && (realwidth = state.precision))
-			fillwith = '0';
-		if (realwidth > (int)ft_strlen(output))
-		{
-
-		}
-	}
+	if (!(ft_strncmp(state.qualifiers, "ll", 2)))
+		num = ft_llitoa(va_arg(ap, long long));
+	else if (!(ft_strncmp(state.qualifiers, "l", 1)))
+		num = ft_litoa(va_arg(ap, long));
+	else if (!ft_strlen(state.qualifiers))
+		num = ft_itoa(va_arg(ap, int));
+	else if (!(ft_strncmp(state.qualifiers, "h", 1)))
+		num = ft_hitoa(va_arg(ap, int));
+	else if (!(ft_strncmp(state.qualifiers, "hh", 2)))
+		num = ft_hhitoa(va_arg(ap, int));
 	else
-		output = ft_strdup("");
-	return (output);
+		num = NULL;
+	if (!num)
+		return (NULL);
+	if (state.padding < 0 && (state.flags.minus = 1))
+		state.padding = -state.padding;
+	if (state.precision < state.padding)
+		state.precision = ft_strlen(num);
+	out = ft_stoa(state, num, TRUE);
+	free(num);
+	return (out);
 }

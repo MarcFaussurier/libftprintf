@@ -13,7 +13,7 @@
 
 #include <libftprintf.h>
 
-char			*ft_fmt_i(t_convertor_state state, va_list ap)
+char			*ft_fmt_i(t_specifier_state state, va_list ap)
 {
 	char		*output;
 	char		fillwith;

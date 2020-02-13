@@ -13,15 +13,15 @@
 
 #include <libftprintf.h>
 
-static void			ft_free_gconvertor_content(void *v)
+static void			ft_free_g_specifiers_content(void *v)
 {
 	free(v);
 }
 
-static t_bool		ft_free_gconvertor()
+static t_bool		ft_free_g_specifiers()
 {
-	ft_lstclear(&g_convertors, &ft_free_gconvertor_content);
-	g_convertors = NULL;
+	ft_lstclear(&g_specifiers, &ft_free_g_specifiers_content);
+	g_specifiers = NULL;
 	return (TRUE);
 }
 
@@ -39,8 +39,8 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
     t_list          *str;
     t_list          *new;
 
-	if (ob && !g_convertors && ft_boot_convertors() && AT_EXIT)
-			atexit((void(*)(void))ft_free_gconvertor);
+	if (ob && !g_specifiers && ft_boot_specifiers() && AT_EXIT)
+			atexit((void(*)(void))ft_free_g_specifiers);
     str = NULL;
     prev = (char*)fmt;
     while (*fmt)
@@ -49,32 +49,32 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
             if (!(gen = ft_substr(prev, 0, (fmt - 1) - prev)))
             {
                 ft_lstclear(&str, &ft_free_str);
-                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
+                return ( - ((!AT_EXIT && ft_free_g_specifiers()) || 1));
             }
             if (!(new = ft_lstnew(gen)))
             {
                 free(gen);
                 ft_lstclear(&str, &ft_free_str);
-                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
+                return ( - ((!AT_EXIT && ft_free_g_specifiers()) || 1));
             }
             ft_lstadd_back(&str, new);
             if (!(gen = ft_argtoa(&fmt, ap)))
             {
                 ft_lstclear(&str, &ft_free_str);
-                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
+                return ( - ((!AT_EXIT && ft_free_g_specifiers()) || 1));
             }
             prev = (char*)fmt;
             if (!(new = ft_lstnew(gen)))
             {
                 free(gen);
                 ft_lstclear(&str, &ft_free_str);
-                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
+                return ( - ((!AT_EXIT && ft_free_g_specifiers()) || 1));
 			}
             ft_lstadd_back(&str, new);
         }
     
     if (!AT_EXIT)
-        ft_free_gconvertor();
+        ft_free_g_specifiers();
     if (prev != fmt)
     {
         gen = ft_substr(prev, 0, fmt - prev);

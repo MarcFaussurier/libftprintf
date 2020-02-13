@@ -16,12 +16,12 @@
 t_bool					ft_is_specifier(char c)
 {
 	t_list				*current;
-	t_assoc_convertor	*value;
+	t_assoc_specifier		*value;
 
-	current = g_convertors;
+	current = g_specifiers;
 	while (current)
 	{
-		value = (t_assoc_convertor*) current->content;
+		value = (t_assoc_specifier*) current->content;
 		if (value->specifier == c)
 			return (TRUE);
 		current = current->next;

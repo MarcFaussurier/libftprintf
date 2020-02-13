@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_get_convertor.c                               .::    .:/ .      .::   */
+/*   ft_not_found_convertor.c                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/05 10:59:10 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 11:05:10 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 12:53:51 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 12:56:56 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libftprintf.h>
 
-t_convertor				ft_get_convertor(char specifier)
+char			*ft_not_found_specifier(t_flags flags, int padding, int precision, char *qualifiers)
 {
-	t_list				*current;
-	t_assoc_convertor	*value;
-
-	current = g_convertors;
-	while (current)
-	{
-		value = (t_assoc_convertor*) current->content;
-		if (value->specifier == specifier)
-			return (value->convertor);
-		current = current->next;
-	}
-	return (not_found_convertor);
+	(void) flags;
+	(void) padding;
+	(void) precision;
+	(void) qualifiers;
+	return (ft_strdup(""));
 }

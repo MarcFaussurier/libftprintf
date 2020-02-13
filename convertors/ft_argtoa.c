@@ -91,7 +91,7 @@ char			*ft_argtoa(char const **fmt, va_list ap)
 		*fmt += 1;
 		return (ft_strdup(""));
 	}
-	return ((ft_get_convertor(*(*fmt)++))((t_convertor_state) {
+	return ((ft_get_specifier(*(*fmt)++))((t_specifier_state) {
                 .flags=flags, 
                 padding, 
                 precision, 

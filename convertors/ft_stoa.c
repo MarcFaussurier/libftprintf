@@ -1,6 +1,6 @@
 #include <libftprintf.h>
 
-char           *ft_stoa(t_convertor_state state, char *si)
+char           *ft_stoa(t_specifier_state state, char *si)
 {
     char        *output;
     int         len;

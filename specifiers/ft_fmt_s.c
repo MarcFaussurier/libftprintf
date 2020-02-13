@@ -18,7 +18,7 @@
 // negative precision get ignored
 // precision will trim the input
 
-char			*ft_fmt_s(t_convertor_state state, va_list ap)
+char			*ft_fmt_s(t_specifier_state state, va_list ap)
 {
 	char		*input;
 	char		*output;

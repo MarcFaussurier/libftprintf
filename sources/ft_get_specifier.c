@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_register_convertor.c                          .::    .:/ .      .::   */
+/*   ft_get_convertor.c                               .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/05 12:24:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 12:27:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 10:59:10 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/05 11:05:10 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libftprintf.h>
 
-t_bool			ft_register_convertor(t_assoc_convertor convertor)
+t_specifier			ft_get_specifier(char specifier)
 {
-	t_assoc_convertor	*value;
-	t_list				*new;
+	t_list			*current;
+	t_assoc_specifier	*value;
 
-	value = malloc(sizeof(t_assoc_convertor));
-	if (!value)
-		return (FALSE);
-	*value = (t_assoc_convertor) convertor;
-	new = ft_lstnew(value);
-	if (!new)
+	current = g_specifiers;
+	while (current)
 	{
-		free(value);
-		return (FALSE);
+		value = (t_assoc_specifier*) current->content;
+		if (value->specifier == specifier)
+			return (value->callback);
+		current = current->next;
 	}
-	ft_lstadd_back(&g_convertors, new);
-	return (TRUE);
+	return (not_found_specifier);
 }

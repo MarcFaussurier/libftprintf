@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_not_found_convertor.c                         .::    .:/ .      .::   */
+/*   ft_boot_convertors.c                             .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/05 12:53:51 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 12:56:56 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/05 12:30:03 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/07 11:53:59 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libftprintf.h>
 
-char			*ft_not_found_convertor(t_flags flags, int padding, int precision, char *qualifiers)
+t_bool			ft_boot_specifiers()
 {
-	(void) flags;
-	(void) padding;
-	(void) precision;
-	(void) qualifiers;
-	return (ft_strdup(""));
+    ft_register_specifier((t_assoc_specifier){'s', &ft_fmt_s});
+    ft_register_specifier((t_assoc_specifier){'i', &ft_fmt_i});
+    return (TRUE);
 }

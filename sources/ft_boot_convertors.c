@@ -21,8 +21,9 @@ static  char    *ft_litoa(t_convertor_state state)
 
 */
 
-void			ft_boot_convertors()
+t_bool			ft_boot_convertors()
 {
     ft_register_convertor((t_assoc_convertor){'s', &ft_fmt_s});
     ft_register_convertor((t_assoc_convertor){'i', &ft_fmt_i});
+    return (TRUE);
 }

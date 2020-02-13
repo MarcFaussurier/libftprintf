@@ -30,45 +30,6 @@ static void         ft_free_str(void *itm)
     free(itm);
 }
 
-char                *ft_lststrjoin(t_list *lst)
-{
-    size_t          output_len;
-    char            *output;
-    t_list          *current;
-    size_t          i;
-    size_t          y;
-    size_t          y_max;
-    char            *y_str;
-
-    output_len = 0;
-    current = lst;
-    while (current)
-    {
-        output_len += ft_strlen((char*)current->content);
-        current = current->next;
-    }
-    output = malloc(output_len);
-    if (!output)
-    {
-        return (NULL);
-    }
-    current = lst;
-    i = 0;
-    while (current)
-    {
-        y = 0;
-        y_str = (char*)current->content;
-        y_max = ft_strlen((const char*)y_str);
-        while (y < y_max)
-        {
-            output[i++] = y_str[y];
-            y += 1;
-        }
-        current = current->next;
-    }
-    output[i] = '\0';
-    return (output);
-}
 
 int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
 {
@@ -78,54 +39,39 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
     t_list          *str;
     t_list          *new;
 
-	if (ob)
-	{
-		if (!g_convertors)
-		{
-			ft_boot_convertors();
-			if (AT_EXIT)
-				atexit((void(*)(void))ft_free_gconvertor);
-		}
-	}
+	if (ob && !g_convertors && ft_boot_convertors() && AT_EXIT)
+			atexit((void(*)(void))ft_free_gconvertor);
     str = NULL;
     prev = (char*)fmt;
     while (*fmt)
-    {
         if (*fmt++ == '%')
         {
-            gen = ft_substr(prev, 0, (fmt - 1) - prev);
-            if (!gen)
+            if (!(gen = ft_substr(prev, 0, (fmt - 1) - prev)))
             {
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
+                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
             }
-            
-            new = ft_lstnew(gen);
-            if (!new)
+            if (!(new = ft_lstnew(gen)))
             {
                 free(gen);
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
-			}
-            
+                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
+            }
             ft_lstadd_back(&str, new);
-            gen = ft_argtoa(&fmt, ap);
-            prev = (char*)fmt;
-            if (!gen)
+            if (!(gen = ft_argtoa(&fmt, ap)))
             {
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
-			}
-            new = ft_lstnew(gen);
-            if (!new)
+                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
+            }
+            prev = (char*)fmt;
+            if (!(new = ft_lstnew(gen)))
             {
                 free(gen);
                 ft_lstclear(&str, &ft_free_str);
-                return ((!AT_EXIT && ft_free_gconvertor()) ? -42 : -42);
+                return ( - ((!AT_EXIT && ft_free_gconvertor()) || 1));
 			}
             ft_lstadd_back(&str, new);
         }
-    }
     
     if (!AT_EXIT)
         ft_free_gconvertor();
@@ -146,8 +92,7 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
         }
         ft_lstadd_back(&str, new);
     }
-    if (!(*ob = ft_lststrjoin(str)))
-        oi = - 42;
+    oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
     ft_lstclear(&str, &ft_free_str);
-    return (ft_strlen(*ob));
+    return (oi);
 }

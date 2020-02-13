@@ -16,26 +16,28 @@
 static t_flags	ft_read_flags(char const **fmt)
 {
 	t_flags		o;
+    char        c;
+
 
 	o = (t_flags) {0, 0, 0, 0};
-	while (**fmt)
-	{
-		if (**fmt == '0')
+	while ((c = *(*fmt)++))
+		if (c == '0')
 			o.zero = 1;
-		else if (**fmt == '+')
+		else if (c == '+')
 			o.plus = 1;
-		else if (**fmt == '-')
+		else if (c == '-')
 		{
 			o.zero = 0;
 			o.minus = 1;
 		}
-		else if (**fmt == '#')
+		else if (c == '#')
 			o.sharp = 1;
 		else
-			break;
-		*fmt += 1;
-	}
-	return (o);
+        {
+            *fmt -= 1;
+            break;
+	    }
+    return (o);
 }
 
 static int		ft_read_num(char const **fmt, va_list ap)
@@ -48,12 +50,9 @@ static int		ft_read_num(char const **fmt, va_list ap)
 	bkp = *fmt;
 	if (**fmt == '*' && ++(*fmt))
 		return (va_arg(ap, int));
-	while (ft_isdigit(**fmt))
-	{
-		*fmt += 1;
-		len += 1;
-	}
-	swp = ft_substr(bkp, 0, len);
+	while (ft_isdigit(**fmt) && (++*fmt) && (++len))
+	    ;
+    swp = ft_substr(bkp, 0, len);
 	o = ft_atoi(swp);
 	free(swp);
 	return (o);
@@ -67,10 +66,7 @@ static char*	ft_read_qualifiers(char const **fmt)
 	i = 0;
 	qualifiers = ft_calloc(3, 1);
 	while (!ft_is_specifier(**fmt) && i < 2)
-	{
-		qualifiers[i++] = **fmt;
-		*fmt += 1;
-	}
+		qualifiers[i++] = *(*fmt)++;
 	return (qualifiers);
 }
 

@@ -22,8 +22,8 @@ int 			main(void)
 	b = printf("%12.2slol\n", NULL);
 	printf("\n[outputs: %i %i]\n", a, b);
 
-	a = ft_printf("%-8.10slol\n", NULL);
-	b = printf("%-8.10slol\n", NULL);
+	a = ft_printf("%--8.10slol\n", NULL);
+	b = printf("%--8.10slol\n", NULL);
 	printf("\n[outputs: %i %i]\n", a, b);
 
 	a = ft_printf("%8.10s\n", NULL);

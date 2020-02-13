@@ -1,41 +1,44 @@
 #include <libftprintf.h>
 
-char           *ft_stoa(t_specifier_state state, char *si)
+char           *ft_stoa(t_specifier_state state, char *input, t_bool enable_zero_padding)
 {
-    char        *output;
-    int         len;
-    int         field_width;
-    int         i;
-    size_t      strsize;
-    char        *str;
 
-	if (!si)
-		si = ft_strdup("(null)");
-	len = ft_strnlen(si, state.precision);
-    field_width = state.padding;
-    strsize = 0;
-	if ((i = -1) && !(state.flags.minus))
-        while (len < field_width-- && ++strsize)
-    		;
-    while (++i < len && ++strsize)
-    	;
-	while (len < field_width-- && ++strsize)
-    	;
-	printf("strsize: %lu\n", strsize);
-	if (!(output = malloc(strsize)) || (strsize = 0))
-        return (NULL);
-	str = output;
-    field_width = state.padding;
-    if (!(state.flags.minus))
-        while (len < field_width--)
-            *str++ = state.flags.zero ? '0' : ' ';
-    i = 0;
-    while (i < len)
-    {
-        *str++ = *si++;
-        i += 1;
-    }
-    while (len < field_width--)
-        *str++ = ' ';
-    return (output);
+	char		*output;
+	size_t		input_len;
+	size_t		field_width;
+	size_t		i;
+	size_t		y;
+
+	if (!input)
+		input = ft_strdup("(null)");
+	if (state.precision < 0)
+		input_len = ft_strlen(input);
+	else if (state.precision > 0 && state.precision != NO_PRECISION)
+		input_len = ft_strnlen(input, (size_t) state.precision);
+	if (state.padding < 0 && (state.flags.minus = 1))
+		field_width = (size_t) -state.padding;
+	else
+		field_width = state.padding ? state.padding : input_len;
+	output = malloc(field_width + 1);
+	i = 0;
+	if (state.flags.minus)
+	{
+		while (i < input_len)
+		{
+			output[i] = input[i];
+			i += 1;
+		}
+		while (i < field_width)
+			output[i++] = (enable_zero_padding && state.flags.zero ) ? '0' : ' ';
+	} 
+	else
+	{
+		while ((i + input_len) < field_width)
+			output[i++] = (enable_zero_padding && state.flags.zero) ? '0' : ' ';
+		y = 0;
+		while (i < field_width)
+			output[i++] = input[y++];
+	}
+	output[field_width] = '\0';
+	return (output);
 }

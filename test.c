@@ -17,6 +17,7 @@ int 			main(void)
 {
 	int			a,b;
 
+    printf("ft_llitoa_base: %s\n", ft_llitoa_base(b10, 258888588454));
  	a = ft_printf("%12.2slol\n", NULL);
 	b = printf("%12.2slol\n", NULL);
 	printf("\n[outputs: %i %i]\n", a, b);

@@ -32,10 +32,6 @@ char			*ft_fmt_i(t_specifier_state state, va_list ap)
 		num = NULL;
 	if (!num)
 		return (NULL);
-	if (state.padding < 0 && (state.flags.minus = 1))
-		state.padding = -state.padding;
-	if (state.precision < state.padding)
-		state.precision = ft_strlen(num);
 	out = ft_stoa(state, num, TRUE);
 	free(num);
 	return (out);

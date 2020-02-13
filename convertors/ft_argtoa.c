@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/12 13:01:38 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 11:32:19 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,7 +38,7 @@ static t_flags	ft_read_flags(char const **fmt)
 	return (o);
 }
 
-static int		ft_read_num(char const **fmt)
+static int		ft_read_num(char const **fmt, va_list ap)
 {
 	char		len = 0;
 	char		*swp;
@@ -46,6 +46,8 @@ static int		ft_read_num(char const **fmt)
 	int			o;
 
 	bkp = *fmt;
+	if (**fmt == '*' && ++(*fmt))
+		return (va_arg(ap, int));
 	while (ft_isdigit(**fmt))
 	{
 		*fmt += 1;
@@ -80,10 +82,10 @@ char			*ft_argtoa(char const **fmt, va_list ap)
 	char		*qualifiers;
 
 	flags = ft_read_flags(fmt);
-	padding = ft_read_num(fmt);
+	padding = ft_read_num(fmt, ap);
 	precision = NO_PRECISION;
 	if (**fmt == '.' && ++*fmt)
-		precision = ft_read_num(fmt);
+		precision = ft_read_num(fmt, ap);
 	qualifiers = ft_read_qualifiers(fmt);
 	if (!qualifiers)
 		return (NULL);

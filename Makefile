@@ -1,4 +1,4 @@
-CSRC		:= $(shell ls ft_*.c sources/* specifiers/*)
+CSRC		:= $(shell ls ft_*.c sources/* convertors/* specifiers/*)
 NAME		:= libftprintf.a
 DEBUG		:= 0
 RM			:= rm -rf

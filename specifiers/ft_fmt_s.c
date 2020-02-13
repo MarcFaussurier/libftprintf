@@ -6,61 +6,58 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 10:58:37 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/12 13:03:40 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/13 14:05:56 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libftprintf.h>
+// padding 16:				-> 10s(null)
+// padding 16 and flag - 	-> (null)10s
+// negative padding become positive
+// negative precision get ignored
+// precision will trim the input
 
 char			*ft_fmt_s(t_convertor_state state, va_list ap)
 {
-    char        *output;
-    char        *s;
-    char        *si;
-    int         len;
-    int         field_width;
-    int         i;
-    size_t      strsize;
-    char        *str;
+	char		*input;
+	char		*output;
+	size_t		input_len;
+	size_t		field_width;
+	size_t		i;
+	size_t		y;
 
-    s = va_arg(ap, char *);
-	if (s)
-    	si = s;
-    else
-		si = ft_strdup("(null)");
-	len = ft_strnlen(si, state.precision);
-    field_width = state.padding;
-    strsize = 0;
-	if (!(state.flags.minus))
-        while (len < field_width--)
-            strsize += 1;
-    i = 0;
-    while (i < len)
-    {
-        strsize += 1;
-        i += 1;
-    }
-    while (len < field_width--)
-        strsize += 1;
-    output = malloc(strsize);
-    str = output;
-    if (!output)
-    {
-        return (NULL);
-    }
-    field_width = state.padding;
-    strsize = 0;
-    if (!(state.flags.minus))
-        while (len < field_width--)
-            *str++ = state.flags.zero ? '0' : ' ';
-    i = 0;
-    while (i < len)
-    {
-        *str++ = *si++;
-        i += 1;
-    }
-    while (len < field_width--)
-        *str++ = ' ';
-    return (output);
+	input = va_arg(ap, char *);
+	if (!input)
+		input = ft_strdup("(null)");
+	if (state.precision < 0)
+		input_len = ft_strlen(input);
+	else if (state.precision > 0 && state.precision != NO_PRECISION)
+		input_len = ft_strnlen(input, (size_t) state.precision);
+	if (state.padding < 0 && (state.flags.minus = 1))
+		field_width = (size_t) -state.padding;
+	else
+		field_width = state.padding ? state.padding : input_len;
+	output = malloc(field_width + 1);
+	i = 0;
+	if (state.flags.minus)
+	{
+		while (i < input_len)
+		{
+			output[i] = input[i];
+			i += 1;
+		}
+		while (i < field_width)
+			output[i++] = ' ';
+	} 
+	else
+	{
+		while ((i + input_len) < field_width)
+			output[i++] = ' ';
+		y = 0;
+		while (i < field_width)
+			output[i++] = input[y++];
+	}
+	output[field_width] = '\0';
+	return (output);
 }

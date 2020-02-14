@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 10:13:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 10:46:46 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,6 +53,7 @@ typedef struct      	s_specifier_state
 	int             padding;
 	int             precision;
 	char            *qualifiers;
+	int				no;
 }                   	t_specifier_state;
 typedef char*		(*t_specifier)(t_specifier_state, va_list);
 typedef struct		s_assoc_specifier
@@ -69,6 +70,11 @@ t_bool			ft_boot_specifiers();
 char			*ft_fmt_s(t_specifier_state, va_list);
 char			*ft_fmt_i(t_specifier_state, va_list);
 char			*ft_fmt_u(t_specifier_state, va_list);
+char			*ft_fmt_o(t_specifier_state, va_list);
+char			*ft_fmt_c(t_specifier_state, va_list);
+char			*ft_fmt_a(t_specifier_state, va_list);
+char			*ft_fmt_p(t_specifier_state, va_list);
+char			*ft_fmt_n(t_specifier_state, va_list);
 char                	*ft_lststrjoin(t_list *);
 char                	*ft_llutoa_base(const char *, unsigned long long);
 char                	*ft_lutoa_base(const char *, unsigned long);
@@ -90,7 +96,7 @@ char                	*ft_litoa(long int);
 char                	*ft_hitoa(short);
 char                	*ft_hhitoa(char);
 char		    	*ft_stoa(t_specifier_state, char *, t_bool);
-char		    	*ft_argtoa(char const **, va_list);
+char		    	*ft_argtoa(char const **, va_list, int);
 int	 	    	ft_printf(const char *, ...);
 int		    	ft_vprintf(const char *, va_list);
 int		    	ft_vasprintf(char const **, const char *, va_list);

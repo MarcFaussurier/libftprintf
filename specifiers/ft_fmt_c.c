@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_boot_convertors.c                             .::    .:/ .      .::   */
+/*   ft_fmt_c.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/05 12:30:03 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 11:08:10 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/14 10:46:01 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/14 11:07:18 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libftprintf.h>
 
-t_bool			ft_boot_specifiers()
+char			*ft_fmt_c(t_specifier_state state, va_list ap)
 {
-    ft_register_specifier((t_assoc_specifier){'s', &ft_fmt_s});
-    ft_register_specifier((t_assoc_specifier){'i', &ft_fmt_i});
-    ft_register_specifier((t_assoc_specifier){'u', &ft_fmt_u});
-    ft_register_specifier((t_assoc_specifier){'c', &ft_fmt_c});
-    ft_register_specifier((t_assoc_specifier){'n', &ft_fmt_n});
-	return (TRUE);
+	char		*c;
+	char		*out;
+
+	c = (char[2]) {va_arg(ap, int), '\0'};
+	state.precision = 1;
+	out = ft_stoa(state, c, FALSE);
+	return (out);
 }

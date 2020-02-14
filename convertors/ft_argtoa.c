@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/13 11:32:19 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 10:37:51 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,7 +70,7 @@ static char*	ft_read_qualifiers(char const **fmt)
 	return (qualifiers);
 }
 
-char			*ft_argtoa(char const **fmt, va_list ap)
+char			*ft_argtoa(char const **fmt, va_list ap, int no)
 {
 	t_flags		flags;
 	int			precision;
@@ -95,6 +95,7 @@ char			*ft_argtoa(char const **fmt, va_list ap)
                 .flags=flags, 
                 padding, 
                 precision, 
-                qualifiers, 
+                qualifiers,
+				.no=no,
     }, ap));
 }

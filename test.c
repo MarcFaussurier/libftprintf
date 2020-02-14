@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 10:14:32 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 11:11:04 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,5 +40,10 @@ int 			main(void)
 
 	a = ft_printf("%*.*hhulol\n", -16, 2, INT_MAX);
 	b = printf("%*.*hhulol\n", -16, 2, INT_MAX);
+	printf("\n[outputs: %i %i]\n", a, b);
+
+	int		n;
+	a = ft_printf("%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
+	b = printf("%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
 	printf("\n[outputs: %i %i]\n", a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 10:46:46 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 12:22:33 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,9 +50,10 @@ typedef struct		s_flags
 typedef struct      	s_specifier_state
 {
 	t_flags         flags;
+	char            *qualifiers;
+	char			specifier;
 	int             padding;
 	int             precision;
-	char            *qualifiers;
 	int				no;
 }                   	t_specifier_state;
 typedef char*		(*t_specifier)(t_specifier_state, va_list);
@@ -61,6 +62,7 @@ typedef struct		s_assoc_specifier
 	char		specifier;
 	t_specifier	callback;
 }			t_assoc_specifier;
+t_bool			ft_free(void *addr, t_bool o);
 t_specifier		ft_get_specifier(char);
 t_bool			ft_is_specifier(char);
 t_bool			ft_register_specifier(t_assoc_specifier);

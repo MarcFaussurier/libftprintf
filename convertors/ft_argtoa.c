@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 10:37:51 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 12:23:16 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,29 +73,23 @@ static char*	ft_read_qualifiers(char const **fmt)
 char			*ft_argtoa(char const **fmt, va_list ap, int no)
 {
 	t_flags		flags;
+	char		*qualifiers;
+	char		specifier;
 	int			precision;
 	int			padding;
-	char		*qualifiers;
 
 	flags = ft_read_flags(fmt);
 	padding = ft_read_num(fmt, ap);
-	precision = NO_PRECISION;
-	if (**fmt == '.' && ++*fmt)
-		precision = ft_read_num(fmt, ap);
-	qualifiers = ft_read_qualifiers(fmt);
-	if (!qualifiers)
+	precision = **fmt == '.' && ++*fmt ? ft_read_num(fmt, ap) : NO_PRECISION;
+	if (!(qualifiers = ft_read_qualifiers(fmt)))
 		return (NULL);
-	if (!ft_is_specifier(**fmt))
-	{
-		free(qualifiers);
-		*fmt += 1;
-		return (ft_strdup(""));
-	}
-	return ((ft_get_specifier(*(*fmt)++))((t_specifier_state) {
-                .flags=flags, 
-                padding, 
-                precision, 
-                qualifiers,
-				.no=no,
-    }, ap));
+	return ((ft_is_specifier(specifier = *(*fmt)++) ? 
+	(ft_get_specifier(specifier))((t_specifier_state) {
+    		.flags=flags,
+			.qualifiers=qualifiers,
+			.specifier=specifier,
+        	.padding=padding, 
+        	.precision=precision, 
+        	.no=no,
+    	}, ap) : ft_strdup("")) + ft_free(qualifiers, 0));
 }

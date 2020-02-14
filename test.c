@@ -47,7 +47,7 @@ int 			main(void)
 	b = printf("%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
 	printf("\n[outputs: %i %i]\n", a, b);
 
-    a = ft_printf("%#p\n", ULONG_LONG_MAX);
-    b = printf("%#p\n", ULONG_LONG_MAX);
+    a = ft_printf("%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
+    b = printf("%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
     printf("\n[outputs: %i %i]\n", a, b);
 }

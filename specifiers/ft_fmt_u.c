@@ -18,7 +18,6 @@ char			*ft_fmt_u(t_specifier_state state, va_list ap)
 	char		*num;
 	char		*out;
 
-	printf("qualifiers: %s\n", state.qualifiers);
 	if (!(ft_strncmp(state.qualifiers, "ll", 3)))
 		num = ft_llutoa(va_arg(ap, unsigned long long));
 	else if (!(ft_strncmp(state.qualifiers, "l", 2)))

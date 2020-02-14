@@ -21,5 +21,7 @@ t_bool			ft_boot_specifiers()
     ft_register_specifier((t_assoc_specifier){'c', &ft_fmt_c});
     ft_register_specifier((t_assoc_specifier){'n', &ft_fmt_n});
     ft_register_specifier((t_assoc_specifier){'p', &ft_fmt_p});
+    ft_register_specifier((t_assoc_specifier){'x', &ft_fmt_x});
+    ft_register_specifier((t_assoc_specifier){'X', &ft_fmt_x});
     return (TRUE);
 }

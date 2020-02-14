@@ -40,9 +40,8 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
     while (*fmt)
         if (*fmt++ == '%' && ++oi)
         {
-            if (!ft_lststradd(&str, ft_substr(prev, 0, (fmt - 1) - prev)))
-                return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
-            if (!ft_lststradd(&str, ft_argtoa(&fmt, ap, oi)))
+            if (!ft_lststradd(&str, ft_substr(prev, 0, (fmt - 1) - prev)) ||
+                !ft_lststradd(&str, ft_argtoa(&fmt, ap, oi)))
                 return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
             prev = (char*)fmt;
         }

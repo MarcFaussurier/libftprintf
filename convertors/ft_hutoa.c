@@ -1,6 +1,6 @@
 #include <libftprintf.h>
 
-char        *ft_htoa(short n)
+char        *ft_hutoa(unsigned short n)
 {
-    return (ft_llitoa_base(b10, n));
+    return (ft_llutoa_base(b10, n));
 }

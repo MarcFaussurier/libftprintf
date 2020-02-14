@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/13 11:27:56 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/02/14 10:13:52 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,6 +68,7 @@ void			*not_found_specifier;
 t_bool			ft_boot_specifiers();
 char			*ft_fmt_s(t_specifier_state, va_list);
 char			*ft_fmt_i(t_specifier_state, va_list);
+char			*ft_fmt_u(t_specifier_state, va_list);
 char                	*ft_lststrjoin(t_list *);
 char                	*ft_llutoa_base(const char *, unsigned long long);
 char                	*ft_lutoa_base(const char *, unsigned long);

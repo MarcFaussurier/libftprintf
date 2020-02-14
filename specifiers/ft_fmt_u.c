@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_fmt_i.c                                       .::    .:/ .      .::   */
+/*   ft_fmt_u.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2020/02/07 11:00:30 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 10:15:30 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Created: 2020/02/14 10:03:23 by mfaussur     #+#   ##    ##    #+#       */
+/*   Updated: 2020/02/14 10:14:49 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include <libftprintf.h>
 
-char			*ft_fmt_i(t_specifier_state state, va_list ap)
+char			*ft_fmt_u(t_specifier_state state, va_list ap)
 {
 	char		*num;
 	char		*out;
 
+	printf("qualifiers: %s\n", state.qualifiers);
 	if (!(ft_strncmp(state.qualifiers, "ll", 3)))
-		num = ft_llitoa(va_arg(ap, long long));
+		num = ft_llutoa(va_arg(ap, unsigned long long));
 	else if (!(ft_strncmp(state.qualifiers, "l", 2)))
-		num = ft_litoa(va_arg(ap, long));
+		num = ft_lutoa(va_arg(ap, unsigned long));
 	else if (!ft_strlen(state.qualifiers))
-		num = ft_itoa(va_arg(ap, int));
+		num = ft_utoa(va_arg(ap, unsigned int));
 	else if (!(ft_strncmp(state.qualifiers, "h", 2)))
-		num = ft_hitoa(va_arg(ap, int));
+		num = ft_hutoa(va_arg(ap, unsigned int));
 	else if (!(ft_strncmp(state.qualifiers, "hh", 3)))
-		num = ft_hhitoa(va_arg(ap, int));
+		num = ft_hhutoa(va_arg(ap, unsigned int));
 	else
 		num = NULL;
 	if (!num)

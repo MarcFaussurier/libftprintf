@@ -39,7 +39,6 @@
 # define B9 b9
 # define B10 b10
 # define B16 "0123456789ABCDEF"
-
 typedef struct		s_flags
 {
 	char		zero:		1;
@@ -77,7 +76,8 @@ char			*ft_fmt_c(t_specifier_state, va_list);
 char			*ft_fmt_a(t_specifier_state, va_list);
 char			*ft_fmt_p(t_specifier_state, va_list);
 char			*ft_fmt_n(t_specifier_state, va_list);
-char                	*ft_lststrjoin(t_list *);
+t_bool          ft_lststradd(t_list **, char *);
+char            *ft_lststrjoin(t_list *);
 char                	*ft_llutoa_base(const char *, unsigned long long);
 char                	*ft_lutoa_base(const char *, unsigned long);
 char                	*ft_utoa_base(const char *, unsigned int);

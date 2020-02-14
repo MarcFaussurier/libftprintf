@@ -41,25 +41,25 @@
 # define B16 "0123456789ABCDEF"
 typedef struct		s_flags
 {
-	char		zero:		1;
-	char		plus:		1;
-	char		minus:		1;
-	char		sharp:		1;
+    char		zero:		1;
+    char		plus:		1;
+    char		minus:		1;
+    char		sharp:		1;
 }			t_flags;
 typedef struct      	s_specifier_state
 {
-	t_flags         flags;
-	char            *qualifiers;
-	char			specifier;
-	int             padding;
-	int             precision;
-	int				no;
+    t_flags         flags;
+    char            *qualifiers;
+    char			specifier;
+    int             padding;
+    int             precision;
+    int				no;
 }                   	t_specifier_state;
 typedef char*		(*t_specifier)(t_specifier_state, va_list);
 typedef struct		s_assoc_specifier
 {
-	char		specifier;
-	t_specifier	callback;
+    char		specifier;
+    t_specifier	callback;
 }			t_assoc_specifier;
 t_bool			ft_free(void *addr, t_bool o);
 t_specifier		ft_get_specifier(char);
@@ -82,27 +82,34 @@ char			*ft_fmt_g(t_specifier_state, va_list);
 
 t_bool          ft_lststradd(t_list **, char *);
 char            *ft_lststrjoin(t_list *);
-char                	*ft_llutoa_base(const char *, unsigned long long);
-char                	*ft_lutoa_base(const char *, unsigned long);
-char                	*ft_utoa_base(const char *, unsigned int);
-char                	*ft_hutoa_base(const char *, unsigned short);
-char                	*ft_hhutoa_base(const char *, unsigned char);
-char                	*ft_llutoa(unsigned long long int);
-char                	*ft_lutoa(unsigned long int);
-char                	*ft_utoa(unsigned int);
-char                	*ft_hutoa(unsigned short);
-char                	*ft_hhutoa(unsigned char);
-char                	*ft_llitoa_base(const char *, long long);
-char                	*ft_litoa_base(const char *, long);
-char                	*ft_itoa_base(const char *, int);
-char                	*ft_hitoa_base(const char *, short);
-char                	*ft_hhitoa_base(const char *, char);
-char                	*ft_llitoa(long long int);
-char                	*ft_litoa(long int);
-char                	*ft_hitoa(short);
-char                	*ft_hhitoa(char);
-char		    	*ft_stoa(t_specifier_state, char *, t_bool);
-char		    	*ft_argtoa(char const **, va_list, int);
+char            *ft_llutoa_base(const char *, unsigned long long);
+char            *ft_lutoa_base(const char *, unsigned long);
+char            *ft_utoa_base(const char *, unsigned int);
+char            *ft_hutoa_base(const char *, unsigned short);
+char            *ft_hhutoa_base(const char *, unsigned char);
+char            *ft_llutoa(unsigned long long int);
+char            *ft_lutoa(unsigned long int);
+char            *ft_utoa(unsigned int);
+char            *ft_hutoa(unsigned short);
+char            *ft_hhutoa(unsigned char);
+char            *ft_llitoa_base(const char *, long long);
+char            *ft_litoa_base(const char *, long);
+char            *ft_itoa_base(const char *, int);
+char            *ft_hitoa_base(const char *, short);
+char            *ft_hhitoa_base(const char *, char);
+char            *ft_llitoa(long long int);
+char            *ft_litoa(long int);
+char            *ft_hitoa(short);
+char            *ft_hhitoa(char);
+char            *ft_ftoa(float);
+char            *ft_dtoa(double);
+char            *ft_ldtoa(long double);
+char            *ft_ftoa_base(const char *, float);
+char            *ft_dtoa_base(const char *, double);
+char            *ft_ldtoa_base(const char *, long double);
+
+char		    *ft_stoa(t_specifier_state, char *, t_bool);
+char		    *ft_argtoa(char const **, va_list, int);
 int	 	    	ft_printf(const char *, ...);
 int		    	ft_vprintf(const char *, va_list);
 int		    	ft_vasprintf(char const **, const char *, va_list);

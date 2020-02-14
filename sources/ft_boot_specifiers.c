@@ -23,5 +23,10 @@ t_bool			ft_boot_specifiers()
     ft_register_specifier((t_assoc_specifier){'p', &ft_fmt_p});
     ft_register_specifier((t_assoc_specifier){'x', &ft_fmt_x});
     ft_register_specifier((t_assoc_specifier){'X', &ft_fmt_x});
+    ft_register_specifier((t_assoc_specifier){'o', &ft_fmt_o});
+    ft_register_specifier((t_assoc_specifier){'O', &ft_fmt_o});
+    ft_register_specifier((t_assoc_specifier){'f', &ft_fmt_f});
+    ft_register_specifier((t_assoc_specifier){'g', &ft_fmt_g});
+    ft_register_specifier((t_assoc_specifier){'G', &ft_fmt_g});
     return (TRUE);
 }

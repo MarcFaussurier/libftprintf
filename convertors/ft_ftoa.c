@@ -2,5 +2,5 @@
 
 char            *ft_ftoa(float n)
 {
-    return (ft_ftoa_base(b10, n));
+    return (ft_ldtoa(n));
 }

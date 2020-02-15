@@ -15,9 +15,7 @@
 
 static t_bool		ft_free_g_specifiers()
 {
-	if (g_specifiers)
-        ft_lstclear(&g_specifiers, &free);
-	g_specifiers = NULL;
+    ft_lstclear(&g_specifiers, &free);
 	return (TRUE);
 }
 

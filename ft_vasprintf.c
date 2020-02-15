@@ -41,8 +41,9 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
     if (!AT_EXIT)
         ft_free_g_specifiers();
     if (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev)))
-            return (-1);
-    oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
+        oi = -42;
+    else
+        oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
     ft_lstclear(&str, &free);
     return (oi);
 }

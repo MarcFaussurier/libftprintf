@@ -13,15 +13,10 @@
 
 #include <libftprintf.h>
 
-static void			ft_free_g_specifiers_content(void *v)
-{
-	free(v);
-}
-
 static t_bool		ft_free_g_specifiers()
 {
 	if (g_specifiers)
-        ft_lstclear(&g_specifiers, &ft_free_g_specifiers_content);
+        ft_lstclear(&g_specifiers, &free);
 	g_specifiers = NULL;
 	return (TRUE);
 }

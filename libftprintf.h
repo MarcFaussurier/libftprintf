@@ -37,12 +37,23 @@
 # define B10 b10
 # define B16 "0123456789ABCDEF"
 # define LDEXPBIAS 16383
-# define LDEXPNAN 32767
+# define POW2_15 32768
 # define NO_PRECISION -424242
 # define PRINTF_ERROR -42
 # ifndef AT_EXIT
 #  define AT_EXIT 0
 # endif
+typedef enum                        e_ld_state
+{
+    NORMAL,
+    ZERO,
+    INFINITY,
+    NOT_A_NUMBER,
+    QUIET_NOT_A_NUMBER,
+    INVALID_NOT_A_NUMBER,
+    CANT_BE_GEN,
+    INVALID_OP
+}                                   t_ld_state;
 typedef union                       u_float
 {
 
@@ -53,7 +64,7 @@ typedef union                       u_float
         unsigned int                exponent:           8;
         unsigned int                mantissa:           23;
     }                               s_value;
-    char                            bytes[32];
+    unsigned char                   bytes[32];
 }                                   t_float;
 typedef union                       u_double
 {
@@ -72,7 +83,7 @@ typedef union                       u_double
             }                       s_mantissa_parts;
         };
     }                               s_value;
-    char                            bytes[64];
+    unsigned char                   bytes[64];
 }                                   t_double;
 typedef union                       u_longdouble
 {
@@ -92,7 +103,7 @@ typedef union                       u_longdouble
             }                       s_mantissa_parts;
         };
     }                               s_value;
-    char                            bytes[80];
+    unsigned char                   bytes[80];
 }                                   t_longdouble;
 typedef struct		                s_flags
 {
@@ -125,7 +136,12 @@ void			                    *not_found_specifier;
 t_bool			                    ft_boot_specifiers();
 t_bool                              ft_lststradd(t_list **, char *);
 char                                *ft_lststrjoin(t_list *);
+long double                         ft_pow(long double n, short p);
+long double                         ft_upow(long double, unsigned short);
+float                               ft_modff(float, float*);
+double                              ft_modf(double, double*);
 long double                         ft_modfl(long double, long double*);
+t_ld_state                          ft_read_state_ld(long double);
 t_bool                              ft_isinfl(long double);
 t_bool                              ft_isnanl(long double);
 char			                    *ft_fmt_s(t_specifier_state, va_list);

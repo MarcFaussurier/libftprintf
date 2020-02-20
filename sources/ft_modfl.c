@@ -9,9 +9,7 @@ long double             ft_modfl(long double x, long double *i)
 
     xp = (void*)&x;
     ip = (void*)i;
-
-    e = xp->s_value.exponent - 16383;
-
+    e = xp->s_value.exponent - LDEXPBIAS;
     if (e < 32)
     {
         if (e < 0)
@@ -46,20 +44,17 @@ long double             ft_modfl(long double x, long double *i)
         xp->s_value.sign = ip->s_value.sign;
         return (x);
     }
-    else
+    r = (unsigned long) ULONG_MAX >> (e - 32);
+    if (!xp->s_value.s_mantissa_parts.low)
     {
-        r = (unsigned long) ULONG_MAX >> (e - 32);
-        if (!xp->s_value.s_mantissa_parts.low)
-        {
-            *i = x;
-            x = 0;
-            xp->s_value.sign = ip->s_value.sign;
-            return (x);
-        }
-        ip->s_value.sign = xp->s_value.sign;
-        ip->s_value.exponent = xp->s_value.exponent;
-        ip->s_value.s_mantissa_parts.high = xp->s_value.s_mantissa_parts.high;
-        ip->s_value.s_mantissa_parts.low = xp->s_value.s_mantissa_parts.low & ~r;
-        return (x - *i);
+        *i = x;
+        x = 0;
+        xp->s_value.sign = ip->s_value.sign;
+        return (x);
     }
+    ip->s_value.sign = xp->s_value.sign;
+    ip->s_value.exponent = xp->s_value.exponent;
+    ip->s_value.s_mantissa_parts.high = xp->s_value.s_mantissa_parts.high;
+    ip->s_value.s_mantissa_parts.low = xp->s_value.s_mantissa_parts.low & ~r;
+    return (x - *i);
 }

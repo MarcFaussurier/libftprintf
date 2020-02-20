@@ -1,7 +1,6 @@
 #include <libftprintf.h>
 
-t_bool          ft_isinfl(long double x)
+t_bool                  ft_isinfl(long double x)
 {
-    (void) x;
-    return (FALSE);
+    return (ft_read_state_ld(x) == INFINITY);
 }

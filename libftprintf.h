@@ -49,7 +49,7 @@ typedef enum                        e_ld_state
     INFINITY,
     NOT_A_NUMBER,
     QUIET_NOT_A_NUMBER,
-    INVALID_NOT_A_NUMBER,
+    INVALID_NUMBER,
     CANT_BE_GEN,
     INVALID_OP
 }                                   t_ld_state;

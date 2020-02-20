@@ -50,4 +50,10 @@ int 			main(void)
     a = ft_printf("%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
     b = printf("%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
     printf("\n[outputs: %i %i]\n", a, b);
+
+    long double     i;
+    long double     q;
+    q = ft_modfl(9654.2658, &i);
+    printf("testing ft_modfl()... [q=%Lf | i=%Lf]\n", q, i);
+    
 }

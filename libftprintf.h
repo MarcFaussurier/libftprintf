@@ -13,7 +13,6 @@
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
-# define IS_LITTLE_ENDIAN (1 == *(unsigned char *)&(int){1})
 # include <stdarg.h>
 # include <libft/libft.h>
 # define b2 "01"

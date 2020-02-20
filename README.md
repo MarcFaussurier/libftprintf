@@ -1,12 +1,17 @@
 [still in heavy developpement]
 
 ## libftprintf
-(((ft_printf -> ft_vprintf) || (ft_asprintf)) ->  ft_vasprintf)@42
+* (((((ft_printf -> ft_vprintf) || (ft_asprintf)) ->  ft_vasprintf) || (ft_wprintf -> ft_wvprintf) || (ft_wasprintf)) ->  ft_wvasprintf)
+
+* ft_*(u || i)toa -> ft_ll(u || i)toa_base -> ft_llutoa_base
+* ft_ftoa -> ft_dtoa -> ft_ldtoa 
+* ft_modf -> ft_modfl 
+* ft_
 
 ### goal: 
 
 reproduction of ALL printf features, including wchars, up to 64 bits ints, up to 80 bits long doubles and all flags / field widths / precisions / qualifiers / specifiers and undefined behaviours under macos.
-also implementation speed was not a goal, priority was more in code clarity.
+also implementation speed was not a goal, priority was more in code clarity and in DRY (aka don't repeat yourself) so that optimisations could be easily added later.
 
 ### allowed primitives functions:
 * unistd.h
@@ -22,6 +27,7 @@ also implementation speed was not a goal, priority was more in code clarity.
 
 ### implementation notes
 * gcc ... -D AT_EXIT=1 ... flag will likely boost your performance by using a global variable for storing specifiers and callbacks association.
+* all functions that exist with a larger type will use it as a parent for avoiding repetitions 
 
 ### CREDITS:
 

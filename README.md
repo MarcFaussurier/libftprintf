@@ -15,6 +15,7 @@ also implementation speed was not a goal, priority was more in code clarity and 
 ### allowed primitives functions:
 * unistd.h
 * stdlib.h
+* limits.h
 
 ### extensibility:
 

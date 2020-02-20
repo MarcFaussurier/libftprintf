@@ -26,7 +26,7 @@ also implementation speed was not a goal, priority was more in code clarity and 
 
 ### implementation notes
 * gcc ... -D AT_EXIT=1 ... flag will likely boost your performance by using a global variable for storing specifiers and callbacks association.
-* all functions that exist with a larger type will use it as a parent for avoiding repetitions 
+* all functions that exist with a larger type will use the one with a larger type for avoiding repetitions 
 
 ### CREDITS:
 

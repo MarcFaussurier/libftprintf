@@ -25,7 +25,7 @@ also implementation speed was not a goal, priority was more in code clarity and 
 * %b for binary displaying of any mem region
 
 ### implementation notes
-* gcc ... -D AT_EXIT=1 ... flag will likely boost your performance by using a global variable for storing specifiers and callbacks association.
+* gcc ... -D AT_EXIT=1 ... flag will likely boost your performance by using a global variable for storing specifiers and callbacks association using atexit() instead of freeing the global variable at each printf exit.
 * all functions that exist with a larger type will use the one with a larger type for avoiding repetitions 
 
 ### CREDITS:

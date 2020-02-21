@@ -1,16 +1,9 @@
 [still in heavy developpement]
 
 ## libftprintf
-* (((((ft_printf -> ft_vprintf) || (ft_asprintf)) ->  ft_vasprintf)
-
-* ft_*(u || i)toa -> ft_ll(u || i)toa_base -> ft_llutoa_base
-* ft_ftoa -> ft_dtoa -> ft_ldtoa 
-* ft_modf -> ft_modfl 
-
-### goal: 
 
 reproduction of printf, with 64 bits int and 80 bits long doubles.
-also implementation speed was not a goal, priority was more in code clarity and in DRY (aka don't repeat yourself) so that optimisations could be easily added later.
+also implementation speed was not a goal, priority was more in code clarity and extensibility.
 
 ### allowed primitives:
 * unistd.h    read()      write()
@@ -19,8 +12,8 @@ also implementation speed was not a goal, priority was more in code clarity and 
 
 ### extensibility:
 
-* register a specifier simply before calling your printf using ft_register_specifier(...)
-* delete a specifier simply before calling your printf using ft_delete_specifier(...)
+* register a specifier simply before calling your printf using ft_register_specifier()
+* delete a specifier simply before calling your printf using ft_delete_specifier()
 
 ### new specifiers
 * %b for binary displaying of any mem region

@@ -12,10 +12,10 @@
 reproduction of ALL printf features, up to 64 bits ints, up to 80 bits long doubles and all flags / field widths / precisions / qualifiers / specifiers and undefined behaviours under macos.
 also implementation speed was not a goal, priority was more in code clarity and in DRY (aka don't repeat yourself) so that optimisations could be easily added later.
 
-### allowed primitives functions:
-* unistd.h
-* stdlib.h
-* limits.h
+### allowed primitives:
+* unistd.h  read() write()
+* stdlib.h  malloc()
+* stdargs.h va_*()
 
 ### extensibility:
 

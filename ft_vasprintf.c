@@ -25,7 +25,9 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
     char            *prev;
     t_list          *str;
 
-	if (ob && !g_specifiers && ft_boot_specifiers() && AT_EXIT)
+	if (!ft_boot_specifiers())
+		return (-ft_free_g_specifiers())
+	if (!g_specifiers && AT_EXIT)
 			atexit((void(*)(void))ft_free_g_specifiers);
     str = NULL;
     prev = (char*)fmt;

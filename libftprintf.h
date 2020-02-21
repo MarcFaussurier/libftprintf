@@ -63,7 +63,7 @@ typedef union                       u_float
         unsigned int                exponent:           8;
         unsigned int                mantissa:           23;
     }                               s_value;
-    unsigned char                   bytes[32];
+    unsigned char                   bytes[4];
 }                                   t_float;
 typedef union                       u_double
 {
@@ -82,7 +82,7 @@ typedef union                       u_double
             }                       s_mantissa_p;
         };
     }                               s_value;
-    unsigned char                   bytes[64];
+    unsigned char                   bytes[8];
 }                                   t_double;
 typedef union                       u_longdouble
 {
@@ -112,7 +112,7 @@ typedef union                       u_longdouble
             unsigned long long      mantissa:           64;
         };
     }                               s_parts;
-    unsigned char                   bytes[80];
+    unsigned char                   bytes[10];
 }                                   t_longdouble;
 typedef struct		                s_flags
 {

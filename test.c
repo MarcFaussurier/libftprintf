@@ -54,8 +54,11 @@ int 			main(void)
     long double     k;
     long double     i;
     long double     q;
-    k = 96.2658;
+    k = 10.2658;
     q = ft_modfl(k, &i);
+    
+    
+    printf("%u", ((t_longdouble) (long double) 95).s_parts.sign);
     printf("testing ft_modfl(%Lf)... [q=%Lf | i=%Lf]\n", k, q, i);
     
 }

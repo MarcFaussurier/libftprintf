@@ -1,7 +1,7 @@
 [still in heavy developpement]
 
 ## libftprintf
-* (((((ft_printf -> ft_vprintf) || (ft_asprintf)) ->  ft_vasprintf) || (ft_wprintf -> ft_wvprintf) || (ft_wasprintf)) ->  ft_wvasprintf) -> ft_argtoa -> specifiers callbacks 
+* (((((ft_printf -> ft_vprintf) || (ft_asprintf)) ->  ft_vasprintf)
 
 * ft_*(u || i)toa -> ft_ll(u || i)toa_base -> ft_llutoa_base
 * ft_ftoa -> ft_dtoa -> ft_ldtoa 

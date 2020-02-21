@@ -11,19 +11,16 @@ also implementation speed was not a goal, priority was more in code clarity and 
 * stdargs.h   va_*()
 
 ### extensibility:
-
 * register a specifier simply before calling your printf using ft_register_specifier()
 * delete a specifier simply before calling your printf using ft_delete_specifier()
-
-### new specifiers
-* %b for displaying a mem region in binary format
 
 ### implementation notes
 * gcc ... -D AT_EXIT=1 ... flag will likely boost printf speed by using a global variable for storing specifiers and callbacks association using atexit() instead of freeing the global variable at each printf exit.
 * all functions that exist with a larger type will use the one with a larger type for avoiding repetitions 
+* %b is a new specifier for displaying a variable in its binary representation
 
 ### CREDITS:
 
-- apple for hexfloat algo: https://opensource.apple.com/source/Libc/Libc-320/stdio/hexfloat.c.auto.html
-- reactos for modf algo: https://github.com/mirror/reactos/blob/master/reactos/lib/sdk/crt/math/modf.c
-- wikipedia for floating points with extended precision https://en.wikipedia.org/wiki/Extended_precision
+* apple for hexfloat algo: https://opensource.apple.com/source/Libc/Libc-320/stdio/hexfloat.c.auto.html
+* reactos for modf algo: https://github.com/mirror/reactos/blob/master/reactos/lib/sdk/crt/math/modf.c
+* wikipedia for floating points with extended precision https://en.wikipedia.org/wiki/Extended_precision

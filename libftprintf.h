@@ -79,7 +79,7 @@ typedef union                       u_double
             {
                 unsigned int        high:               20;
                 unsigned int        low:                32;
-            }                       s_mantissa_parts;
+            }                       s_mantissa_p;
         };
     }                               s_value;
     unsigned char                   bytes[64];
@@ -91,17 +91,27 @@ typedef union                       u_longdouble
     {
         unsigned int                sign:               1;
         unsigned int                exponent:           15;
-        unsigned int                i:                  1;
         union
         {
-            unsigned long long      mantissa:           63;
+            struct
+            {
+                unsigned long long  i:                  1;
+                unsigned long long  y:                  1;
+                unsigned long long  value:              62;
+            }                       s_mantissa_bb;
+            struct
+            {
+                unsigned long long  i:                  1;
+                unsigned long long  value:              63;
+            }                       s_mantissa_b;
             struct
             {
                 unsigned int        high:               32;
                 unsigned int        low:                32;
-            }                       s_mantissa_parts;
+            }                       s_mantissa_p;
+            unsigned long long      mantissa:           64;
         };
-    }                               s_value;
+    }                               s_parts;
     unsigned char                   bytes[80];
 }                                   t_longdouble;
 typedef struct		                s_flags
@@ -126,6 +136,8 @@ typedef struct		                s_assoc_specifier
     char		                    specifier;
     t_specifier	                    callback;
 }			                        t_assoc_specifier;
+void                                ft_putwc(wchar_t);
+void                                ft_putwstr(wchar_t*);
 t_bool			                    ft_free(void *, t_bool);
 t_specifier		                    ft_get_specifier(char);
 t_bool			                    ft_is_specifier(char);

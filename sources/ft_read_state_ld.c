@@ -10,10 +10,10 @@ t_ld_state          ft_read_state_ld(long double x)
 
     xp = (void*) &x;
     // exp is not null  
-    if (xp->s_value.exponent)
+    if (xp->s_parts.exponent)
     {
         // all exp bits are 1
-        if (xp->s_value.exponent == POW2_15)
+        if (xp->s_parts.exponent == POW2_15)
         {
         
         }

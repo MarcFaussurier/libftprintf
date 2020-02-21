@@ -9,29 +9,29 @@ long double             ft_modfl(long double x, long double *i)
 
     xp = (void*)&x;
     ip = (void*)i;
-    e = xp->s_value.exponent - LDEXPBIAS;
+    e = xp->s_parts.exponent - LDEXPBIAS;
     if (e < 32)
     {
         if (e < 0)
         {
             ip->value = 0;
-            xp->s_value.sign = ip->s_value.sign;
+            xp->s_parts.sign = ip->s_parts.sign;
             return (x);
         }
         else
         {
             r = ((unsigned long) ULONG_MAX) >> (e + 1);
-            if (!xp->s_value.s_mantissa_parts.low && !(xp->s_value.s_mantissa_parts.low & r))
+            if (!xp->s_parts.s_mantissa_p.low && !(xp->s_parts.s_mantissa_p.low & r))
             {
                 ip->value = x;
                 x = 0;
-                ip->s_value.sign = xp->s_value.sign;
+                ip->s_parts.sign = xp->s_parts.sign;
                 return (x);
             }
-            ip->s_value.sign = xp->s_value.sign;
-            ip->s_value.exponent = ip->s_value.exponent;
-            ip->s_value.s_mantissa_parts.high = xp->s_value.s_mantissa_parts.high & ~ r;
-            ip->s_value.s_mantissa_parts.low = 0;
+            ip->s_parts.sign = xp->s_parts.sign;
+            ip->s_parts.exponent = ip->s_parts.exponent;
+            ip->s_parts.s_mantissa_p.high = xp->s_parts.s_mantissa_p.high & ~ r;
+            ip->s_parts.s_mantissa_p.low = 0;
             return (x - *i);
         }
     }
@@ -41,20 +41,20 @@ long double             ft_modfl(long double x, long double *i)
         if (ft_isnanl(x) || ft_isinfl(x))
             return (x);
         x = 0;
-        xp->s_value.sign = ip->s_value.sign;
+        xp->s_parts.sign = ip->s_parts.sign;
         return (x);
     }
     r = (unsigned long) ULONG_MAX >> (e - 32);
-    if (!xp->s_value.s_mantissa_parts.low)
+    if (!xp->s_parts.s_mantissa_p.low)
     {
         *i = x;
         x = 0;
-        xp->s_value.sign = ip->s_value.sign;
+        xp->s_parts.sign = ip->s_parts.sign;
         return (x);
     }
-    ip->s_value.sign = xp->s_value.sign;
-    ip->s_value.exponent = xp->s_value.exponent;
-    ip->s_value.s_mantissa_parts.high = xp->s_value.s_mantissa_parts.high;
-    ip->s_value.s_mantissa_parts.low = xp->s_value.s_mantissa_parts.low & ~r;
+    ip->s_parts.sign = xp->s_parts.sign;
+    ip->s_parts.exponent = xp->s_parts.exponent;
+    ip->s_parts.s_mantissa_p.high = xp->s_parts.s_mantissa_p.high;
+    ip->s_parts.s_mantissa_p.low = xp->s_parts.s_mantissa_p.low & ~r;
     return (x - *i);
 }

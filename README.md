@@ -16,7 +16,7 @@ also implementation speed was not a goal, priority was more in code clarity and 
 * delete a specifier simply before calling your printf using ft_delete_specifier()
 
 ### new specifiers
-* %b for binary displaying of any mem region
+* %b for displaying a mem region in binary format
 
 ### implementation notes
 * gcc ... -D AT_EXIT=1 ... flag will likely boost printf speed by using a global variable for storing specifiers and callbacks association using atexit() instead of freeing the global variable at each printf exit.

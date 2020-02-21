@@ -45,5 +45,5 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
     else
         oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
     ft_lstclear(&str, &free);
-    return (oi + (!AT_EXIT && ft_free_g_specifiers() ? 0 : 0));
+    return (oi + ((!AT_EXIT && ft_free_g_specifiers()) && 0));
 }

@@ -26,9 +26,9 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
     t_list          *str;
 
 	if (!ft_boot_specifiers())
-		return (-ft_free_g_specifiers())
+		return (-ft_free_g_specifiers());
 	if (!g_specifiers && AT_EXIT)
-			atexit((void(*)(void))ft_free_g_specifiers);
+		atexit((void(*)(void))ft_free_g_specifiers);
     str = NULL;
     prev = (char*)fmt;
 	oi = 0;
@@ -42,10 +42,7 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
         }
     if (!AT_EXIT)
         ft_free_g_specifiers();
-    if (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev)))
-        oi = -42;
-    else
-        oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
+    oi = (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev))) ? -42 : (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
     ft_lstclear(&str, &free);
     return (oi);
 }

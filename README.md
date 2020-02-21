@@ -13,9 +13,9 @@ reproduction of ALL printf features, up to 64 bits ints, up to 80 bits long doub
 also implementation speed was not a goal, priority was more in code clarity and in DRY (aka don't repeat yourself) so that optimisations could be easily added later.
 
 ### allowed primitives:
-* unistd.h  read() write()
-* stdlib.h  malloc()
-* stdargs.h va_*()
+* unistd.h    read()      write()
+* stdlib.h    malloc()    free()
+* stdargs.h   va_*()
 
 ### extensibility:
 

@@ -9,7 +9,7 @@
 
 ### goal: 
 
-reproduction of ALL printf features, up to 64 bits ints, up to 80 bits long doubles and all flags / field widths / precisions / qualifiers / specifiers and undefined behaviours under macos.
+reproduction of printf, with 64 bits int and 80 bits long doubles.
 also implementation speed was not a goal, priority was more in code clarity and in DRY (aka don't repeat yourself) so that optimisations could be easily added later.
 
 ### allowed primitives:

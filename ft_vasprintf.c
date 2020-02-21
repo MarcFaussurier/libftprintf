@@ -40,9 +40,10 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
                 return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
             prev = (char*)fmt;
         }
-    if (!AT_EXIT)
-        ft_free_g_specifiers();
-    oi = (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev))) ? -42 : (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
+    if (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev)))
+        oi = -42;
+    else
+        oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
     ft_lstclear(&str, &free);
-    return (oi);
+    return (oi + (!AT_EXIT && ft_free_g_specifiers() ? 0 : 0));
 }

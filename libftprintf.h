@@ -89,28 +89,32 @@ typedef union                       u_longdouble
     long double                     value;
     struct
     {
-        unsigned int                sign:               1;
-        unsigned int                exponent:           15;
+
+
+
         union
         {
             struct
             {
+                unsigned long long  value:              62;
                 unsigned long long  i:                  1;
                 unsigned long long  y:                  1;
-                unsigned long long  value:              62;
-            }                       s_mantissa_bb;
+            }                       s_bb;
             struct
             {
-                unsigned long long  i:                  1;
                 unsigned long long  value:              63;
-            }                       s_mantissa_b;
+                unsigned long long  i:                  1;
+            }                       s_b;
             struct
             {
-                unsigned int        high:               32;
-                unsigned int        low:                32;
-            }                       s_mantissa_p;
-            unsigned long long      mantissa:           64;
-        };
+                unsigned long long  low:               32;
+                unsigned long long  high:              32;
+            }                       s_hl;
+            unsigned long long      vaule:              64;
+        }                           u_mantissa;
+        
+        unsigned long long          exponent:           15;
+        unsigned long long          sign:               1;
     }                               s_parts;
     unsigned char                   bytes[10];
 }                                   t_longdouble;

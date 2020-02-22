@@ -3,14 +3,15 @@
 long double             ft_modfl(long double x, long double *i)
 {
     int                                     e;
-    unsigned long                           r;
+    unsigned int                            r;
     t_longdouble                            *xp;
     t_longdouble                            *ip;
 
-    ft_putstr("b");
     xp = (void*)&x;
     ip = (void*)i;
-    e = xp->s_parts.exponent - LDEXPBIAS;
+    printf("sign: %i\n", xp->bytes[9] << 8);
+    printf("e: %i bias: %i \n", xp->s_parts.exponent, LDEXPBIAS);
+    e = xp->s_parts.exponent - 0x3fff;
     if (e < 32)
     {
         ft_putstr("<32");
@@ -20,39 +21,32 @@ long double             ft_modfl(long double x, long double *i)
             xp->s_parts.sign = ip->s_parts.sign;
             return (x);
         }
-        r = ((unsigned long) ULONG_MAX) >> (e + 1);
-        if (!xp->s_parts.s_mantissa_p.low && !(xp->s_parts.s_mantissa_p.low & r))
+        r = ((unsigned int) 0xffffffff) >> (e + 1);
+        if (!xp->s_parts.u_mantissa.s_hl.low && !(xp->s_parts.u_mantissa.s_hl.low & r))
         {
-            ft_putstr ("hi\ni");
             *i = x;
             x = 0;
             ip->s_parts.sign = xp->s_parts.sign;
             return (x);
         }
         ip->s_parts.sign = xp->s_parts.sign;
-        ip->s_parts.exponent = ip->s_parts.exponent;
-        ip->s_parts.s_mantissa_p.high = xp->s_parts.s_mantissa_p.high & ~ r;
-        ip->s_parts.s_mantissa_p.low = 0;
+        ip->s_parts.exponent = xp->s_parts.exponent;
+        ip->s_parts.u_mantissa.s_hl.high = xp->s_parts.u_mantissa.s_hl.high &~r;
+        ip->s_parts.u_mantissa.s_hl.low = 0;
         return (x - *i);
     }
     if (e > 63)
     {
-        ft_putstr(">63");
-        printf("e: %i\n", e);
         *i = x;
         if (ft_isnanl(x) || ft_isinfl(x))
-        {
-            ft_putstr("inf or nan\n");
             return (x);
-        }
         x = 0;
         xp->s_parts.sign = ip->s_parts.sign;
         return (x);
     }
-    r = (unsigned long) ULONG_MAX >> (e - 32);
-    if (!xp->s_parts.s_mantissa_p.low)
+    r = ULONG_MAX >> (e - 32);
+    if (!xp->s_parts.u_mantissa.s_hl.low)
     {
-        ft_putstr("no mantissa low");
         *i = x;
         x = 0;
         xp->s_parts.sign = ip->s_parts.sign;
@@ -60,8 +54,7 @@ long double             ft_modfl(long double x, long double *i)
     }
     ip->s_parts.sign = xp->s_parts.sign;
     ip->s_parts.exponent = xp->s_parts.exponent;
-    ip->s_parts.s_mantissa_p.high = xp->s_parts.s_mantissa_p.high;
-    ip->s_parts.s_mantissa_p.low = xp->s_parts.s_mantissa_p.low & ~r;
-    ft_putstr("end");
+    ip->s_parts.u_mantissa.s_hl.high = xp->s_parts.u_mantissa.s_hl.high;
+    ip->s_parts.u_mantissa.s_hl.low = xp->s_parts.u_mantissa.s_hl.low & ~r;
     return (x - *i);
 }

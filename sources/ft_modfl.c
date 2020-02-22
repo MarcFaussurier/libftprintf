@@ -9,12 +9,9 @@ long double             ft_modfl(long double x, long double *i)
 
     xp = (void*)&x;
     ip = (void*)i;
-    printf("sign: %i\n", xp->bytes[9] << 8);
-    printf("e: %i bias: %i \n", xp->s_parts.exponent, LDEXPBIAS);
     e = xp->s_parts.exponent - LDEXPBIAS;
     if (e < 32)
     {
-        ft_putstr("<32");
         if (e < 0)
         {
             *i = 0;

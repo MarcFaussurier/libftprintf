@@ -22,7 +22,7 @@ long double             ft_modfl(long double x, long double *i)
             return (x);
         }
         r = ((unsigned int) 0xffffffff) >> (e + 1);
-        if (!xp->s_parts.u_mantissa.s_pair.low && !(xp->s_parts.u_mantissa.s_pair.low & r))
+        if (!xp->s_parts.u_mantisa.s_pair.low && !(xp->s_parts.u_mantisa.s_pair.low & r))
         {
             *i = x;
             x = 0;
@@ -31,8 +31,8 @@ long double             ft_modfl(long double x, long double *i)
         }
         ip->s_parts.sign = xp->s_parts.sign;
         ip->s_parts.exponent = xp->s_parts.exponent;
-        ip->s_parts.u_mantissa.s_pair.high = xp->s_parts.u_mantissa.s_pair.high &~r;
-        ip->s_parts.u_mantissa.s_pair.low = 0;
+        ip->s_parts.u_mantisa.s_pair.high = xp->s_parts.u_mantisa.s_pair.high &~r;
+        ip->s_parts.u_mantisa.s_pair.low = 0;
         return (x - *i);
     }
     if (e > 63)
@@ -45,7 +45,7 @@ long double             ft_modfl(long double x, long double *i)
         return (x);
     }
     r = ULONG_MAX >> (e - 32);
-    if (!xp->s_parts.u_mantissa.s_pair.low)
+    if (!xp->s_parts.u_mantisa.s_pair.low)
     {
         *i = x;
         x = 0;
@@ -54,7 +54,7 @@ long double             ft_modfl(long double x, long double *i)
     }
     ip->s_parts.sign = xp->s_parts.sign;
     ip->s_parts.exponent = xp->s_parts.exponent;
-    ip->s_parts.u_mantissa.s_pair.high = xp->s_parts.u_mantissa.s_pair.high;
-    ip->s_parts.u_mantissa.s_pair.low = xp->s_parts.u_mantissa.s_pair.low & ~r;
+    ip->s_parts.u_mantisa.s_pair.high = xp->s_parts.u_mantisa.s_pair.high;
+    ip->s_parts.u_mantisa.s_pair.low = xp->s_parts.u_mantisa.s_pair.low & ~r;
     return (x - *i);
 }

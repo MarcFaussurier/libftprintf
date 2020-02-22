@@ -59,7 +59,7 @@ typedef union                       u_float
     float                           value;
     struct
     {
-        unsigned int                mantissa:           23;
+        unsigned int                mantisa:            23;
         unsigned int                exponent:           8;
         unsigned int                sign:               1;
     }                               s_parts;
@@ -79,7 +79,7 @@ typedef union                       u_double
                 unsigned int        low:                32;
                 unsigned int        high:               20;
             }                       s_parts;
-        }                           u_mantissa;
+        }                           u_mantisa;
         unsigned long long          exponent:           11;
         unsigned long long          sign:               1;
     }                               s_parts;
@@ -92,16 +92,16 @@ typedef union                       u_long_double
     {
         union
         {
-            unsigned long long      mantissa:           64;
+            unsigned long long      value:           64;
             struct
             {
-                unsigned long long  value:           62;
+                unsigned long long  value:              62;
                 unsigned long long  y:                  1;
                 unsigned long long  i:                  1;
             }                       s_bb;
             struct
             {
-                unsigned long long  value:           63;
+                unsigned long long  value:              63;
                 unsigned long long  i:                  1;
             }                       s_b;
             struct
@@ -109,7 +109,7 @@ typedef union                       u_long_double
                 unsigned long long  low:               32;
                 unsigned long long  high:              32;
             }                       s_pair;
-        }                           u_mantissa;
+        }                           u_mantisa;
         unsigned long long          exponent:           15;
         unsigned long long          sign:               1;
     }                               s_parts;

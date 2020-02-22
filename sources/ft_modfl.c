@@ -11,7 +11,7 @@ long double             ft_modfl(long double x, long double *i)
     ip = (void*)i;
     printf("sign: %i\n", xp->bytes[9] << 8);
     printf("e: %i bias: %i \n", xp->s_parts.exponent, LDEXPBIAS);
-    e = xp->s_parts.exponent - 0x3fff;
+    e = xp->s_parts.exponent - LDEXPBIAS;
     if (e < 32)
     {
         ft_putstr("<32");
@@ -21,7 +21,7 @@ long double             ft_modfl(long double x, long double *i)
             xp->s_parts.sign = ip->s_parts.sign;
             return (x);
         }
-        r = ((unsigned int) 0xffffffff) >> (e + 1);
+        r = UINT_MAX >> (e + 1);
         if (!xp->s_parts.u_mantisa.s_pair.low && !(xp->s_parts.u_mantisa.s_pair.low & r))
         {
             *i = x;

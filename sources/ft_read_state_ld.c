@@ -6,7 +6,7 @@
 */
 t_ld_state          ft_read_state_ld(long double x)
 {
-    t_longdouble        *xp;
+    t_long_double        *xp;
 
     xp = (void*) &x;
     // exp is not null  

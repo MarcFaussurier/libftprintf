@@ -59,65 +59,61 @@ typedef union                       u_float
     float                           value;
     struct
     {
-        unsigned int                sign:               1;
-        unsigned int                exponent:           8;
         unsigned int                mantissa:           23;
-    }                               s_value;
+        unsigned int                exponent:           8;
+        unsigned int                sign:               1;
+    }                               s_parts;
     unsigned char                   bytes[4];
 }                                   t_float;
 typedef union                       u_double
 {
     double                          value;
+    unsigned char                   bytes[8];
     struct
     {
-        unsigned long long          sign:               1;
-        unsigned long long          exponent:           11;
         union
         {
-            unsigned long long      mantissa:           52;
+            unsigned long long      value:              52;
             struct
             {
-                unsigned int        high:               20;
                 unsigned int        low:                32;
-            }                       s_mantissa_p;
-        };
-    }                               s_value;
-    unsigned char                   bytes[8];
+                unsigned int        high:               20;
+            }                       s_parts;
+        }                           u_mantissa;
+        unsigned long long          exponent:           11;
+        unsigned long long          sign:               1;
+    }                               s_parts;
 }                                   t_double;
-typedef union                       u_longdouble
+typedef union                       u_long_double
 {
     long double                     value;
+    unsigned char                   bytes[10];
     struct
     {
-
-
-
         union
         {
+            unsigned long long      mantissa:           64;
             struct
             {
-                unsigned long long  value:              62;
-                unsigned long long  i:                  1;
+                unsigned long long  value:           62;
                 unsigned long long  y:                  1;
+                unsigned long long  i:                  1;
             }                       s_bb;
             struct
             {
-                unsigned long long  value:              63;
+                unsigned long long  value:           63;
                 unsigned long long  i:                  1;
             }                       s_b;
             struct
             {
                 unsigned long long  low:               32;
                 unsigned long long  high:              32;
-            }                       s_hl;
-            unsigned long long      vaule:              64;
+            }                       s_pair;
         }                           u_mantissa;
-        
         unsigned long long          exponent:           15;
         unsigned long long          sign:               1;
     }                               s_parts;
-    unsigned char                   bytes[10];
-}                                   t_longdouble;
+}                                   t_long_double;
 typedef struct		                s_flags
 {
     char		                    zero:               1;

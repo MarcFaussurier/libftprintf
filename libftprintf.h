@@ -45,11 +45,12 @@
 typedef enum                        e_ld_state
 {
     NORMAL,
+    DENORMAL,
     ZERO,
     INFINITY,
     NOT_A_NUMBER,
     QUIET_NOT_A_NUMBER,
-    INVALID_NUMBER,
+    QUIET_NOT_A_NUMBER_INVALID_OP,
     CANT_BE_GEN,
     INVALID_OP
 }                                   t_ld_state;
@@ -92,7 +93,7 @@ typedef union                       u_long_double
     {
         union
         {
-            unsigned long long      value:           64;
+            unsigned long long      value:              64;
             struct
             {
                 unsigned long long  value:              62;
@@ -136,8 +137,7 @@ typedef struct		                s_assoc_specifier
     char		                    specifier;
     t_specifier	                    callback;
 }			                        t_assoc_specifier;
-void                                ft_putwc(wchar_t);
-void                                ft_putwstr(wchar_t*);
+t_bool                              ft_is_in_a(int, int*, unsigned int);
 t_bool			                    ft_free(void *, t_bool);
 t_specifier		                    ft_get_specifier(char);
 t_bool			                    ft_is_specifier(char);

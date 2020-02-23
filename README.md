@@ -11,7 +11,8 @@ Reproduction of printf, with 64 bits int and 80 bits long doubles. Also implemen
 * delete a specifier simply before calling your printf using ft_delete_specifier()
 
 ### notes
-* gcc ... -D AT_EXIT=1 ... flag will likely boost printf speed by using a global variable for storing specifiers and callbacks association using atexit() instead of freeing the global variable at each printf exit.
+* gcc ... -D AT_EXIT=1 ... compilation flag will likely boost printf speed by using a global variable for storing specifiers and callbacks association using atexit() instead of freeing the global variable at each printf exit.
+* gcc ... -D LDMAXPRECISION=1024 ... compilation flag will alow you to modify the max precision that printf will use for handling long doubles.
 * all functions that exist with a larger type will use the one with a larger type for avoiding repetitions 
 * %b is a new specifier for displaying a variable in its binary representation
 

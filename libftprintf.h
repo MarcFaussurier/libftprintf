@@ -172,6 +172,7 @@ char            			        *ft_fmt_g(t_specifier_state, va_list);
 char                                *ft_ftoa(float);
 char                                *ft_dtoa(double);
 char                                *ft_ldtoa(long double);
+char                                *ft_ldtoa_base(const char*, long double);
 char                                *ft_ftohex(long double);
 char                                *ft_dtohex(long double);
 char                                *ft_ldtohex(long double);

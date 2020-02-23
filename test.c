@@ -61,6 +61,8 @@ int 			main(void)
     printf("testing ft_modfl(%Lf)... [q=%Lf | i=%Lf]\n", k, q, i);
     ft_printf("\n[%Lf]\n",   44.5565899999999999999999999999999999999999999999999999999L);
     printf("\n%.256Lf\n",  44.5565899999999999999999999999999999999999999999999999999L);
+    ft_printf("21?: %Lf\n", 21.42L);
+    printf("%a %s||\n", 21.42, ft_ldtoa_base(b16, 21.42));
     printf("%Lf\n", 10.0L);
     
 }

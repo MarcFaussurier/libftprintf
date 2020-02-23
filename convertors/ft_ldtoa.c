@@ -1,65 +1,86 @@
 #include <libftprintf.h>
 
+
+static char         *ft_read_ipart(long double n)
+{
+    size_t          i;
+    size_t          s;
+    long double     k;
+    char            *out;
+    char            c;
+
+    if (n == 1)
+        return (ft_strdup("1"));
+    else if (n == 0)
+        return (ft_strdup("0"));
+    s = 1;
+    k = n;
+    while (k >= 1 && (k /= 10))
+        s += 1;
+    printf("s: %zu \n", s);
+    out = malloc(s);
+    i = 0;
+    s -= 2;
+    while (TRUE)
+    {
+        c = (char)  (n / ft_pow(10, s));
+        out[i++] = '0' + c;
+        n -= c * ft_pow(10, s);
+        if (s)
+            s -= 1;
+        else
+            break ;
+        if (!n)
+        {
+            out[i++] = '0';
+            break;
+    
+        }
+    }
+    out[i] = '\0';
+    return (out);
+}
+/*
+static char         *ft_read_rest(long double n)
+{
+    long double     k;
+    size_t          s;
+    char            *out;
+
+    if (n >= 1 || n < 0)
+        return (ft_strdup(""));
+    k = n;
+    s = 0;
+    while (k != 0 && (k *= 10))
+        s += 1;
+    out = malloc(k + 1);
+    s = 0;
+    while (n != 0 && (n *= 10))
+        out[s++] = '0' + (char) n;
+    out[s] = '\0';
+    (void) n;
+    return (NULL);
+}
+
+*/
+
+
 char                *ft_ldtoa(long double n)
 {
-
- /*   size_t          output_len;
-
-    long double     n_bkp;
-    char            d;
-*/
+    long double     ipart;
+    long double     rest;
     char            *output;
+    char            *swp1;
+    char            *swp2;
+    char            *swp3;
 
-    (void) n;
-    output = NULL;
-    /*
-    output_len = 1;
-    n_bkp = n;
-    if (n_bkp < 0)
-    {
-        output_len += 1;
-        n_bkp = -n_bkp;
-    }
-    while (n_bkp >= 1)
-    {
-        output_len += 1;
-        n_bkp /= 10;
-    }
-    if (n_bkp < 1)
-    {
-        output_len += 1;
-        while (n_bkp != 0)
-        {
-            output_len += 1;
-            d = n_bkp * 10;
-            n = n - (d / 10) * 10;
-        }
-    }
-    output = malloc(output_len + 1);
-    n_bkp = n;
-    if (n_bkp < 0)
-    {
-
-        output[output_len++] = '-';
-        n_bkp = -n_bkp;
-    }
-    while (n_bkp >= 1)
-    {
-        output[output_len++] = '0' + (int) (n_bkp - (n_bkp / 10) * 10);
-        n_bkp /= 10;
-    }
-    else if (n_bkp < 1)
-    {
-        output[output_len++] = '.';
-        while (n_bkp != 0)
-        {
-            d = n_bkp * 10;
-            output[output_len++] = '0' + d;
-            n = n - (d / 10) * 10;
-        }
-    }
-    output[output_len] = '\0';
-    */
+    rest = ft_modfl(n, &ipart);
+    swp1 = ft_read_ipart(ipart);
+    swp2 = ft_strdup("");//ft_read_rest(rest);
+    swp3 = ft_strjoin(swp1, ".");
+    output = ft_strjoin(swp3, swp2);
+    free(swp1);
+    free(swp2);
+    free(swp3);
     return (output);
-
 }

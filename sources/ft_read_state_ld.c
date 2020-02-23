@@ -41,7 +41,7 @@ t_ld_state          ft_read_state_ld(long double x)
     if (xp->s_parts.u_mantisa.s_bb.i)
         return (CANT_BE_GEN);
     if (xp->s_parts.u_mantisa.s_bb.value)
-            return(DENORMAL);
+        return(DENORMAL);
     return (ZERO);
 }
 

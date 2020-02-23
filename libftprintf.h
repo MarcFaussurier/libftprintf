@@ -35,6 +35,9 @@
 # define B9 b9
 # define B10 b10
 # define B16 "0123456789ABCDEF"
+# ifndef LDMAXPRECISION
+#  define LDMAXPRECISION 256
+# endif
 # define LDEXPBIAS 16383
 # define POW2_15 32768
 # define NO_PRECISION -424242

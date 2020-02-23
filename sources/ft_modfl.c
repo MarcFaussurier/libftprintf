@@ -18,6 +18,11 @@ long double             ft_modfl(long double x, long double *i)
             xp->s_parts.sign = ip->s_parts.sign;
             return (x);
         }
+        if (x >= LONG_LONG_MIN && x <= LONG_LONG_MAX)
+        {
+            *i = (long long) x;
+            return (x - *i);
+        }
         r = UINT_MAX >> (e + 1);
         if (!xp->s_parts.u_mantisa.s_pair.low && !(xp->s_parts.u_mantisa.s_pair.low & r))
         {

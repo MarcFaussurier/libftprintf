@@ -11,7 +11,7 @@ static char         *ft_read_ipart(long double n)
 
     if (n == 1)
         return (ft_strdup("1"));
-    else if (n == 0)
+    else if (!n)
         return (ft_strdup("0"));
     s = 1;
     k = n;
@@ -34,36 +34,42 @@ static char         *ft_read_ipart(long double n)
         {
             out[i++] = '0';
             break;
-    
         }
     }
     out[i] = '\0';
     return (out);
 }
-/*
+
 static char         *ft_read_rest(long double n)
 {
-    long double     k;
     size_t          s;
+    long double     k;
     char            *out;
+    char            c;
 
-    if (n >= 1 || n < 0)
-        return (ft_strdup(""));
+    if (n >= 1 || n <= 0)
+        return ("");
     k = n;
-    s = 0;
-    while (k != 0 && (k *= 10))
+    s = 1;
+    while (k && s <= LDMAXPRECISION)
+    {
+        c = k * ft_pow(10,s);
+        k -= c*ft_pow(10, -s);
         s += 1;
-    out = malloc(k + 1);
-    s = 0;
-    while (n != 0 && (n *= 10))
-        out[s++] = '0' + (char) n;
-    out[s] = '\0';
-    (void) n;
-    return (NULL);
+    }
+    out = malloc(s);
+    k = n;
+    s = 1;
+    while (k && s <= LDMAXPRECISION)
+    {
+        c = k * ft_pow(10,s);
+        out[s - 1] = '0' + c;
+        k -= c*ft_pow(10, -s);
+        s += 1;
+    }
+    out[s - 1] = '\n';
+    return (out);
 }
-
-*/
-
 
 char                *ft_ldtoa(long double n)
 {
@@ -75,8 +81,9 @@ char                *ft_ldtoa(long double n)
     char            *swp3;
 
     rest = ft_modfl(n, &ipart);
+    printf ("ldtoa()... r=%Lf n=%Lf i=%Lf\n", rest, n, ipart);
     swp1 = ft_read_ipart(ipart);
-    swp2 = ft_strdup("");//ft_read_rest(rest);
+    swp2 = ft_read_rest(rest);
     swp3 = ft_strjoin(swp1, ".");
     output = ft_strjoin(swp3, swp2);
     free(swp1);

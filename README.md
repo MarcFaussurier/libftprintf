@@ -4,7 +4,7 @@ Reproduction of printf, with 64 bits int and 80 bits long doubles. Also implemen
 ### primitives
 * unistd.h&nbsp;&nbsp;&nbsp;read()&nbsp;&nbsp;&nbsp;write()
 * stdlib.h&nbsp;&nbsp;&nbsp;malloc()&nbsp;&nbsp;&nbsp;free()
-* stdargs.h&nbsp;&nbsp;&nbsp;va_*()
+* stdargs.h&nbsp;&nbsp;&nbsp;&nbsp;va_*()
 
 ### extensibility
 * register a specifier simply before calling your printf using ft_register_specifier()

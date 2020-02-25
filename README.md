@@ -1,5 +1,5 @@
 ## libftprintf
-Reproduction of printf, with 64 bits int and 80 bits long doubles. Also implementation speed was not a goal, priority was more in code clarity and extensibility. This project is still under construction.
+Reproduction of printf, with 64 bits int and 80 bits long double. Also implementation speed was not a goal, priority was more in code clarity and extensibility. This project is still under construction.
 
 ### primitives
 * unistd.h&nbsp;&nbsp;&nbsp;&nbsp;read()&nbsp;&nbsp;&nbsp;write()

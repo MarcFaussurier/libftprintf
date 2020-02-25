@@ -40,8 +40,7 @@ static char         *ft_insert_nulls(t_list *str, t_list **nulls, char *s)
             }
             current_null = current_null->next;
         }
-        if ((z = ft_strlen(current_word->content)))
-            y += z - 1;
+        y += ft_strlen(current_word->content);
         current_word = current_word->next;
     }
     return (s);

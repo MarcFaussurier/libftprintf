@@ -16,21 +16,10 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 # define b2 "01"
-# define b3 "012"
-# define b4 "0123"
-# define b5 "01234"
-# define b6 "012345"
-# define b7 "0123456"
 # define b8 "01234567"
-# define b9 "012345678"
 # define b10 "0123456789"
 # define b16 "0123456789abcdef"
 # define B2 b2
-# define B3 b3
-# define B4 b4
-# define B5 b5
-# define B6 b6
-# define B7 b7
 # define B8 b8
 # define B9 b9
 # define B10 b10
@@ -146,6 +135,7 @@ typedef struct		                s_assoc_specifier
     char		                    specifier;
     t_specifier	                    callback;
 }			                        t_assoc_specifier;
+void                                ft_putmem_fd(int, char *, size_t);
 void                                ft_putmem(char*, size_t);
 void                                ft_lstdel_node(t_list**, t_list*, void(*)(void*));
 t_bool                              ft_lstadd_back_new(t_list**, void*);
@@ -210,6 +200,8 @@ char                                *ft_hitoa(short);
 char                                *ft_hhitoa(char);
 char		                        *ft_stoa(t_specifier_state, char *, t_bool, t_bool);
 char		                        *ft_argtoa(char const **, va_list, int, t_list**);
+int                                 ft_vdprintf(int, const char *, va_list);
+int                                 ft_dprintf(int, const char *, ...);
 int	 	    	                    ft_printf(const char *, ...);
 int		    	                    ft_vprintf(const char *, va_list);
 int		    	                    ft_vasprintf(char **, const char *, va_list);

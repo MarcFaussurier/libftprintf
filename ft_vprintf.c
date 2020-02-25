@@ -15,10 +15,5 @@
 
 int				ft_vprintf(const char *fmt, va_list ap)
 {
-	int			oi;
-	char    	*ob;
-
-	oi = ft_vasprintf(&ob, fmt, ap);
-	ft_putstr_fd(ob, STDIN_FILENO);
-	return (oi);
+    return (ft_vdprintf(STDIN_FILENO, fmt, ap));
 }

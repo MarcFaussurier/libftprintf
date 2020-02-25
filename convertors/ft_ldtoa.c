@@ -1,4 +1,4 @@
-#include <libftprintf.h>
+#include "libftprintf.h"
 
 
 static char         *ft_read_ipart(const char *b, long double n)
@@ -19,7 +19,6 @@ static char         *ft_read_ipart(const char *b, long double n)
     k = n;
     while (k >= 1 && (k /= bl))
         s += 1;
-    printf("s: %zu \n", s);
     out = malloc(s);
     i = 0;
     s -= 2;
@@ -85,7 +84,6 @@ char                *ft_ldtoa_base(const char *b, long double n)
     char            *swp3;
 
     rest = ft_modfl(n, &ipart);
-    printf ("ldtoa()... r=%Lf n=%Lf i=%Lf\n", rest, n, ipart);
     swp1 = ft_read_ipart(b, ipart);
     swp2 = ft_read_rest(b, rest);
     swp3 = ft_strjoin(swp1, ".");

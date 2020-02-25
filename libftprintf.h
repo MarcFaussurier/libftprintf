@@ -14,7 +14,7 @@
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 # include <stdarg.h>
-# include <libft/libft.h>
+# include "libft/libft.h"
 # define b2 "01"
 # define b3 "012"
 # define b4 "0123"
@@ -202,6 +202,6 @@ char		                        *ft_stoa(t_specifier_state, char *, t_bool);
 char		                        *ft_argtoa(char const **, va_list, int);
 int	 	    	                    ft_printf(const char *, ...);
 int		    	                    ft_vprintf(const char *, va_list);
-int		    	                    ft_vasprintf(char const **, const char *, va_list);
-int		    	                    ft_asprintf(char const **, const char *, ...);
+int		    	                    ft_vasprintf(char **, const char *, va_list);
+int		    	                    ft_asprintf(char **, const char *, ...);
 #endif

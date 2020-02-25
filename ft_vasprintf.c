@@ -11,16 +11,15 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <libftprintf.h>
+#include "libftprintf.h"
 
 static t_bool		ft_free_g_specifiers()
 {
-    ft_putstr("clear");
     ft_lstclear(&g_specifiers, &free);
 	return (TRUE);
 }
 
-int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
+int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
 {
 	int				oi;
     char            *prev;
@@ -39,7 +38,7 @@ int					ft_vasprintf(char const **ob, const char *fmt, va_list ap)
             if (!ft_lststradd(&str, ft_substr(prev, 0, (fmt - 1) - prev)) ||
                 !ft_lststradd(&str, ft_argtoa(&fmt, ap, oi)))
                 return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
-            prev = (char*)fmt;
+            prev = (void*)fmt;
         }
     if (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev)))
         oi = -42;

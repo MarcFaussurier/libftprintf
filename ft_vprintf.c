@@ -11,14 +11,14 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <libftprintf.h>
+#include "libftprintf.h"
 
 int				ft_vprintf(const char *fmt, va_list ap)
 {
 	int			oi;
-	char const	*ob;
+	char    	*ob;
 
 	oi = ft_vasprintf(&ob, fmt, ap);
-	ft_putstr((char*) ob);
+	ft_putstr_fd(ob, STDIN_FILENO);
 	return (oi);
 }

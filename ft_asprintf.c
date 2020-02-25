@@ -11,9 +11,9 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <libftprintf.h>
+#include "libftprintf.h"
 
-int					ft_asprintf(char const **ob, const char *fmt, ...)
+int					ft_asprintf(char **ob, const char *fmt, ...)
 {
 	int				output;
 	va_list			ap;

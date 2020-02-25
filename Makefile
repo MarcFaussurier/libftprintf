@@ -27,5 +27,6 @@ norme:
 $(NAME):	$(COBJ)
 	@cd libft && make bonus
 	$(AR) $(NAME) $(COBJ) $(shell ls libft/*.o)
+	ranlib $(NAME)
 .PHONY:
 		all fclean clean re bonus

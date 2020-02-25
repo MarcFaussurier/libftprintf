@@ -70,7 +70,8 @@ static char*	ft_read_qualifiers(char const **fmt)
 	return (qualifiers);
 }
 
-char			*ft_argtoa(char const **fmt, va_list ap, int no)
+
+char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 {
 	t_flags		flags;
 	char		*qualifiers;
@@ -91,5 +92,6 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no)
         	.padding=padding, 
         	.precision=precision, 
         	.no=no,
+            .nulls=nulls,
     	}, ap) : ft_strdup("")) + ft_free(qualifiers, 0));
 }

@@ -32,7 +32,7 @@ char			*ft_fmt_i(t_specifier_state state, va_list ap)
 		num = NULL;
 	if (!num)
 		return (NULL);
-	out = ft_stoa(state, num, TRUE);
+	out = ft_stoa(state, num, TRUE, FALSE);
 	free(num);
 	return (out);
 }

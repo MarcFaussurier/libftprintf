@@ -125,6 +125,11 @@ typedef struct		                s_flags
     char		                    minus:		        1;
     char		                    sharp:		        1;
 }			                        t_flags;
+typedef struct                      s_null
+{
+    char                            *address;
+    size_t                          index;
+}                                   t_null;
 typedef struct      	            s_specifier_state
 {
     t_flags                         flags;
@@ -133,6 +138,7 @@ typedef struct      	            s_specifier_state
     int                             padding;
     int                             precision;
     int				                no;
+    t_list                          **nulls;
 }                   	            t_specifier_state;
 typedef char*		                (*t_specifier)(t_specifier_state, va_list);
 typedef struct		                s_assoc_specifier
@@ -140,6 +146,10 @@ typedef struct		                s_assoc_specifier
     char		                    specifier;
     t_specifier	                    callback;
 }			                        t_assoc_specifier;
+void                                ft_putmem(char*, size_t);
+void                                ft_lstdel_node(t_list**, t_list*, void(*)(void*));
+t_bool                              ft_lstadd_back_new(t_list**, void*);
+t_bool                              ft_lstadd_front_new(t_list**, void*);
 t_bool                              ft_is_in_a(int, int*, unsigned int);
 t_bool			                    ft_free(void *, t_bool);
 t_specifier		                    ft_get_specifier(char);
@@ -198,8 +208,8 @@ char                                *ft_llitoa(long long int);
 char                                *ft_litoa(long int);
 char                                *ft_hitoa(short);
 char                                *ft_hhitoa(char);
-char		                        *ft_stoa(t_specifier_state, char *, t_bool);
-char		                        *ft_argtoa(char const **, va_list, int);
+char		                        *ft_stoa(t_specifier_state, char *, t_bool, t_bool);
+char		                        *ft_argtoa(char const **, va_list, int, t_list**);
 int	 	    	                    ft_printf(const char *, ...);
 int		    	                    ft_vprintf(const char *, va_list);
 int		    	                    ft_vasprintf(char **, const char *, va_list);

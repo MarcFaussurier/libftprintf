@@ -14,7 +14,7 @@
 #include "libftprintf.h"
 #include <string.h>
 
-void            test(int nb, const char *fmt, ...)
+void            test(int *nb, const char *fmt, ...)
 {
     va_list     ap;
     va_list     ap2;
@@ -22,15 +22,24 @@ void            test(int nb, const char *fmt, ...)
     char        *s2;
     int         i1;
     int         i2;
-
+    int         diff;
     
+    *nb += 1;
     va_start(ap2, fmt);
     va_start(ap, fmt);
+    if ((i1 = ft_vasprintf(&s1, fmt, ap)) != (i2 = vasprintf(&s2, fmt, ap2)) || (diff = memcmp(s1, s2, i2)))
+    {
+        printf("[test line %i] invalid output: {%i} [r=%i | libc: r=%i]\n", *nb, diff, i1, i2);
+        ft_putstr("YOUR: ");
+        ft_putmem(s1, i1);
+        ft_putendl("");
+        ft_putstr("LIBC: ");
+        ft_putmem(s2, i2);
+        ft_putendl("");
 
-    if ((i1 = ft_vasprintf(&s1, fmt, ap)) != (i2 = vasprintf(&s2, fmt, ap2)) || strcmp(s1, s2))
-        printf("[test line %i] invalid output: [your: \"%s\" r=%i | libc: \"%s\" r=%i]\n",nb, s1, i1, s2, i2);
+    }
     else
-        printf ("[test line %i] success [your: \"%s\" r=%i | libc:\"%s\"] r=%i\n", nb, s1, i1, s2, i2);
+        printf ("[test line %i] success [your: \"%s\" r=%i | libc:\"%s\"] r=%i\n", *nb, s1, i1, s2, i2);
     va_end(ap);
     va_end(ap2);
 }
@@ -41,9 +50,11 @@ int 			main(void)
     int         n;
 
     n = 43; //SET ME AS CURRENT LOC!
-    test(++n, "");
-    test(++n, "1");
-    test(++n, "%s", "hello");
+    test(&n, "");
+    test(&n, "1");
+    test(&n, "%s", "hello");
+    test(&n, "%s", (char[3]) {'\0', 'a', '\0'});
+    test(&n, "%10c lol %c 1", 0, 0);
     /*
     printf("ft_llitoa_base: %s\n", ft_llitoa_base(b10, 258888588454));
  	a = ft_printf("%12.2slol\n", NULL);

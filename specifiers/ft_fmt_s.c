@@ -15,5 +15,5 @@
 
 char			*ft_fmt_s(t_specifier_state state, va_list ap)
 {
-	return (ft_stoa(state, va_arg(ap, char *), FALSE));
+	return (ft_stoa(state, va_arg(ap, char *), FALSE, FALSE));
 }

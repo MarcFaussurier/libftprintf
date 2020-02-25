@@ -39,7 +39,7 @@ void            test(int *nb, const char *fmt, ...)
 
     }
     else
-        printf ("[test line %i] success [your: \"%s\" r=%i | libc:\"%s\"] r=%i\n", *nb, s1, i1, s2, i2);
+        printf ("[test line %i] success r=%i\t| \"%s\"\n", *nb, i2, s2);
     va_end(ap);
     va_end(ap2);
 }

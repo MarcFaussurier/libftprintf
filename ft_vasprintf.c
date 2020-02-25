@@ -24,7 +24,6 @@ static char         *ft_insert_nulls(t_list *str, t_list **nulls, char *s)
     t_list          *current_word;
     t_list          *current_null;
     size_t          y;
-    size_t          z;
 
     y = 0;
     current_word = str;

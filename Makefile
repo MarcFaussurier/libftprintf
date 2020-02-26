@@ -1,13 +1,13 @@
 CSRC		:= $(shell ls ft_*.c sources/* convertors/* specifiers/*)
 NAME		:= libftprintf.a
-DEBUG		:= 0
+DEBUG		:= 1
 RM			:= rm -rf
 AR			:= ar rcs
 CC			:= gcc
 CFLAGS		:= -Werror -Wextra -Wall -Wparentheses
 COBJ		:= $(CSRC:.c=.o)
 BONUSOBJ	:= $(BONUSSRC:.c=.o)
-DEBUGFLAGS	:= -g -fsanitize=address -fno-omit-frame-pointer
+DEBUGFLAGS	:= -g #-fsanitize=address -fno-omit-frame-pointer
 INC			:= ./
 CFLAGS		:= $(CFLAGS) -I$(INC)
 ifeq ($(DEBUG),1)

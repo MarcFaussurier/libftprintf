@@ -17,7 +17,7 @@ char                *ft_lststrjoin(t_list *lst)
         output_len += ft_strlen((char*)current->content);
         current = current->next;
     }
-    output = malloc(output_len);
+    output = malloc(output_len + 1);
     if (!output)
     {
         return (NULL);

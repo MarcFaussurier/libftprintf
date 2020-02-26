@@ -36,10 +36,11 @@ void            test(int *nb, const char *fmt, ...)
         ft_putstr("LIBC: ");
         ft_putmem(s2, i2);
         ft_putendl("");
-
     }
     else
         printf ("[test line %i] success r=%i\t| \"%s\"\n", *nb, i2, s2);
+    free(s1);
+    free(s2);
     va_end(ap);
     va_end(ap2);
 }

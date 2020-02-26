@@ -23,6 +23,7 @@ static char         *ft_insert_nulls(t_list *str, t_list **nulls, char *s)
 {
     t_list          *current_word;
     t_list          *current_null;
+    t_list          *swp;
     size_t          y;
 
     y = 0;
@@ -32,12 +33,13 @@ static char         *ft_insert_nulls(t_list *str, t_list **nulls, char *s)
         current_null = *nulls;
         while (current_null)
         {
+            swp = current_null->next;
             if (((t_null*)current_null->content)->address == current_word->content)
             {
                 s[y + ((t_null*)current_null->content)->index] = '\0';
                 ft_lstdel_node(nulls, current_null, &free);
             }
-            current_null = current_null->next;
+            current_null = swp;
         }
         y += ft_strlen(current_word->content);
         current_word = current_word->next;
@@ -72,7 +74,8 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
         oi = -42;
     else
         oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
-    *ob = ft_insert_nulls(str, &nulls, *ob);
+   if (oi > 0)
+        *ob = ft_insert_nulls(str, &nulls, *ob);
     ft_lstclear(&str, &free);
     ft_lstclear(&nulls, &free);
     return (oi + (!AT_EXIT && ft_free_g_specifiers() && 0));

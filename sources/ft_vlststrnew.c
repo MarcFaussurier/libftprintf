@@ -7,7 +7,7 @@ t_list			*ft_vlststrnew(unsigned int n, va_list ap)
 	char		*s;
 
 	y = 0;
-	while (y < n && (s = va_arg(ap, char *)))
+	while (y++ < n && (s = va_arg(ap, char *)))
 		if (!(ft_lststradd(&o, s)))
 		{
 			ft_lstclear(&o, &free);

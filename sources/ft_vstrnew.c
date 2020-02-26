@@ -1,6 +1,11 @@
 #include "libftprintf.h"
 
-char		*ft_vstrnew(unsigned int n, va_list ap)
+char	    	*ft_vstrnew(unsigned int n, va_list ap)
 {
-	return (ft_lststrjoin(ft_vlststrnew(n, ap)));
+    t_list      *lst;
+
+    lst = ft_vlststrnew(n, ap);
+    if (lst)
+        return (ft_lststrjoin(lst));
+    return (NULL);
 }

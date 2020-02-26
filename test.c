@@ -49,7 +49,7 @@ int 			main(void)
     char        *s;
     int         n;
 
-    n = 43; //SET ME AS CURRENT LOC!
+    n = 52; //SET ME AS CURRENT LOC!
     test(&n, "");
     test(&n, "1");
     test(&n, "%s", "hello");

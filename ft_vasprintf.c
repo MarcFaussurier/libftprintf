@@ -73,7 +73,6 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
     else
         oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
     *ob = ft_insert_nulls(str, &nulls, *ob);
-//    (void) ft_insert_nulls;
     ft_lstclear(&str, &free);
     ft_lstclear(&nulls, &free);
     return (oi + (!AT_EXIT && ft_free_g_specifiers() && 0));

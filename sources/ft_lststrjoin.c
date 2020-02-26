@@ -10,6 +10,8 @@ char                *ft_lststrjoin(t_list *lst)
     size_t          y_max;
     char            *y_str;
 
+    if (!lst)
+	    return (NULL);
     output_len = 0;
     current = lst;
     while (current)

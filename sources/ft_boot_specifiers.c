@@ -15,6 +15,7 @@
 
 t_bool			ft_boot_specifiers()
 {
+    ft_register_specifier((t_assoc_specifier){'%', &ft_fmt_percent});
     ft_register_specifier((t_assoc_specifier){'s', &ft_fmt_s});
     ft_register_specifier((t_assoc_specifier){'i', &ft_fmt_i});
     ft_register_specifier((t_assoc_specifier){'u', &ft_fmt_u});

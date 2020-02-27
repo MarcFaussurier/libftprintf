@@ -27,7 +27,8 @@ void            test(int *nb, const char *fmt, ...)
     *nb += 1;
     va_start(ap2, fmt);
     va_start(ap, fmt);
-    if ((i1 = ft_vasprintf(&s1, fmt, ap)) != (i2 = vasprintf(&s2, fmt, ap2)) || (diff = memcmp(s1, s2, i2)))
+    diff = 0;
+    if ((i1 = ft_vasprintf(&s1, fmt, ap)) != (i2 = vasprintf(&s2, fmt, ap2)) || (diff = memcmp(s1, s2, i1)))
     {
         printf("[test line %i] invalid output: {%i} [r=%i | libc: r=%i]\n", *nb, diff, i1, i2);
         ft_putstr("YOUR: ");
@@ -50,7 +51,7 @@ int 			main(void)
     char        *s;
     int         n;
 
-    n = 53; //SET ME AS CURRENT LOC!
+    n = 54; //SET ME AS CURRENT LOC!
     test(&n, "");
     test(&n, "1");
     test(&n, "%s", "hello");
@@ -71,7 +72,8 @@ int 			main(void)
 	test(&n, "%1i", 0);
 	test(&n, "%2i", 0);
 	test(&n, "%10i", 0);
-	test(&n, "%1i", -1);
+	test(&n, "%1i", -101);
+    test(&n, "%1i", -1);
 	test(&n, "%2i", -1);
 	test(&n, "%3i", -1);
 	test(&n, "%9i", INT_MAX);

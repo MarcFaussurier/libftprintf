@@ -16,13 +16,17 @@ char           *ft_stoa(t_specifier_state state, char *input, t_bool enable_zero
 
 		if (state.padding < 0 && (state.flags.minus = 1))
 			state.padding = -state.padding;
-		if (state.precision < state.padding)
+	    if (state.padding < (int)ft_strlen(input))
+            state.padding = ft_strlen(input);
+        if (state.precision < state.padding)
 			state.precision = ft_strlen(input);
 	}
-	if (state.precision < 0)
+    if (state.precision < 0)
 		input_len = ft_strlen(input);
 	else if (state.precision > 0 && state.precision != NO_PRECISION)
 		input_len = ft_strnlen(input, (size_t) state.precision);
+    else
+        input_len = state.precision;
 	if (state.padding < 0 && (state.flags.minus = 1))
 		field_width = (size_t) -state.padding;
 	else

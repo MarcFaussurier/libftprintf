@@ -1,38 +1,55 @@
 #include "libftprintf.h"
 
-char                *ft_wstrtoa(wchar_t *str)
-{
-    char            *o;
-    size_t          o_len;
-    size_t          i;
-    unsigned char   y;
 
-    o_len = 1;
-    i = 0;
-    while (str[i])
+
+char	    *ft_wchartoa(wchar_t w)
+{
+	int		i;
+    char    *o;
+
+    o = malloc(5);
+	i = 0;
+	if (w <= CHAR_MAX)
+		o[i++] = (w & 0x7f) | 0;
+	else if (w <= SHRT_MAX)
     {
-        y = 0;
-        while (y < 4)
-        {
-            if (((t_wchar*)str)->bytes[y])
-                o_len += 1;
-            y += 1;
-        }
-        i += 1;
+		o[i++] = (w >> 6) + 0xC0;
+        o[i++] = (w & 0x3f) + 0x80;
     }
-    o = malloc(o_len);
-    i = 0;
-    while (*str)
+    else if (w <= 0xFFFF)
     {
-        y = 0;
-        while (y < 4)
-        {
-            if (((t_wchar*)str)->bytes[y])
-                o[i++] = ((t_wchar*)str)->bytes[y];
-            y += 1;
-        }
-        str += 1;
+        o[i++] = (w >> 12) + 0xE0;
+        o[i++] = ((w >> 6) & 0x3F) + 0x80;
+        o[i++] = (w & 0x3F) + 0x80;
+    }
+    else
+    {
+        o[i++] = (w >> 18) + 0xF0;
+        o[i++] = ((w >> 12) & 0x3F) + 0x80;
+        o[i++] = ((w >> 6) & 0x3F) + 0x80;
+        o[i++] = (w & 0x3F) + 0x80;
     }
     o[i] = '\0';
     return (o);
+}
+
+char                *ft_wstrtoa(wchar_t *str)
+{
+    t_list          *o;
+    char            *s;
+
+    o = NULL;
+    while (*str)
+    {
+
+        if (!ft_lststradd(&o, ft_wchartoa(*str)))
+        {
+            ft_lstclear(&o, &free);
+            return (NULL);
+        }
+        str += 1;
+    }
+    s = ft_lststrjoin(o);
+    ft_lstclear(&o, &free);
+    return (s);
 }

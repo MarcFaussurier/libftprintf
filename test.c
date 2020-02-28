@@ -14,6 +14,8 @@
 #include "libftprintf.h"
 #include <string.h>
 
+int             g_errors = 0;
+
 void            test(int *nb, const char *fmt, ...)
 {
     va_list     ap;
@@ -30,6 +32,7 @@ void            test(int *nb, const char *fmt, ...)
     diff = 0;
     if ((i1 = ft_vasprintf(&s1, fmt, ap)) != (i2 = vasprintf(&s2, fmt, ap2)) || (diff = memcmp(s1, s2, i1)))
     {
+        g_errors += 1;
         printf("[test line %i] invalid output: {%i} [r=%i | libc: r=%i]\n", *nb, diff, i1, i2);
         ft_putstr("YOUR: ");
         ft_putmem(s1, i1);
@@ -46,12 +49,20 @@ void            test(int *nb, const char *fmt, ...)
     va_end(ap2);
 }
 
+int isLittleEndian()
+{
+    short int number = 0x1;
+    char *numPtr = (char*)&number;
+    return (numPtr[0] == 1);
+}
+
 int 			main(void)
 {
     char        *s;
     int         n;
 
     n = 54; //SET ME AS CURRENT LOC!
+    printf("sizeof (wchar) : %zu %i\n", sizeof(wchar_t), isLittleEndian());
     test(&n, "");
     test(&n, "1");
     test(&n, "%s", "hello");
@@ -66,7 +77,7 @@ int 			main(void)
     test(&n, "%1c", '1');
 	test(&n, "%2c", '1');
     test(&n, "%10c", '1');
-	test(&n, "%1s", "");
+	test(&n, "%--1s", "");
 	test(&n, "%5s", "Hello");
 	test(&n, "%6s", "Hello");
 	test(&n, "%1i", 0);
@@ -124,9 +135,14 @@ int 			main(void)
 	test(&n, "%*.*hilol\n", -16, 2, 4242);
 	test(&n, "%*.*hhulol\n", -16, 2, INT_MAX);
 	test(&n, "%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
-        test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
-        test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
-        test(&n, "\n[%Lf]\n",   44.5565899999999999999999999999L);
-	test(&n, "21?: %Lf\n", 21.42L);
-    	test(&n, "1");
+    test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
+    test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
+    test(&n, "[%.2Lf]\n",   44.5605L);
+    test(&n, "[%.2Lf]\n",   44.5405L);
+    test(&n, "21?: %Lf\n", 21.42L);
+    test(&n, "1");
+    test(&n, "%lclol%lc", 0, 0);
+    test(&n, "%lc", '\\');
+    //test(&n, "%lc", 316);
+    printf("%i errors\n", g_errors);
 }

@@ -111,60 +111,22 @@ int 			main(void)
 	test(&n, "%10X", 0);
 	test(&n, "%1X", -1);
 	test(&n, "%2X", -1);
-    test(&n, "%3X", -1);
+        test(&n, "%3X", -1);
 	test(&n, "%9X", UINT_MAX);
 	test(&n, "%10X", UINT_MAX);
 	test(&n, "%11X", UINT_MAX);
 	test(&n, "%1p", (void*)42);
 	test(&n, "%5p", (void*)42);
-    /*
-    printf("ft_llitoa_base: %s\n", ft_llitoa_base(b10, 258888588454));
- 	a = ft_printf("%12.2slol\n", NULL);
-	b = printf("%12.2slol\n", NULL);
-	printf("\n[outputs: %i %i]\n", a, b);
-
-	a = ft_printf("%--8.10slol\n", NULL);
-	b = printf("%--8.10slol\n", NULL);
-	printf("\n[outputs: %i %i]\n", a, b);
-
-	a = ft_printf("%8.10s\n", NULL);
-	b = printf("%8.10s\n", NULL);
-	printf("\n[outputs: %i %i]\n", a, b);
-
-	a = ft_printf("%*.*slol\n", -16, 3, NULL);
-	b = printf("%*.*slol\n", -16, 3, NULL);
-	printf("\n[outputs: %i %i]\n", a, b);
-
-	a = ft_printf("%*.*hilol\n", -16, 2, 4242);
-	b = printf("%*.*hilol\n", -16, 2, 4242);
-	printf("\n[outputs: %i %i]\n", a, b);
-
-	a = ft_printf("%*.*hhulol\n", -16, 2, INT_MAX);
-	b = printf("%*.*hhulol\n", -16, 2, INT_MAX);
-	printf("\n[outputs: %i %i]\n", a, b);
-
-	int		n;
-	a = ft_printf("%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
-	b = printf("%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
-	printf("\n[outputs: %i %i]\n", a, b);
-
-    a = ft_printf("%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
-    b = printf("%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
-    printf("\n[outputs: %i %i]\n", a, b);
-
-    long double     k;
-    long double     i;
-    long double     q;
-    k = 10.2658;
-    q = ft_modfl(k, &i);
-    
-    
-    printf("testing ft_modfl(%Lf)... [q=%Lf | i=%Lf]\n", k, q, i);
-    ft_printf("\n[%Lf]\n",   44.5565899999999999999999999999999999999999999999999999999L);
-    printf("\n%.256Lf\n",  44.5565899999999999999999999999999999999999999999999999999L);
-    ft_printf("21?: %Lf\n", 21.42L);
-    printf("%a %La %s||\n", 21.42, 21.42L, ft_ldtoa_base(b16, 21.42L));
-    printf("%Lf\n", 10.0L);
-    ft_printf("1");
-    printf("1");*/
+ 	test(&n, "%12.2slol\n", NULL);
+	test(&n, "%--8.10slol\n", NULL);
+	test(&n, "%8.10s\n", NULL);
+	test(&n, "%*.*slol\n", -16, 3, NULL);
+	test(&n, "%*.*hilol\n", -16, 2, 4242);
+	test(&n, "%*.*hhulol\n", -16, 2, INT_MAX);
+	test(&n, "%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
+        test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
+        test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
+        test(&n, "\n[%Lf]\n",   44.5565899999999999999999999999L);
+	test(&n, "21?: %Lf\n", 21.42L);
+    	test(&n, "1");
 }

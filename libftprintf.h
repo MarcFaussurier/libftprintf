@@ -46,6 +46,11 @@ typedef enum                        e_ld_state
     CANT_BE_GEN,
     INVALID_OP
 }                                   t_ld_state;
+typedef union                       u_wchar
+{
+    wchar_t                         value;
+    char                            bytes[4];
+}                                   t_wchar;
 typedef union                       u_float
 {
 
@@ -154,6 +159,7 @@ t_list                              *ft_vlststrnew(unsigned int, va_list);
 char                                *ft_strnew(unsigned int, ...);
 char                                *ft_vstrnew(unsigned int, va_list);
 char                                *ft_lststrjoin(t_list*);
+char                                *ft_wstrtoa(wchar_t*);
 long double                         ft_pow(long double, short);
 long double                         ft_upow(long double, unsigned short);
 float                               ft_modff(float, float*);

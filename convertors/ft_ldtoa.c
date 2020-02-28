@@ -70,7 +70,7 @@ static char         *ft_read_rest(const char *b, long double n)
         k -= c*ft_pow(bl, -s);
         s += 1;
     }
-    out[s - 1] = '\n';
+    out[s - 1] = '\0';
     return (out);
 }
 

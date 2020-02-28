@@ -10,7 +10,7 @@ char           *ft_stoa(t_specifier_state state, char *input, t_bool enable_zero
 	size_t		y;
 
 	if (!input)
-		input = ft_strdup("(null)");
+		input = (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'};
 
 	if (state.padding < 0 && (state.flags.minus = 1))
 		state.padding = -state.padding;
@@ -37,7 +37,7 @@ char           *ft_stoa(t_specifier_state state, char *input, t_bool enable_zero
 		while (i < input_len)
 		{
 			output[i] = input[i];
-			if (!i && is_null)
+			if (is_null)
             {
                 cnull = malloc(sizeof(t_null));
                 *cnull = (t_null) {.address=output,.index=i};
@@ -61,7 +61,7 @@ char           *ft_stoa(t_specifier_state state, char *input, t_bool enable_zero
 		while (i < field_width)
         {
 			output[i] = input[y];
-            if (!y && is_null)
+            if (is_null)
             {
                 cnull = malloc(sizeof(t_null));
                 *cnull = (t_null) {.address=output, .index=i};

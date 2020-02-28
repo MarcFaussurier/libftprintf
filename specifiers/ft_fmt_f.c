@@ -17,7 +17,7 @@ char        *ft_fmt_f(t_specifier_state state, va_list ap)
         return (NULL);
     if (state.precision == NO_PRECISION)
     {
-   	state.precision = 6 + ft_strchr(num, '.') - num + 1;
+       	state.precision = 6 + ft_strchr(num, '.') - num + 1;
     }
     out = ft_stoa(state, num, FALSE, FALSE);
     free(num);

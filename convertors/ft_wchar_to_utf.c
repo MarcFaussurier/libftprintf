@@ -1,14 +1,6 @@
 #include "libftprintf.h"
 /*
- ** 
- ** I do not use this function anywhere because we can not rely on setlocale()
- ** and so garbage in -> garbage out would happend when dealing %lc %ls with it
- ** so I assume that default LC_ALL and LC_CTYPE are both C 
- ** values above UCHAR_MAX would returns an error exactly like macos's printf do
- ** without locales set
- **
- ** i just keep this function here and maybe that i'll use it someday by relying
- credits https://stackoverflow.com/questions/148403/utf8-to-from-wide-char-conversion-in-stl/14809553
+ ** credits https://stackoverflow.com/questions/148403/utf8-to-from-wide-char-conversion-in-stl/14809553
  */
 
 char                *ft_wchar_to_utf(wchar_t c)

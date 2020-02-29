@@ -28,12 +28,13 @@ char			*ft_fmt_c(t_specifier_state state, va_list ap)
             return (ft_stoa(state, (char[2]) {-42, '\0'}, FALSE, !y));
         z = (wchar_t[2]) {y, 0};
         swp = ft_wstrtoa(z);
-        o = ft_stoa(state, swp, FALSE, FALSE);
+        if (swp)
+            o = ft_stoa(state, swp, FALSE, FALSE);
+        else
+            o = NULL;
         free(swp);
         return (o);
     }
     i = va_arg(ap, int);
-    if (!i)
-        return (ft_stoa(state, (char[2]) {-42, '\0'}, FALSE, !i));
-    return (ft_stoa(state, (char[2]){i, '\0'}, FALSE, !i));
+    return (ft_stoa(state, (char[2]) {i ? i : -42, '\0'}, FALSE, !i));
 }

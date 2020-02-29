@@ -22,12 +22,17 @@ char	    *ft_wchartoa(wchar_t w)
         o[i++] = ((w >> 6) & 0x3F) + 0x80;
         o[i++] = (w & 0x3F) + 0x80;
     }
-    else
+    else if (w <= 0x10FFFF - 1)
     {
         o[i++] = (w >> 18) + 0xF0;
         o[i++] = ((w >> 12) & 0x3F) + 0x80;
         o[i++] = ((w >> 6) & 0x3F) + 0x80;
         o[i++] = (w & 0x3F) + 0x80;
+    }
+    else
+    {
+        free(o);
+        return (NULL);
     }
     o[i] = '\0';
     return (o);
@@ -37,12 +42,14 @@ char                *ft_wstrtoa(wchar_t *str)
 {
     t_list          *o;
     char            *s;
-
+    char            *p;
     o = NULL;
+
+    p = (void*)1;
     while (*str)
     {
 
-        if (!ft_lststradd(&o, ft_wchartoa(*str)))
+        if (!ft_lststradd(&o, p = ft_wchartoa(*str)) || !p)
         {
             ft_lstclear(&o, &free);
             return (NULL);

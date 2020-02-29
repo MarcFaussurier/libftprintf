@@ -30,7 +30,7 @@ void            test(int *nb, const char *fmt, ...)
     va_start(ap2, fmt);
     va_start(ap, fmt);
     diff = 0;
-    if ((i1 = ft_vasprintf(&s1, fmt, ap)) != (i2 = vasprintf(&s2, fmt, ap2)) || (diff = memcmp(s1, s2, i1)))
+    if ((i1 = ft_vasprintf(&s1, fmt, ap)) != (i2 = vasprintf(&s2, fmt, ap2)) || (i1 >= 0 && (diff = memcmp(s1, s2, i1))))
     {
         g_errors += 1;
         printf("[test line %i] invalid output: {%i} [r=%i | libc: r=%i]\n", *nb, diff, i1, i2);
@@ -42,7 +42,9 @@ void            test(int *nb, const char *fmt, ...)
         ft_putendl("");
     }
     else
+    {
         printf ("[test line %i] success r=%i\t| \"%s\"\n", *nb, i2, s2);
+    }
     free(s1);
     free(s2);
     va_end(ap);
@@ -61,7 +63,7 @@ int 			main(void)
     char        *s;
     int         n;
 
-    n = 54; //SET ME AS CURRENT LOC!
+    n = 68; //SET ME AS CURRENT LOC!
     printf("sizeof (wchar) : %zu %i\n", sizeof(wchar_t), isLittleEndian());
     test(&n, "");
     test(&n, "1");
@@ -143,6 +145,8 @@ int 			main(void)
     test(&n, "1");
     test(&n, "%lclol%lc", 0, 0);
     test(&n, "%lc", '\\');
-    //test(&n, "%lc", 316);
+    test(&n, "%lc", INT_MAX / 2);
+    test(&n, "%lc", INT_MAX - 2);
+    test(&n, "%lc", 316);
     printf("%i errors\n", g_errors);
 }

@@ -62,9 +62,8 @@ int 			main(void)
 {
     char        *s;
     int         n;
-
-    n = 68; //SET ME AS CURRENT LOC!
-    printf("sizeof (wchar) : %zu %i\n", sizeof(wchar_t), isLittleEndian());
+    printf("sizeof (wchar) : %zu is_little_endian: %i\n", sizeof(wchar_t), isLittleEndian());
+    n = 66; //SET ME AS CURRENT LOC!
     test(&n, "");
     test(&n, "1");
     test(&n, "%s", "hello");
@@ -82,10 +81,10 @@ int 			main(void)
 	test(&n, "%--1s", "");
 	test(&n, "%5s", "Hello");
 	test(&n, "%6s", "Hello");
-	test(&n, "%1i", 0);
+	test(&n, "%1i", -101);
+    test(&n, "%1i", 0);
 	test(&n, "%2i", 0);
 	test(&n, "%10i", 0);
-	test(&n, "%1i", -101);
     test(&n, "%1i", -1);
 	test(&n, "%2i", -1);
 	test(&n, "%3i", -1);
@@ -145,8 +144,15 @@ int 			main(void)
     test(&n, "1");
     test(&n, "%lclol%lc", 0, 0);
     test(&n, "%lc", '\\');
-    test(&n, "%lc", INT_MAX / 2);
-    test(&n, "%lc", INT_MAX - 2);
-    test(&n, "%lc", 316);
+    //test(&n, "%lc", INT_MAX / 2);
+    //test(&n, "%lc", INT_MAX - 2);
+    //test(&n, "%lc", 316);
+    test(&n, "%llllllllllllllli", LLONG_MAX);
+    test(&n, "%hhhhhhhhi", LLONG_MAX);
+    test(&n, "%zzwwwi", LLONG_MAX);
+
+    test(&n, "%lllllllllllllllx", LLONG_MAX);
+    test(&n, "%hhhhhhhhi", LLONG_MAX);
+    test(&n, "%zzwwwx", LLONG_MAX);
     printf("%i errors\n", g_errors);
 }

@@ -15,24 +15,5 @@
 
 char			*ft_fmt_u(t_specifier_state state, va_list ap)
 {
-	char		*num;
-	char		*out;
-
-	if (!(ft_strncmp(state.qualifiers, "ll", 3)))
-		num = ft_llutoa(va_arg(ap, unsigned long long));
-	else if (!(ft_strncmp(state.qualifiers, "l", 2)))
-		num = ft_lutoa(va_arg(ap, unsigned long));
-	else if (!ft_strlen(state.qualifiers))
-		num = ft_utoa(va_arg(ap, unsigned int));
-	else if (!(ft_strncmp(state.qualifiers, "h", 2)))
-		num = ft_hutoa(va_arg(ap, unsigned int));
-	else if (!(ft_strncmp(state.qualifiers, "hh", 3)))
-		num = ft_hhutoa(va_arg(ap, unsigned int));
-	else
-		num = NULL;
-	if (!num)
-		return (NULL);
-	out = ft_stoa(state, num, TRUE, FALSE);
-	free(num);
-	return (out);
+    return (ft_unumtoa(state, ap, b10, FALSE));
 }

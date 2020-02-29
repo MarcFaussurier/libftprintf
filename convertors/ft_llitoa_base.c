@@ -7,7 +7,7 @@ char                        *ft_llitoa_base(const char *base, long long int n)
 
     if (n < 0)
     {
-        swp = ft_llutoa_base(base, n);
+        swp = ft_llutoa_base(base, -n);
         output = ft_strjoin("-", swp);
         free(swp);
         return (output);

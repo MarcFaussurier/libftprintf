@@ -156,6 +156,8 @@ t_bool			                    ft_boot_specifiers();
 t_bool                              ft_lststradd(t_list **, char *);
 t_list                              *ft_lststrnew(unsigned int, ...);
 t_list                              *ft_vlststrnew(unsigned int, va_list);
+char                                *ft_numtoa(t_specifier_state, va_list, const char *, t_bool);
+char                                *ft_unumtoa(t_specifier_state, va_list, const char *, t_bool);
 char                                *ft_strnew(unsigned int, ...);
 char                                *ft_vstrnew(unsigned int, va_list);
 char                                *ft_lststrjoin(t_list*);

@@ -59,6 +59,7 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
 	if (!g_specifiers && AT_EXIT)
 		atexit((void(*)(void))ft_free_g_specifiers);
     str = NULL;
+    *ob = NULL;
     prev = (char*)fmt;
 	oi = 0;
     nulls = NULL;
@@ -80,8 +81,12 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
    if (oi > 0)
         *ob = ft_insert_nulls(str, &nulls, *ob);
    else
-	*ob = ft_strdup("(null)");
-    ft_lstclear(&str, &free);
+   {
+        if (*ob)
+            free(*ob);
+       *ob = ft_strdup("(null)");
+   }
+   ft_lstclear(&str, &free);
     ft_lstclear(&nulls, &free);
     return (oi + (!AT_EXIT && ft_free_g_specifiers() && 0));
 }

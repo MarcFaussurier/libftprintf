@@ -15,23 +15,8 @@
 
 char			*ft_fmt_c(t_specifier_state state, va_list ap)
 {
-    char        *swp;
-    char        *o;
-    wchar_t     y;
     int         i;
-
-    if (!ft_strncmp(state.qualifiers, "l", 2))
-    {
-        y = va_arg(ap, wchar_t);
-        if (!y)
-            return (ft_stoa(state, (char[2]) {-42, '\0'}, FALSE, !y));
-        swp = ft_wchar_to_UTF8((wchar_t[2]){y, 0});
-        if (!swp)
-        	return (NULL);
-	o = ft_stoa(state, swp, FALSE, FALSE);
-        free(swp);
-        return (o);
-    }
+    
     i = va_arg(ap, int);
     return (ft_stoa(state, (char[2]) {i ? i : -42, '\0'}, FALSE, !i));
 }

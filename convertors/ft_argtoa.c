@@ -58,16 +58,23 @@ static int		ft_read_num(char const **fmt, va_list ap)
 	return (o);
 }
 
-static char*	ft_read_qualifiers(char const **fmt)
+static char*	        ft_read_qualifiers(char const **fmt)
 {
-	char *qualifiers;
+	char                *qualifiers;
 	unsigned char		i;
+    t_list              *o;
 
 	i = 0;
-	qualifiers = ft_calloc(3, 1);
-	while (!ft_is_specifier(**fmt) && i < 2)
-		qualifiers[i++] = *(*fmt)++;
-	return (qualifiers);
+    o = NULL;
+    while (!ft_is_specifier(**fmt) && **fmt && ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
+		if (!ft_lststradd(&o, ft_strdup((char[2]){ *(*fmt)++, 0})))
+        {
+            ft_lstclear(&o, &free);
+            return (NULL);
+        }
+    qualifiers = ft_lststrjoin((o));
+    ft_lstclear(&o, &free);
+    return (qualifiers);
 }
 
 
@@ -84,7 +91,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	precision = **fmt == '.' && ++*fmt ? ft_read_num(fmt, ap) : NO_PRECISION;
 	if (!(qualifiers = ft_read_qualifiers(fmt)))
 		return (NULL);
-	return ((ft_is_specifier(specifier = *(*fmt)++) ? 
+	return ((ft_is_specifier(specifier = **fmt) ? 
 	(ft_get_specifier(specifier))((t_specifier_state) {
     		.flags=flags,
 			.qualifiers=qualifiers,
@@ -93,5 +100,5 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
         	.precision=precision, 
         	.no=no,
             .nulls=nulls,
-    	}, ap) : ft_strdup("")) + ft_free(qualifiers, 0));
+    	}, ap) + ((*fmt)++ && 0) : ft_strdup("")) + ft_free(qualifiers, 0));
 }

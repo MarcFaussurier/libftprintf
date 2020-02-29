@@ -159,7 +159,7 @@ t_list                              *ft_vlststrnew(unsigned int, va_list);
 char                                *ft_strnew(unsigned int, ...);
 char                                *ft_vstrnew(unsigned int, va_list);
 char                                *ft_lststrjoin(t_list*);
-char                                *ft_wstrtoa(wchar_t*);
+char                                *ft_wchar_to_UTF8(wchar_t*);
 long double                         ft_pow(long double, short);
 long double                         ft_upow(long double, unsigned short);
 float                               ft_modff(float, float*);

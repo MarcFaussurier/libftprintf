@@ -67,8 +67,11 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
         {
             if (!ft_lststradd(&str, ft_substr(prev, 0, (fmt - 1) - prev)) ||
                 !ft_lststradd(&str, ft_argtoa(&fmt, ap, oi, &nulls)))
-                return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
-            prev = (void*)fmt;
+	    {
+			*ob = ft_strdup("(null)");
+		    return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
+	    }
+	    prev = (void*)fmt;
         }
     if (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev)))
         oi = -42;
@@ -76,6 +79,8 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
         oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
    if (oi > 0)
         *ob = ft_insert_nulls(str, &nulls, *ob);
+   else
+	*ob = ft_strdup("(null)");
     ft_lstclear(&str, &free);
     ft_lstclear(&nulls, &free);
     return (oi + (!AT_EXIT && ft_free_g_specifiers() && 0));

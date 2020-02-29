@@ -1,62 +1,63 @@
 #include "libftprintf.h"
-
-
-
-char	    *ft_wchartoa(wchar_t w)
+/*
+** creits https://stackoverflow.com/questions/148403/utf8-to-from-wide-char-conversion-in-stl/14809553
+*/
+char 			*ft_wchar_to_UTF8(wchar_t * in)
 {
-	int		i;
-    char    *o;
+    t_list 		*out;
+    unsigned int	codepoint = 0;
+   char 		*strout;   
 
-    o = malloc(5);
-	i = 0;
-	if (w <= CHAR_MAX)
-		o[i++] = (w & 0x7f) | 0;
-	else if (w <= SHRT_MAX)
+    while (*in != 0)
     {
-		o[i++] = (w >> 6) + 0xC0;
-        o[i++] = (w & 0x3f) + 0x80;
-    }
-    else if (w <= 0xFFFF)
-    {
-        o[i++] = (w >> 12) + 0xE0;
-        o[i++] = ((w >> 6) & 0x3F) + 0x80;
-        o[i++] = (w & 0x3F) + 0x80;
-    }
-    else if (w <= 0x10FFFF - 1)
-    {
-        o[i++] = (w >> 18) + 0xF0;
-        o[i++] = ((w >> 12) & 0x3F) + 0x80;
-        o[i++] = ((w >> 6) & 0x3F) + 0x80;
-        o[i++] = (w & 0x3F) + 0x80;
-    }
-    else
-    {
-        free(o);
-        return (NULL);
-    }
-    o[i] = '\0';
-    return (o);
-}
-
-char                *ft_wstrtoa(wchar_t *str)
-{
-    t_list          *o;
-    char            *s;
-    char            *p;
-    o = NULL;
-
-    p = (void*)1;
-    while (*str)
-    {
-
-        if (!ft_lststradd(&o, p = ft_wchartoa(*str)) || !p)
+	    printf("it\n");
+        if (*in >= 0xd800 && *in <= 0xdbff)
+            codepoint = ((*in - 0xd800) << 10) + 0x10000;
+        else
         {
-            ft_lstclear(&o, &free);
-            return (NULL);
+            if (*in >= 0xdc00 && *in <= 0xdfff)
+                codepoint |= *in - 0xdc00;
+            else
+                codepoint = *in;
+
+            if (codepoint <= 0x7f && !ft_lststradd(&out, ft_strdup((char[2]){codepoint, 0})))
+        	{
+		   ft_lstclear(&out, free);
+		   return (NULL);
+		}    
+	else if (codepoint <= 0x7ff && !ft_lststradd(&out, ft_strdup((char[3]){
+			0xc0 | ((codepoint >> 6) & 0x1f),
+			0x80 | (codepoint & 0x3f),
+			0})))
+        	{
+		   ft_lstclear(&out, free);
+		   return (NULL);
+		}    
+            else if (codepoint <= 0xffff && !ft_lststradd(&out, ft_strdup((char[4]){
+			0xe0 | ((codepoint >> 12) & 0x0f),
+			0x80 | ((codepoint >> 6) & 0x3f),
+			0x80 | (codepoint & 0x3f),
+			0})))
+        	{
+		   ft_lstclear(&out, free);
+		   return (NULL);
+		}    
+            else if (!ft_lststradd(&out, ft_strdup((char[5]){
+			0xf0 | ((codepoint >> 18) & 0x07),
+			0x80 | ((codepoint >> 12) & 0x3f),
+			0x80 | ((codepoint >> 6) & 0x3f),
+			0x80 | (codepoint & 0x3f),
+			0})))
+        	{
+		   ft_lstclear(&out, free);
+		   return (NULL);
+		}    
+            codepoint = 0;
         }
-        str += 1;
+	in += 1;
     }
-    s = ft_lststrjoin(o);
-    ft_lstclear(&o, &free);
-    return (s);
+    strout = (ft_lststrjoin(out));
+    ft_lstclear(&out, &free);
+    return (strout);
 }
+

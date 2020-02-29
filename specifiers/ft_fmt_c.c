@@ -17,7 +17,6 @@ char			*ft_fmt_c(t_specifier_state state, va_list ap)
 {
     char        *swp;
     char        *o;
-    wchar_t        *z;
     wchar_t     y;
     int         i;
 
@@ -26,12 +25,10 @@ char			*ft_fmt_c(t_specifier_state state, va_list ap)
         y = va_arg(ap, wchar_t);
         if (!y)
             return (ft_stoa(state, (char[2]) {-42, '\0'}, FALSE, !y));
-        z = (wchar_t[2]) {y, 0};
-        swp = ft_wstrtoa(z);
-        if (swp)
-            o = ft_stoa(state, swp, FALSE, FALSE);
-        else
-            o = NULL;
+        swp = ft_wchar_to_UTF8((wchar_t[2]){y, 0});
+        if (!swp)
+        	return (NULL);
+	o = ft_stoa(state, swp, FALSE, FALSE);
         free(swp);
         return (o);
     }

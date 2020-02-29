@@ -20,7 +20,7 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
 
     if (!ft_strncmp(state.qualifiers, "ll", 3))
     {
-        swp = ft_wstrtoa(va_arg(ap, wchar_t *));
+        swp = ft_wchar_to_UTF8(va_arg(ap, wchar_t *));
         o = ft_stoa(state, swp, FALSE, FALSE);
         free(swp);
         return (o);

@@ -19,4 +19,5 @@ Reproduction of printf, with 64 bits int and 80 bits long double. Also implement
 
 ### credits
 * reactos for modf algo: https://github.com/mirror/reactos/blob/master/reactos/lib/sdk/crt/math/modf.c
+* utf16/32 to utf8: https://stackoverflow.com/questions/148403/utf8-to-from-wide-cha
 

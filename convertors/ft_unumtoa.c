@@ -6,7 +6,9 @@ char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, 
 	char		*out;
     char        *swp;
 
-	if (!(ft_strncmp(state.qualifiers, "ll", 2)))
+    if (!ft_strncmp(state.qualifiers, "z", 1))
+        num = ft_llutoa_base(b, va_arg(ap, unsigned long long));
+	else if (!(ft_strncmp(state.qualifiers, "ll", 2)))
 		num = ft_llutoa_base(b, va_arg(ap, unsigned long long));
 	else if (!(ft_strncmp(state.qualifiers, "l", 2)))
 		num = ft_lutoa_base(b, va_arg(ap, unsigned long));

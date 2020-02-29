@@ -148,13 +148,14 @@ int 			main(void)
     test(&n, "%lc", 0x0376);
     test(&n, "%lc", WCHAR_MAX);
     test(&n, "%ls", (wchar_t[2]){'/', 0});
-    //test(&n, "%lc", INT_MAX / 2);
-    //test(&n, "%lc", INT_MAX - 2);
-    //test(&n, "%lc", 316);
+    test(&n, "%lc", INT_MAX / 2);
+    test(&n, "%lc", INT_MAX - 2);
+    test(&n, "%lc", WCHAR_MAX);
+    test(&n, "%lc", 316);
     test(&n, "%llllllllllllllli", LLONG_MAX);
     test(&n, "%hhhhhhhhi", LLONG_MAX);
     test(&n, "%zzwwwi", LLONG_MAX);
-
+    test(&n, "%zzzzzu", ULONG_LONG_MAX);
     test(&n, "%lllllllllllllllx", LLONG_MAX);
     test(&n, "%hhhhhhhhi", LLONG_MAX);
     test(&n, "%zzwwwx", LLONG_MAX);

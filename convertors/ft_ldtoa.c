@@ -49,19 +49,30 @@ static char         *ft_read_rest(const char *b, long double n)
     char            *out;
     char            c;
 
-    if (n >= 1 || n <= 0)
-        return ("");
+	if (n == (long double) 0)
+	{
+		out = malloc(LDMAXPRECISION + 1);
+		out[LDMAXPRECISION] = '\0';
+		s = 0;
+		while (s < LDMAXPRECISION)
+		{
+			out[s++] = '0';
+		}
+		return (out);
+	}
+    if (n >= 1 || n < 0)
+        return (ft_strdup(""));
     bl = ft_strlen(b);
     k = n;
     s = 1;
-    while (k && s <= LDMAXPRECISION)
+	while (k && s <= LDMAXPRECISION)
     {
         c = k * ft_pow(bl,s);
         k -= c*ft_pow(bl, -s);
         s += 1;
     }
     out = malloc(s);
-    k = n;
+	k = n;
     s = 1;
     while (k && s <= LDMAXPRECISION)
     {
@@ -71,7 +82,7 @@ static char         *ft_read_rest(const char *b, long double n)
         s += 1;
     }
     out[s - 1] = '\0';
-    return (out);
+	return (out);
 }
 
 char                *ft_ldtoa_base(const char *b, long double n)
@@ -83,15 +94,16 @@ char                *ft_ldtoa_base(const char *b, long double n)
     char            *swp2;
     char            *swp3;
 
-    rest = ft_modfl(n, &ipart);
-    swp1 = ft_read_ipart(b, ipart);
-    swp2 = ft_read_rest(b, rest);
-    swp3 = ft_strjoin(swp1, ".");
-    output = ft_strjoin(swp3, swp2);
-    free(swp1);
-    free(swp2);
-    free(swp3);
-    return (output);
+	rest = ft_modfl(n, &ipart);
+	swp1 = ft_read_ipart(b, ipart);
+	swp2 = ft_read_rest(b, rest);
+	swp3 = ft_strjoin(swp1, ".");
+	output = ft_strjoin(swp3, swp2);
+	free(swp1);
+	free(swp2);
+	free(swp3);
+
+	return (output);
 }
 
 char            *ft_ldtoa(long double n)

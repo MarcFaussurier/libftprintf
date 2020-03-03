@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 11:11:04 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/03 18:06:58 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,7 +87,7 @@ int         y = 5;
 int         z = 6;
 
     printf("sizeof (wchar) : %zu is_little_endian: %i\n", sizeof(wchar_t), isLittleEndian());
-    n = 83; //SET ME AS CURRENT LOC!
+    n = 90; //SET ME AS CURRENT LOC!
     test(&n, "");
     test(&n, "1");
     test(&n, "%s", "hello");
@@ -159,7 +159,7 @@ int         z = 6;
 	test(&n, "%*.*slol\n", -16, 3, NULL);
 	test(&n, "%*.*hilol\n", -16, 2, 4242);
 	test(&n, "%*.*hhulol\n", -16, 2, INT_MAX);
-	test(&n, "%0-*.*c		%n	lol\n", -10, -5, 'q', &n);
+	test(&n, "%0-*.*c		%n	lol\n", -10, -5, 'q', &t4);
     test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
     test(&n, "%0-16p %x %X %#x %#X\n", ULONG_LONG_MAX, INT_MAX, INT_MAX, INT_MAX, INT_MAX);
     test(&n, "[%.2Lf]\n",   44.5605L);
@@ -428,7 +428,8 @@ int         z = 6;
 (test(&n, "%.5s", "Hello"));
 (test(&n, "%.6s", "Hello"));
 (test(&n, "%.7s", "Hello"));
-(test(&n, "%.s", 42));
+//printf("%s", 42);
+//(test(&n, "%.s", 42));
 (test(&n, "%.0d", 0));
 (test(&n, "%.1d", 0));
 (test(&n, "%.2d", 0));
@@ -1171,9 +1172,9 @@ int         z = 6;
 (test(&n, "%*.*s", 0, 0, "Hello"));
 (test(&n, "%*.*s", 0, 0, "Hello"));
 (test(&n, "%*.*s", 0, 5, "Hello"));
-(test(&n, "%*.*s", 0, -5, "Hello"));
-(test(&n, "%*.*s", 5, 0, "Hello"));
-(test(&n, "%*.*s", -5, 0, "Hello"));
+(test(&n, "%*.*s", 0, -5, "24Hello24"));
+(test(&n, "%*.*s", 5, 0, "23Hello23"));
+(test(&n, "%*.*s", -5, 0, "Hello22"));
 (test(&n, "%*.*s", 5, 5, "Hello"));
 (test(&n, "%n", NULL));
 (test(&n, "123%n ", &t2));
@@ -1187,7 +1188,10 @@ int         z = 6;
 (test(&n, "%10.2s %n ", "Hello", &t2));
 (test(&n, "size = %d", t2));
 (test(&n, "%10.2s %n %s %n", "Hello", &t2, "Hello2", &t2bis));
-(test(&n, "%f", 0));
+printf("floats...%f\n", 0);
+ft_printf("mine %f\n", 0);
+printf("dbl: %Lf\n", (long double) 42.0L);
+//(test(&n, "%f", 0));
 (test(&n, "%.f", 42.0));
 (test(&n, "%.1f", 42.0));
 (test(&n, "%.f", 42.1));

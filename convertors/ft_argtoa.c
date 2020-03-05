@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 12:23:16 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/05 13:37:38 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,7 +21,7 @@ static t_flags	ft_read_flags(char const **fmt)
 
 	o = (t_flags) {0, 0, 0, 0};
 	while ((c = *(*fmt)++))
-		if (c == '0')
+		if (c == '0' && !o.minus)
 			o.zero = 1;
 		else if (c == '+')
 			o.plus = 1;

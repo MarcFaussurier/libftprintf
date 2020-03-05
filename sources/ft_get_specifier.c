@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 10:59:10 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/05 11:05:10 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/05 12:35:05 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ t_specifier			ft_get_specifier(char specifier)
 	while (current)
 	{
 		value = (t_assoc_specifier*) current->content;
-		if (value->specifier == specifier)
+		if (value->specifier == specifier || (ft_isupper(specifier) ? (specifier + 32 == value->specifier) : 0))
 			return (value->callback);
 		current = current->next;
 	}

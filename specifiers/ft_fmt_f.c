@@ -32,7 +32,7 @@ char            *ft_fmt_f(t_specifier_state state, va_list ap)
             last_digit += 1;
         }
     */
-    out = ft_stoa(state, num, FALSE, FALSE);
+    out = ft_stoa((t_stoa_args){state, num, FALSE, FALSE, FALSE});
     free(num);
     return (out);
 }

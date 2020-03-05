@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/02/14 12:22:33 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/05 14:23:13 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -141,6 +141,14 @@ typedef struct		                s_assoc_specifier
     char		                    specifier;
     t_specifier	                    callback;
 }			                        t_assoc_specifier;
+typedef struct						s_stoa_args
+{
+	t_specifier_state				state;
+	char							*input;
+	t_bool							is_num;
+	t_bool							is_null;
+	t_bool							is_one_char;
+}									t_stoa_args;
 void                                ft_putmem_fd(int, char *, size_t);
 void                                ft_putmem(char*, size_t);
 void                                ft_lstdel_node(t_list**, t_list*, void(*)(void*));
@@ -213,7 +221,7 @@ char                                *ft_llitoa(long long int);
 char                                *ft_litoa(long int);
 char                                *ft_hitoa(short);
 char                                *ft_hhitoa(char);
-char		                        *ft_stoa(t_specifier_state, char *, t_bool, t_bool);
+char		                        *ft_stoa(t_stoa_args args);
 char		                        *ft_argtoa(char const **, va_list, int, t_list**);
 int                                 ft_vdprintf(int, const char *, va_list);
 int                                 ft_dprintf(int, const char *, ...);

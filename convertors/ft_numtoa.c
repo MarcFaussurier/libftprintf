@@ -30,7 +30,7 @@ char            *ft_numtoa(t_specifier_state state, va_list ap, const char *b, t
     }
     else
         swp = num;
-    out = ft_stoa(state, swp, TRUE, FALSE);
+    out = ft_stoa((t_stoa_args){state, swp, TRUE, FALSE, FALSE});
 	free(swp);
 	return (out);
 }

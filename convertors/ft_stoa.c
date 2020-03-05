@@ -12,6 +12,7 @@ char           *ft_stoa(t_stoa_args args)
 	size_t		i;
 	size_t		y;
 	size_t		oj_precision;
+	size_t		oj_width;
 
 	if (!args.input)
 		args.input = (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'};
@@ -24,11 +25,18 @@ char           *ft_stoa(t_stoa_args args)
 	} 
 	else
 		is_n = FALSE;
-	oj_precision = args.state.precision > 0 ? args.state.precision : -args.state.precision;
+	oj_width = args.state.padding > 0 ? args.state.padding : -args.state.padding;
 	if (is_n && args.state.padding)
 		args.state.padding -= 1;
 	if (args.state.padding < 0 && (args.state.flags.minus = 1))
 		args.state.padding = -args.state.padding;
+	if (args.state.precision == NO_PRECISION)
+		oj_precision = ft_strlen(args.input) > (size_t) args.state.padding ? ft_strlen(args.input) : args.state.padding;
+	else
+		oj_precision = args.state.precision > 0 ? args.state.precision : -args.state.precision;
+	printf("precision: %zu, padding: %zu\n", oj_precision, oj_width);
+	if ((args.is_num && oj_precision > oj_width))
+		args.state.flags.zero = 1;
 	if (args.is_num)
 	{
 		if (args.state.precision != NO_PRECISION && args.state.precision > args.state.padding)
@@ -79,9 +87,8 @@ char           *ft_stoa(t_stoa_args args)
 	} 
 	else
 	{
-		printf("field_width: %zu, input_len  %zu\n", field_width, input_len);
 		while ((i + input_len) < field_width)
-			output[i++] = ((!args.is_num && args.state.flags.zero) || (args.is_num && i >= (field_width - oj_precision))) ? '0' : ' ';
+			output[i++] = ((!args.is_num && args.state.flags.zero) || (args.is_num && args.state.flags.zero && i >= (oj_width - oj_precision))) ? '0' : ' ';
 		y = 0;
 		while (i < field_width)
         {

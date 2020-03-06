@@ -50,7 +50,7 @@ static int		ft_read_num(char const **fmt, va_list ap)
 	bkp = *fmt;
 	if (**fmt == '*' && ++(*fmt))
 		return (va_arg(ap, int));
-	while (ft_isdigit(**fmt) && (++*fmt) && (++len))
+	while ((ft_isdigit(**fmt) || **fmt == '-' || **fmt == '+' || **fmt == ' ') && (++*fmt) && (++len))
 	    ;
     swp = ft_substr(bkp, 0, len);
 	o = ft_atoi(swp);

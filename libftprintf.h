@@ -181,6 +181,7 @@ long double                         ft_modfl(long double, long double*);
 t_ld_state                          ft_read_state_ld(long double);
 t_bool                              ft_isinfl(long double);
 t_bool                              ft_isnanl(long double);
+char                                *ft_btoa(void * ptr, size_t size);
 char			                    *ft_fmt_percent(t_specifier_state, va_list);
 char			                    *ft_fmt_s(t_specifier_state, va_list);
 char			                    *ft_fmt_i(t_specifier_state, va_list);

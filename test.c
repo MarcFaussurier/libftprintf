@@ -525,6 +525,8 @@ int         z = 6;
 (test(&n, "%.s", "ddd"));
 (test(&n, "%.0s", "ddd"));
 (test(&n, "%.1s", "ddd"));
+unsigned long long i = 1;//ULONG_LONG_MAX;
+printf("%s\n", ft_btoa(&i, sizeof(unsigned long long)));
 (test(&n, "%.+1d", 'a'));
 (test(&n, "%10.2d", 'a'));
 (test(&n, "%-010.+6d", 'a'));
@@ -542,6 +544,7 @@ int         z = 6;
 (test(&n, "%010.+- 5d", 'a'));
 (test(&n, "%010. + - + - 5d", 'a'));
 (test(&n, "%010.6s", "97"));
+
 return (exitmsg(n));
 (test(&n, "%.0d", 0));
 (test(&n, "%0.d", 0));

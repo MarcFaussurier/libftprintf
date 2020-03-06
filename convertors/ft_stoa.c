@@ -9,7 +9,9 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
     int         len;
     t_null      *n;
 
-    i = 0;
+    if (!input)
+		return (NULL);
+	i = 0;
     y = 0;
     if (state.precision < 0 && state.precision != NO_PRECISION)
         state.precision = 0;
@@ -62,13 +64,10 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
             state.precision = len;
         state.padding -= state.precision;
         o = malloc(state.padding + state.precision  + ft_strlen(input) + 10);
-        
-     //   printf("pading: %i precision: %i len: %i i: %i\n", state.padding, state.precision, len, i);
-       
         if (!(state.flags.minus || state.flags.zero))
             while (state.padding-- > 0)
                 o[i++] = ' ';
-        if (sign)
+		if (sign)
             o[i++] = sign;
         if (type == PREFIXED_NUMBER)
         {
@@ -76,9 +75,6 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
             if (input[y] == 'x' || input[y] == 'X')
                 o[i++] = input[y++];
         }
-
-        //if (state.padding > 0)
-        //    state.flags.zero = 0;
         if (!state.flags.minus)
             while (state.padding-- > 0)
                 o[i++] = state.flags.zero ? '0' : ' ';

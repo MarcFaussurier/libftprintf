@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/06 19:22:08 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/06 21:26:07 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -98,6 +98,19 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	int			precision;
 	int			padding;
 
+	padding = 0;
+	precision = NO_PRECISION;/*
+	while (ft_is_in_a(**fmt, (int[]){'.', '+', '-', '#', ' ', '*', 6}) || ft_isdigit(**fmt))
+	{
+		// parse flags
+		flags = ft_merge(flags, ft_read_flags(fmt));
+		padding = ft_read_num(fmt, ap);
+		if (**fmt == '.')
+		{
+			*fmt = 1;
+			precision = ft_read_num(fmt, ap);
+		}
+	}*/
 	// todo:: while loop for continuous flags padding . precision 
 	flags = ft_read_flags(fmt);
 	padding = ft_read_num(fmt, ap);

@@ -35,7 +35,7 @@
 # ifndef AT_EXIT
 #  define AT_EXIT 0
 # endif
-typedef enum                        e_ld_state
+typedef enum                        e_ld_states
 {
     NORMAL,
     DENORMAL,
@@ -47,6 +47,14 @@ typedef enum                        e_ld_state
     CANT_BE_GEN,
     INVALID_OP
 }                                   t_ld_state;
+typedef enum                        e_fmt_types
+{
+    NUMBER,
+    PREFIXED_NUMBER,
+    FLOAT_NUMBER,
+    STRING,
+    CHAR
+}                                   t_fmt_type;
 typedef union                       u_wchar
 {
     wchar_t                         value;
@@ -119,6 +127,7 @@ typedef struct		                s_flags
     char		                    plus:		        1;
     char		                    minus:		        1;
     char		                    sharp:		        1;
+    char                            space:              1;
 }			                        t_flags;
 typedef struct                      s_null
 {
@@ -141,14 +150,6 @@ typedef struct		                s_assoc_specifier
     char		                    specifier;
     t_specifier	                    callback;
 }			                        t_assoc_specifier;
-typedef struct						s_stoa_args
-{
-	t_specifier_state				state;
-	char							*input;
-	t_bool							is_num;
-	t_bool							is_null;
-	t_bool							is_one_char;
-}									t_stoa_args;
 void                                ft_putmem_fd(int, char *, size_t);
 void                                ft_putmem(char*, size_t);
 void                                ft_lstdel_node(t_list**, t_list*, void(*)(void*));
@@ -221,7 +222,7 @@ char                                *ft_llitoa(long long int);
 char                                *ft_litoa(long int);
 char                                *ft_hitoa(short);
 char                                *ft_hhitoa(char);
-char		                        *ft_stoa(t_stoa_args args);
+char		                        *ft_stoa(t_specifier_state, t_fmt_type, char *);
 char		                        *ft_argtoa(char const **, va_list, int, t_list**);
 int                                 ft_vdprintf(int, const char *, va_list);
 int                                 ft_dprintf(int, const char *, ...);

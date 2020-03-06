@@ -1,129 +1,131 @@
 #include "libftprintf.h"
 
-char           *ft_stoa(t_stoa_args args)
+char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
 {
-    t_null      *cnull;
-	t_bool		is_n;
-	char		*output;
-	char		*swp;
-	char		*swp2;
-	size_t		input_len;
-	size_t		field_width;
-	size_t		i;
-	size_t		y;
-	size_t		oj_precision;
-	size_t		oj_width;
+    char        *o;
+    char        sign;
+    int         i;
+    int         y;
+    int         len;
+    t_null      *n;
 
-	if (!args.input)
-		args.input = (char[7]) {'(', 'n', 'u', 'l', 'l', ')', '\0'};
-	if (args.input[0] == '-' && args.is_num)
-	{
-		swp = ft_substr(args.input, 1, ft_strlen(args.input) - 1);
-		//	free(input);
-		args.input = swp;
-		is_n = TRUE;
-	} 
-	else
-		is_n = FALSE;
-	oj_width = args.state.padding > 0 ? args.state.padding : -args.state.padding;
-	if (is_n && args.state.padding)
-		args.state.padding -= 1;
-	if (args.state.padding < 0 && (args.state.flags.minus = 1))
-		args.state.padding = -args.state.padding;
-	if (args.state.precision == NO_PRECISION)
-		oj_precision = ft_strlen(args.input) > (size_t) args.state.padding ? ft_strlen(args.input) : args.state.padding;
-	else
-		oj_precision = args.state.precision > 0 ? args.state.precision : -args.state.precision;
-	printf("precision: %zu, padding: %zu\n", oj_precision, oj_width);
-	if ((args.is_num && oj_precision > oj_width))
-		args.state.flags.zero = 1;
-	if (args.is_num)
-	{
-		if (args.state.precision != NO_PRECISION && args.state.precision > args.state.padding)
-			args.state.padding = args.state.precision;
-		if (args.state.padding < (int)ft_strlen(args.input))
-        	args.state.padding = ft_strlen(args.input);
-        if (args.state.precision < args.state.padding)
-			args.state.precision = ft_strlen(args.input);
-	} 
-	else if (args.is_one_char)
-	{
-		if (!args.state.precision || !args.state.padding)
-		{	
-			args.state.precision = 1;
-		}
-	}
-    if (args.state.precision < 0 || args.state.precision == NO_PRECISION)
-		input_len = ft_strlen(args.input);
-    else 
-		input_len = ft_strnlen(args.input, (size_t) args.state.precision);
-	if (args.state.padding < 0 && (args.state.flags.minus = 1))
-		field_width = (size_t) -args.state.padding;
-	else
-		field_width = args.state.padding ? args.state.padding : input_len;
-	if (!(output = malloc(field_width + 1)))
-	    return (NULL);
     i = 0;
-	if (args.state.flags.minus)
-	{
-		while (i < input_len)
-		{
-			output[i] = args.input[i];
-			if (args.is_null)
-            {
-                cnull = malloc(sizeof(t_null));
-                *cnull = (t_null) {.address=output,.index=i};
-                if (!ft_lstadd_back_new(args.state.nulls, cnull))
-                {
-                    free(output);
-                    ft_lstclear(args.state.nulls, &free);
-                    return (NULL);
-                }
-            }
-            i += 1;
-		}
-		while (i < field_width)
-			output[i++] = (!args.is_num && args.state.flags.zero ) ? '0' : ' ';
-	} 
-	else
-	{
-		while ((i + input_len) < field_width)
-			output[i++] = ((!args.is_num && args.state.flags.zero) || (args.is_num && args.state.flags.zero && i >= (oj_width - oj_precision))) ? '0' : ' ';
-		y = 0;
-		while (i < field_width)
+    y = 0;
+    if (state.precision < 0 && state.precision != NO_PRECISION)
+        state.precision = 0;
+    
+    if (state.padding < 0)
+    {
+        state.padding = -state.padding;
+      //  if (!state.flags.zero)
+        state.flags.minus = 1;
+    }
+    if (type == NUMBER || type == PREFIXED_NUMBER || type == FLOAT_NUMBER)
+    {
+        if (state.flags.minus)
+            state.flags.zero = 0;
+        len = ft_strlen(input);
+        sign = 0;
+        if (input[0] == '-')
         {
-			output[i] = args.input[y];
-            if (args.is_null)
-            {
-                cnull = malloc(sizeof(t_null));
-                *cnull = (t_null) {.address=output, .index=i};
-                if (!ft_lstadd_back_new(args.state.nulls, cnull))
-                {
-                    free(output);
-                    ft_lstclear(args.state.nulls, &free);
-                    return (NULL);
-                }
-            }
-            i += 1;
+            sign = '-';
             y += 1;
+            state.padding -= 1;
+            len -= 1;
         }
-	}
-	output[field_width] = '\0';
-	if (is_n)
-	{
-		y = 0;
-		while (output[y])
-		{
-			if ((args.state.flags.zero && output[y] != '0') || output[y] != ' ')
-				break;
-			y += 1;
-		}
-		swp = ft_substr(output, 0, y);
-		swp2 = ft_substr(output, y, field_width - y);
-	//	free(output);
-		output = ft_strnew(3, swp, "-", swp2, NULL);
-		free(swp);
-		free(swp2);
-	}
-	return (output);
+        else if (state.flags.plus)
+        {
+            sign = '+';
+            state.padding -= 1;
+        }
+        else if (state.flags.space)
+        {
+            sign = ' ';
+            state.padding -= 1;
+        }
+        if (type == PREFIXED_NUMBER)
+        {
+            if (input[y + 1] == 'x' || input[y + 1] == 'X')
+            {
+                state.padding -= 2;
+                len -= 2;
+            }
+            else if (input[y] == '0')
+            {
+                state.padding -= 1;
+                len -= 1;
+            }
+        }
+        if (state.precision == NO_PRECISION)
+            state.precision = len;
+        if ( len > state.precision)
+            state.precision = len;
+        state.padding -= state.precision;
+        o = malloc(state.padding + state.precision  + ft_strlen(input) + 10);
+        if (!(state.flags.minus || state.flags.zero))
+            while (state.padding-- > 0)
+                o[i++] = ' ';
+        if (sign)
+            o[i++] = sign;
+        if (type == PREFIXED_NUMBER)
+        {
+            o[i++] = input[y++];
+            if (input[y] == 'x' || input[y] == 'X')
+                o[i++] = input[y++];
+        }
+ //       printf("pading: %i precision: %i len: %i i: %i\n", state.padding, state.precision, len, i);
+        //if (state.padding > 0)
+        //    state.flags.zero = 0;
+        if (!state.flags.minus)
+            while (state.padding-- > 0)
+                o[i++] = state.flags.zero ? '0' : ' ';
+        while (len <  state.precision--)
+            o[i++] = '0';
+        while (len-- > 0)
+            o[i++] = input[y++];
+        while(state.padding-- > 0)
+            o[i++] = ' ';
+    }
+    else if (type == STRING)
+    {
+        if (!input)
+            input = "(null)";
+        if (state.precision == NO_PRECISION)
+            state.precision = ft_strlen(input);
+        len = ft_strnlen(input, state.precision);
+        o = malloc(state.padding + len + 1);
+        if (!state.flags.minus || state.flags.zero)
+			while (len < state.padding--)
+				o[i++] = state.flags.zero ? '0' : ' ';
+        y = 0;
+        while (y++ < len)
+				o[i++] = *input++;
+		while ( len < state.padding--)
+				o[i++] = ' ';
+    }
+    else if (type == CHAR)
+    {
+        len = 1;
+        o = malloc((state.padding > 1 ? state.padding : 1) + 1);
+        if (!state.flags.minus)
+            while (--state.padding > 0)
+                o[i++] = ' ';
+        o[i] = (unsigned char) !input[0] ? -42 : input[0];
+        if (!input[0])
+        {
+            n = malloc(sizeof(t_null));
+            *n = (t_null) {.address=o,.index=i};
+            if (!ft_lstadd_back_new(state.nulls, n))
+            {
+                // malloc issue ...
+            }
+        }
+        i += 1;
+        while (--state.padding > 0)
+            o[i++] = ' ';
+    }
+    else
+        o = ft_strdup("");
+    o[i] = 0;
+    return (o);
 }

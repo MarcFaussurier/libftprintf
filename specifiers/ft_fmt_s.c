@@ -38,10 +38,10 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
             b += 1;
         }
         i[b] = 0;
-        o = ft_stoa((t_stoa_args){state, i, FALSE, FALSE, FALSE});
+        o = ft_stoa(state, STRING, i);
         free(i);
         return (o);
     }
     else
-        return (ft_stoa((t_stoa_args){state, va_arg(ap, char *), FALSE, FALSE, FALSE}));
+        return (ft_stoa(state, STRING, va_arg(ap, char *)));
 }

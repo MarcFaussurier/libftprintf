@@ -10,7 +10,7 @@ char            *ft_fmt_p(t_specifier_state state, va_list ap)
 	swp = ft_llutoa_base(b16, (unsigned long long) va_arg(ap, void *));
     swp2 = ft_strjoin("0x", swp);
     free(swp);
-    output = ft_stoa((t_stoa_args){state, swp2, TRUE, FALSE, FALSE});
+    output = ft_stoa(state, PREFIXED_NUMBER, swp2);
     free(swp2);
     
     return (output);

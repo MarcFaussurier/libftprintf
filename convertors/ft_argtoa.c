@@ -19,7 +19,7 @@ static t_flags	ft_read_flags(char const **fmt)
     char        c;
 
 
-	o = (t_flags) {0, 0, 0, 0};
+	o = (t_flags) {0, 0, 0, 0, 0};
 	while ((c = *(*fmt)++))
 		if (c == '0' && !o.minus)
 			o.zero = 1;
@@ -89,7 +89,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	flags = ft_read_flags(fmt);
 	padding = ft_read_num(fmt, ap);
 	precision = **fmt == '.' && ++*fmt ? ft_read_num(fmt, ap) : NO_PRECISION;
-	if (!(qualifiers = ft_read_qualifiers(fmt)))
+    if (!(qualifiers = ft_read_qualifiers(fmt)))
 		return (NULL);
 	return ((ft_is_specifier(specifier = **fmt) ? 
 	(ft_get_specifier(specifier))((t_specifier_state) {

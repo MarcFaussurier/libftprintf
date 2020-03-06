@@ -5,6 +5,7 @@ char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, 
 	char		*num;
 	char		*out;
     char        *swp;
+    t_fmt_type  t;
 
     if (!ft_strncmp(state.qualifiers, "z", 1))
         num = ft_llutoa_base(b, va_arg(ap, unsigned long long));
@@ -22,8 +23,10 @@ char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, 
 		num = ft_strdup("0");
 	if (!num)
 		return (NULL);
-	if (prefix && state.flags.sharp)
+	t = NUMBER;
+    if (prefix && state.flags.sharp)
     {
+        t = PREFIXED_NUMBER;
         if (ft_isupper(state.specifier))
             swp = ft_strjoin("0X", num);
         else
@@ -32,7 +35,7 @@ char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, 
     }
     else
         swp = num;
-    out = ft_stoa((t_stoa_args){state, swp, TRUE, FALSE, FALSE});
+    out = ft_stoa(state, t, swp);
 	free(swp);
 	return (out);
 }

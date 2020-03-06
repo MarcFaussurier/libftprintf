@@ -23,7 +23,7 @@
 #include <locale.h>
 
 int             g_errors = 0;
-
+int             g_start = 0;
 
 /*
 **
@@ -76,7 +76,7 @@ int isLittleEndian()
 
 int exitmsg(int n)
 {
-	return printf("%i errors / %i tests\n", g_errors, n);
+	return printf("%i errors / %i tests\n", g_errors, n - g_start);
 }
 
 int 			main(void)
@@ -92,9 +92,10 @@ int         y = 5;
 int         z = 6;
 
     printf("sizeof (wchar) : %zu is_little_endian: %i\n", sizeof(wchar_t), isLittleEndian());
-    n = 95; //SET ME AS CURRENT LOC!
+    n = g_start = 95; //SET ME AS CURRENT LOC!
     test(&n, "");
     test(&n, "1");
+    test(&n, "%.s", "hello");
     test(&n, "%s", "hello");
     test(&n, "%s", (char[3]) {'\0', 'a', '\0'});
     test(&n, "%10c lol %c 1", 0, 0);
@@ -157,7 +158,8 @@ int         z = 6;
 	test(&n, "%10X", UINT_MAX);
 	test(&n, "%11X", UINT_MAX);
 	test(&n, "%1p", (void*)42);
-	test(&n, "%5p", (void*)42);
+	test(&n, "%4p", (void*)1);
+    test(&n, "%5p", (void*)42);
  	test(&n, "%12.2slol\n", NULL);
 	test(&n, "%--8.10slol\n", NULL);
 	test(&n, "%8.10s\n", NULL);
@@ -372,6 +374,7 @@ int         z = 6;
 (test(&n, "%-5p", (void*)42));
 (test(&n, "%01i", 0));
 (test(&n, "%02i", 0));
+(test(&n, "%020.10s", "hello"));
 (test(&n, "%010.10s", "hello"));
 (test(&n, "%010i", 0));
 (test(&n, "%01i", -1));
@@ -452,6 +455,7 @@ int         z = 6;
 (test(&n, "%.1c", 'a'));
 (test(&n, "%.2c", 'a'));
 (test(&n, "%.10c", 'a'));
+(test(&n, "%.s", "hello world"));
 (test(&n, "%.0s", "hello world"));
 (test(&n, "%.s", "hello world"));
 (test(&n, "%0.s", "hello world"));
@@ -499,10 +503,13 @@ int         z = 6;
 (test(&n, "%0.10d", 'a'));
 (test(&n, "%.10d", 'a'));
 (test(&n, "%10.d", 'a'));
-(test(&n, "%010.5d", 'a'));
+(test(&n, "%010.6d", 'a'));
+(test(&n, "%0#10.6x", 'a'));
+(test(&n, "%010.5s", "97"));
 (test(&n, "%10.5d", 'a'));
 (test(&n, "%010.-5d", 'a'));
 (test(&n, "%010.6s", "97"));
+return (exitmsg(n));
 (test(&n, "%.0d", 0));
 (test(&n, "%0.d", 0));
 (test(&n, "%0.1d", 0));
@@ -516,7 +523,6 @@ int         z = 6;
 (test(&n, "%1.0s", "hello"));
 (test(&n, "%1.s", "hello"));
 (test(&n, "%.1s", "hello"));
-return (exitmsg(n));
 (test(&n, "%.1d", 0));
 (test(&n, "%.2d", 0));
 (test(&n, "%.0d", 5));

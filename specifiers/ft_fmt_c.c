@@ -23,11 +23,11 @@ char			*ft_fmt_c(t_specifier_state state, va_list ap)
         y = va_arg(ap, wchar_t);
         if (y > UCHAR_MAX)
             return (NULL);
-        return (ft_stoa((t_stoa_args){state, (char[2]) {y ? y : -42, '\0'}, FALSE, !y, TRUE}));
+        return (ft_stoa(state, CHAR, (char[2]) {y, '\0'}));
     }
     else
     {
         i = va_arg(ap, int);
-        return (ft_stoa((t_stoa_args){state, (char[2]) {i ? i : -42, '\0'}, FALSE, !i, TRUE}));
+        return (ft_stoa(state, CHAR, (char[2]) {i, '\0'}));
     }
 }

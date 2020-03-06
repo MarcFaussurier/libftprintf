@@ -5,6 +5,7 @@ char            *ft_numtoa(t_specifier_state state, va_list ap, const char *b, t
 	char		*num;
 	char		*out;
     char        *swp;
+    t_fmt_type  t;
 
 	if (!(ft_strncmp(state.qualifiers, "ll", 2)))
 		num = ft_llitoa_base(b, va_arg(ap, long long));
@@ -20,17 +21,19 @@ char            *ft_numtoa(t_specifier_state state, va_list ap, const char *b, t
 		num = ft_strdup("-1");
 	if (!num)
 		return (NULL);
-	if (prefix && state.flags.sharp)
+	t = NUMBER;
+    if (prefix && state.flags.sharp)
     {
         if (ft_isupper(state.specifier))
             swp = ft_strjoin("0X", num);
         else
             swp = ft_strjoin("0x", num);
         free(num);
+        t = PREFIXED_NUMBER;
     }
     else
         swp = num;
-    out = ft_stoa((t_stoa_args){state, swp, TRUE, FALSE, FALSE});
+    out = ft_stoa(state, t, swp);
 	free(swp);
 	return (out);
 }

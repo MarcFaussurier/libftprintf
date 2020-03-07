@@ -90,8 +90,7 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
 			input = "(null)";
 		if (state.precision == NO_PRECISION)
             state.precision = ft_strlen(input);
-		if ((len = ft_strlen(input)) < state.precision)
-        	len = ft_strnlen(input, state.precision);
+        len = ft_strnlen(input, state.precision);
         o = malloc(state.padding + len + 1);
         if (!state.flags.minus || state.flags.zero)
 			while (len < state.padding--)

@@ -194,6 +194,7 @@ char            			        *ft_fmt_p(t_specifier_state, va_list);
 char            			        *ft_fmt_n(t_specifier_state, va_list);
 char        		      	        *ft_fmt_f(t_specifier_state, va_list);
 char            			        *ft_fmt_g(t_specifier_state, va_list);
+char                                *ft_fmt_b(t_specifier_state, va_list);
 char                                *ft_ftoa(float);
 char                                *ft_dtoa(double);
 char                                *ft_ldtoa(long double);

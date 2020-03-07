@@ -5,14 +5,10 @@ t_bool          ft_lststradd(t_list **str, char *ptr)
 
     t_list          *new;
 
-    if (!ptr)
+    if (!ptr || !(new = ft_lstnew(ptr)))
     {
-        ft_lstclear(str, &free);
-        return (FALSE);
-    }
-    if (!(new = ft_lstnew(ptr)))
-    {
-        free(ptr);
+        if (ptr)
+            free(ptr);
         ft_lstclear(str, &free);
         return (FALSE);
     }

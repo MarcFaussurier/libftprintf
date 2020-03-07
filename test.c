@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 09:51:18 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 10:39:52 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -163,7 +163,7 @@ int         z = 6;
  	test(&n, "%12.2slol\n", NULL);
 	test(&n, "%--8.10slol\n", NULL);
 	test(&n, "%8.10s\n", NULL);
-	test(&n, "%*.*slol\n", 16, 3, NULL);
+	test(&n, "%.*slol\n",  3, NULL);
 	test(&n, "%*.*hilol\n", -16, 2, 4242);
 	test(&n, "%*.*hhulol\n", -16, 2, INT_MAX);
 	test(&n, "%0-*.*c		%n	lol\n", -10, -5, 'q', &t4);
@@ -183,7 +183,10 @@ int         z = 6;
     test(&n, "%llllllllllllllli", LLONG_MAX);
     test(&n, "%hhhhhhhhi", LLONG_MAX);
     test(&n, "%zzwwwi", LLONG_MAX);
-    test(&n, "%zzzzzu", ULONG_LONG_MAX);
+	test(&n, "%zzwwwi", LLONG_MAX);
+	test(&n, "%hhx %hhhhlll %llllllllllllllhhhhhu %lllhhhhhl %hhhhhhhhlllllhhhl  %hhhhhhhhhl %lllllhhhhh ", LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX);
+	test(&n, "%0.0hhh#x     ", LLONG_MAX);
+	test(&n, "%zzzzzu", ULONG_LONG_MAX);
     test(&n, "%lllllllllllllllx", LLONG_MAX);
     test(&n, "%hhhhhhhhi", LLONG_MAX);
     test(&n, "%zzwwwx", LLONG_MAX);

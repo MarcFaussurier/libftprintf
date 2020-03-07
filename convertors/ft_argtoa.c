@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 09:13:45 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 10:32:26 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ static char*	        ft_read_qualifiers(char const **fmt)
 
 	i = 0;
     o = NULL;
-    while (!ft_is_specifier(**fmt) && **fmt && ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
+    while (ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
 		if (!ft_lststradd(&o, ft_strdup((char[2]){ *(*fmt)++, 0})))
         {
             ft_lstclear(&o, &free);
@@ -94,6 +94,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 {
 	t_flags		flags;
 	char		*qualifiers;
+	char		*swp;
 	int			precision;
 	int			padding;
 	char		specifier;
@@ -101,6 +102,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	padding = 0;
 	precision = NO_PRECISION;
 	flags = (t_flags) {0,0,0,0,0};
+	qualifiers = NULL;
 	while (ft_is_in_a(**fmt, (int[6]){'.', '+', '-', '#', ' ', '*'}, 6) || ft_isdigit(**fmt))
 	{
 		flags = ft_merge_flags(flags, ft_read_flags(fmt));
@@ -109,14 +111,30 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 		{
 			precision = 0;
 			*fmt += 1;
-			if (!ft_isdigit(**fmt))
+			if (!ft_isdigit(**fmt) && **fmt != '*')
 				continue;
 			precision = ft_read_num(fmt, ap);
 		}
+		if (!(swp = ft_read_qualifiers(fmt)))
+			return (NULL);
+		else if (ft_strlen(swp))
+		{
+			if (qualifiers)
+				free(qualifiers);
+			qualifiers = swp;
+		}
 	}
-	if (!(qualifiers = ft_read_qualifiers(fmt)))
+	if (!(swp = ft_read_qualifiers(fmt)))
 		return (NULL);
-	return ((ft_is_specifier(specifier = *(*fmt)++) ? 
+	else if (ft_strlen(swp))
+	{
+		if (qualifiers)
+			free(qualifiers);
+		qualifiers = swp;
+	}
+	if (!qualifiers)
+		qualifiers = ft_strdup("");
+	return ((ft_is_specifier(specifier = **fmt) ? 
 	(ft_get_specifier(specifier))((t_specifier_state) {
     		.flags=flags,
 			.qualifiers=qualifiers,
@@ -125,5 +143,5 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
         	.precision=precision, 
         	.no=no,
             .nulls=nulls,
-    	}, ap) : NULL) + ft_free(qualifiers, 0));
+    	}, ap) + (++*fmt && 0) : ft_strdup("")) + ft_free(qualifiers, 0));
 }

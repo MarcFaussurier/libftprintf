@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/06 21:26:07 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 08:21:54 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,41 +99,22 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	int			padding;
 
 	padding = 0;
-	precision = NO_PRECISION;/*
-	while (ft_is_in_a(**fmt, (int[]){'.', '+', '-', '#', ' ', '*', 6}) || ft_isdigit(**fmt))
+	precision = NO_PRECISION;
+	flags = (t_flags) {0,0,0,0,0};
+	while (ft_is_in_a(**fmt, (int[6]){'.', '+', '-', '#', ' ', '*'}, 6) || ft_isdigit(**fmt))
 	{
-		// parse flags
 		flags = ft_merge(flags, ft_read_flags(fmt));
 		padding = ft_read_num(fmt, ap);
 		if (**fmt == '.')
 		{
-			*fmt = 1;
+			precision = 0;
+			*fmt += 1;
+			if (!ft_isdigit(**fmt))
+				continue;
 			precision = ft_read_num(fmt, ap);
 		}
-	}*/
-	// todo:: while loop for continuous flags padding . precision 
-	flags = ft_read_flags(fmt);
-	padding = ft_read_num(fmt, ap);
-	flags = ft_merge(flags, ft_read_flags(fmt));
-	precision = NO_PRECISION;
-	if (**fmt == '.')
-	{
-		precision = 0;
-		*fmt += 1;
-	//	if (**fmt != '0')
-		    qualifiers = (void*)*fmt;
-			while (ft_is_in_a(**fmt, (int[6]){'0','+','-','#',' ', '*'}, 6) || ft_isdigit(**fmt))
-			{
-				precision = ft_read_num(fmt, ap);
-				flags = ft_merge(flags, ft_read_flags(fmt));
-			}
-			if (precision < 0 && precision != NO_PRECISION)
-				padding = -precision;
-			printf("read precision: %i\n", precision);
-		}
-	else
-		precision = NO_PRECISION;
-    if (!(qualifiers = ft_read_qualifiers(fmt)))
+	}
+	if (!(qualifiers = ft_read_qualifiers(fmt)))
 		return (NULL);
 	return ((ft_is_specifier(specifier = **fmt) ? 
 	(ft_get_specifier(specifier))((t_specifier_state) {

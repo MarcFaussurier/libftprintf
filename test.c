@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/06 19:19:11 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 07:50:49 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -525,8 +525,6 @@ int         z = 6;
 (test(&n, "%.s", "ddd"));
 (test(&n, "%.0s", "ddd"));
 (test(&n, "%.1s", "ddd"));
-long long i = -10000000000001;//ULONG_LONG_MAX;
-ft_printf("%llb (%zu)\n", &i, sizeof(long long));
 (test(&n, "%.+1d", 'a'));
 (test(&n, "%10.2d", 'a'));
 (test(&n, "%-010.+6d", 'a'));

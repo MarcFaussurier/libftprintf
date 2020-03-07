@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 08:21:54 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 09:07:09 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ static char*	        ft_read_qualifiers(char const **fmt)
 
 	i = 0;
     o = NULL;
-    while (!ft_is_specifier(**fmt) && **fmt && ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
+    while (**fmt && !ft_is_specifier(**fmt)  && ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
 		if (!ft_lststradd(&o, ft_strdup((char[2]){ *(*fmt)++, 0})))
         {
             ft_lstclear(&o, &free);
@@ -79,7 +79,7 @@ static char*	        ft_read_qualifiers(char const **fmt)
 }
 
 
-static t_flags	ft_merge(t_flags a, t_flags b)
+static t_flags	ft_merge_flags(t_flags a, t_flags b)
 {
 	return ((t_flags) {
 		.minus = (a.minus | b.minus),
@@ -94,7 +94,6 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 {
 	t_flags		flags;
 	char		*qualifiers;
-	char		specifier;
 	int			precision;
 	int			padding;
 
@@ -103,7 +102,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	flags = (t_flags) {0,0,0,0,0};
 	while (ft_is_in_a(**fmt, (int[6]){'.', '+', '-', '#', ' ', '*'}, 6) || ft_isdigit(**fmt))
 	{
-		flags = ft_merge(flags, ft_read_flags(fmt));
+		flags = ft_merge_flags(flags, ft_read_flags(fmt));
 		padding = ft_read_num(fmt, ap);
 		if (**fmt == '.')
 		{
@@ -116,14 +115,14 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	}
 	if (!(qualifiers = ft_read_qualifiers(fmt)))
 		return (NULL);
-	return ((ft_is_specifier(specifier = **fmt) ? 
-	(ft_get_specifier(specifier))((t_specifier_state) {
+	return ((ft_is_specifier(**fmt) ? 
+	(ft_get_specifier(**fmt))((t_specifier_state) {
     		.flags=flags,
 			.qualifiers=qualifiers,
-			.specifier=specifier,
+			.specifier=*(*fmt)++,
         	.padding=padding, 
         	.precision=precision, 
         	.no=no,
             .nulls=nulls,
-    	}, ap) + ((*fmt)++ && 0) : ft_strdup("")) + ft_free(qualifiers, 0));
+    	}, ap) : NULL) + ft_free(qualifiers, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 07:50:49 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 09:06:53 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -163,7 +163,8 @@ int         z = 6;
  	test(&n, "%12.2slol\n", NULL);
 	test(&n, "%--8.10slol\n", NULL);
 	test(&n, "%8.10s\n", NULL);
-	test(&n, "%*.*slol\n", -16, 3, NULL);
+	printf("%.*slol\n", -16, 3, NULL);
+	test(&n, "%.*slol\n", 16, 3, NULL);
 	test(&n, "%*.*hilol\n", -16, 2, 4242);
 	test(&n, "%*.*hhulol\n", -16, 2, INT_MAX);
 	test(&n, "%0-*.*c		%n	lol\n", -10, -5, 'q', &t4);
@@ -517,6 +518,7 @@ int         z = 6;
 (test(&n, "%.010d", 9));
 (test(&n, "%10.2s", "hello world"));
 (test(&n, "%10.2lhhh#s", "hello world"));
+(test(&n, "%10.2lhhhzzs", "hello world"));
 (test(&n, "%10.2s", "hello world"));
 (test(&n, "%-10.0#+-0s", "hello"));
 (test(&n, "%.-#101.101s", "ddd"));

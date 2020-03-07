@@ -9,13 +9,10 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
     int         len;
     t_null      *n;
 
-    if (!input)
-		return (NULL);
 	i = 0;
     y = 0;
     if (state.precision < 0 && state.precision != NO_PRECISION)
         state.precision = 0;
-    
     if (state.padding < 0)
     {
         state.padding = -state.padding;
@@ -24,6 +21,8 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
     }
     if (type == NUMBER || type == PREFIXED_NUMBER || type == FLOAT_NUMBER)
     {
+		if (!input)
+			return (NULL);
         if (state.flags.minus || (state.precision != NO_PRECISION && state.padding))
             state.flags.zero = 0;
         len = ft_strlen(input);
@@ -88,8 +87,8 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
     else if (type == STRING)
     {
         if (!input)
-            input = "(null)";
-        if (state.precision == NO_PRECISION)
+			input = "(null)";
+		if (state.precision == NO_PRECISION)
             state.precision = ft_strlen(input);
         len = ft_strnlen(input, state.precision);
         o = malloc(state.padding + len + 1);
@@ -104,6 +103,8 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
     }
     else if (type == CHAR)
     {
+		if (!input)
+			return (NULL);
         len = 1;
         o = malloc((state.padding > 1 ? state.padding : 1) + 1);
         if (!state.flags.minus)

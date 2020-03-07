@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 09:07:09 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 09:13:45 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,7 +67,7 @@ static char*	        ft_read_qualifiers(char const **fmt)
 
 	i = 0;
     o = NULL;
-    while (**fmt && !ft_is_specifier(**fmt)  && ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
+    while (!ft_is_specifier(**fmt) && **fmt && ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
 		if (!ft_lststradd(&o, ft_strdup((char[2]){ *(*fmt)++, 0})))
         {
             ft_lstclear(&o, &free);
@@ -96,6 +96,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	char		*qualifiers;
 	int			precision;
 	int			padding;
+	char		specifier;
 
 	padding = 0;
 	precision = NO_PRECISION;
@@ -115,11 +116,11 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	}
 	if (!(qualifiers = ft_read_qualifiers(fmt)))
 		return (NULL);
-	return ((ft_is_specifier(**fmt) ? 
-	(ft_get_specifier(**fmt))((t_specifier_state) {
+	return ((ft_is_specifier(specifier = *(*fmt)++) ? 
+	(ft_get_specifier(specifier))((t_specifier_state) {
     		.flags=flags,
 			.qualifiers=qualifiers,
-			.specifier=*(*fmt)++,
+			.specifier=specifier,
         	.padding=padding, 
         	.precision=precision, 
         	.no=no,

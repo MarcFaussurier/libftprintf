@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 10:58:37 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 09:03:05 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 09:51:46 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -43,7 +43,8 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
         	i[b] = 0;
 		}
 		o = ft_stoa(state, STRING, i);
-        free(i);
+        if (i)
+			free(i);
         return (o);
     }
     o = va_arg(ap, char *);

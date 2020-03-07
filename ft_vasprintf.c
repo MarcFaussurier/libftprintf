@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:39:04 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 09:07:41 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 09:11:56 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,7 +69,7 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
             if (!ft_lststradd(&str, ft_substr(prev, 0, (fmt - 1) - prev)) ||
                 !ft_lststradd(&str, ft_argtoa(&fmt, ap, oi, &nulls)))
 	    {
-			*ob = ft_strdup("(null)");
+			*ob = ft_strdup("");
 		    return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
 	    }
 	    prev = (void*)fmt;
@@ -84,7 +84,7 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
    {
         if (*ob)
             free(*ob);
-       *ob = ft_strdup("(null)");
+       *ob = ft_strdup("");
    }
    ft_lstclear(&str, &free);
     ft_lstclear(&nulls, &free);

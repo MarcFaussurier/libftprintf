@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 09:06:53 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/07 09:51:18 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -163,8 +163,7 @@ int         z = 6;
  	test(&n, "%12.2slol\n", NULL);
 	test(&n, "%--8.10slol\n", NULL);
 	test(&n, "%8.10s\n", NULL);
-	printf("%.*slol\n", -16, 3, NULL);
-	test(&n, "%.*slol\n", 16, 3, NULL);
+	test(&n, "%*.*slol\n", 16, 3, NULL);
 	test(&n, "%*.*hilol\n", -16, 2, 4242);
 	test(&n, "%*.*hhulol\n", -16, 2, INT_MAX);
 	test(&n, "%0-*.*c		%n	lol\n", -10, -5, 'q', &t4);

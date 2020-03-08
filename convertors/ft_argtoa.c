@@ -116,8 +116,8 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 			precision = ft_read_num(fmt, ap);
 		}
 		if (!(swp = ft_read_qualifiers(fmt)))
-			return (NULL);
-		else if (ft_strlen(swp))
+			return ((void*)(size_t)(0+ft_free(qualifiers, 0)));
+		else if (ft_strlen(swp) || ft_free(swp, 0))
 		{
 			if (qualifiers)
 				free(qualifiers);
@@ -125,8 +125,8 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 		}
 	}
 	if (!(swp = ft_read_qualifiers(fmt)))
-		return (NULL);
-	else if (ft_strlen(swp))
+		return ((void*)(size_t)(0+ft_free(qualifiers, 0)));
+	else if (ft_strlen(swp) || ft_free(swp, 0))
 	{
 		if (qualifiers)
 			free(qualifiers);

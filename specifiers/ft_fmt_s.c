@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 10:58:37 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/09 15:08:40 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/09 15:09:38 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,6 +52,5 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
     	o = va_arg(ap, char *);
 		return (ft_stoa(state, STRING, o));
 	}
-	printf("qualifiers: %s\n", state.qualifiers);
 	return (NULL);
 }

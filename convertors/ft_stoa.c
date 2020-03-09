@@ -59,11 +59,12 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
         }
         if (state.precision == NO_PRECISION)
             state.precision = len;
+        o = malloc(state.padding + state.precision  + ft_strlen(input) + 10);
+
         if ( len > state.precision)
             state.precision = len;
         state.padding -= state.precision;
-        o = malloc(state.padding + state.precision  + ft_strlen(input) + 10);
-        if (!(state.flags.minus || state.flags.zero))
+		if (!(state.flags.minus || state.flags.zero))
             while (state.padding-- > 0)
                 o[i++] = ' ';
 		if (sign)

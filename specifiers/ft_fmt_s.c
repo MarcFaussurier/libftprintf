@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/07 10:58:37 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 09:51:46 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/09 15:08:40 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,7 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
 
     if (!ft_strncmp(state.qualifiers, "l", 2))
     {
-        y = va_arg(ap, wchar_t *);
+		y = va_arg(ap, wchar_t *);
 		b = 0;
 		i = NULL;
 		if (y)
@@ -30,8 +30,8 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
 			while (y[b])
     	    {
         	    if (y[b] > UCHAR_MAX)
-                	return (NULL);
-            	b += 1;
+					return (NULL);
+				b += 1;
         	}
 			i = malloc(b + 1);
 			b = 0;
@@ -47,6 +47,11 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
 			free(i);
         return (o);
     }
-    o = va_arg(ap, char *);
-	return (ft_stoa(state, STRING, o));
+	else if (!ft_strlen(state.qualifiers) || !ft_strncmp(state.qualifiers, "ll", 3) || !ft_strncmp(state.qualifiers, "h", 1))
+	{
+    	o = va_arg(ap, char *);
+		return (ft_stoa(state, STRING, o));
+	}
+	printf("qualifiers: %s\n", state.qualifiers);
+	return (NULL);
 }

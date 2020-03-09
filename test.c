@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 10:39:52 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/09 15:08:51 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -184,7 +184,11 @@ int         z = 6;
     test(&n, "%hhhhhhhhi", LLONG_MAX);
     test(&n, "%zzwwwi", LLONG_MAX);
 	test(&n, "%zzwwwi", LLONG_MAX);
-	test(&n, "%hhx %hhhhlll %llllllllllllllhhhhhu %lllhhhhhl %hhhhhhhhlllllhhhl  %hhhhhhhhhl %lllllhhhhh ", LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX);
+	(test(&n, "%hhh100#zo", "hello world"));
+	test(&n, "%lhhlllllls", (void*)"hello world");
+	test(&n, "%hhhhll#s", "hello");
+	test(&n, "%hhhh#s", "hello");
+	test(&n, "%hhhhlll %llllllllllllllhhhhhu %lllhhhhhl %hhhhhhhhlllllhhhl  %hhhhhhhhhl %lllllhhhhh ", LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX, LLONG_MAX);
 	test(&n, "%0.0hhh#x     ", LLONG_MAX);
 	test(&n, "%zzzzzu", ULONG_LONG_MAX);
     test(&n, "%lllllllllllllllx", LLONG_MAX);
@@ -520,6 +524,8 @@ int         z = 6;
 (test(&n, "%.010d", 9));
 (test(&n, "%10.2s", "hello world"));
 (test(&n, "%10.2lhhh#s", "hello world"));
+(test(&n, "%llu == %llu ?", ULONG_MAX, ULLONG_MAX));
+(test(&n, "%hhhhhhhhu == %llu ?", ULONG_MAX, ULLONG_MAX));
 (test(&n, "%10.2lhhhzzs", "hello world"));
 (test(&n, "%10.2s", "hello world"));
 (test(&n, "%-10.0#+-0s", "hello"));
@@ -546,7 +552,6 @@ int         z = 6;
 (test(&n, "%010.+- 5d", 'a'));
 (test(&n, "%010. + - + - 5d", 'a'));
 (test(&n, "%010.6s", "97"));
-
 return (exitmsg(n));
 (test(&n, "%.0d", 0));
 (test(&n, "%0.d", 0));

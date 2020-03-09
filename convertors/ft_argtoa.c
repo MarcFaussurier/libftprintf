@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/07 10:32:26 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/09 15:04:09 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,18 +64,29 @@ static char*	        ft_read_qualifiers(char const **fmt)
 	char                *qualifiers;
 	unsigned char		i;
     t_list              *o;
+	char				max;
+	unsigned char		y;
 
 	i = 0;
     o = NULL;
-    while (ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4))
-		if (!ft_lststradd(&o, ft_strdup((char[2]){ *(*fmt)++, 0})))
-        {
-            ft_lstclear(&o, &free);
-            return (NULL);
-        }
-    qualifiers = ft_lststrjoin((o));
-    ft_lstclear(&o, &free);
-    return (qualifiers);
+	max = 0;
+	y = 0;
+	while (ft_is_in_a(**fmt, (int[4]){'l', 'h', 'z', 'L'}, 4) && ++i)
+	{
+		if (**fmt == 'l')
+			y += 1;
+		if (**fmt > max)
+			max = **fmt;
+		*fmt += 1;	
+	}
+	qualifiers = malloc(3);
+	qualifiers[0] = max;
+	if (max == 'h')
+		qualifiers[1] = !(i % 2) ? 'h' : 0;
+	else
+		qualifiers[1] = !(y % 2) ? 'l' : 0;
+	qualifiers[2] = 0;
+	return (qualifiers);
 }
 
 
@@ -103,10 +114,11 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	precision = NO_PRECISION;
 	flags = (t_flags) {0,0,0,0,0};
 	qualifiers = NULL;
-	while (ft_is_in_a(**fmt, (int[6]){'.', '+', '-', '#', ' ', '*'}, 6) || ft_isdigit(**fmt))
+	while (ft_is_in_a(**fmt, (int[10]){'.', '+', '-', '#', ' ', '*', 'l', 'h', 'z', 'L'}, 10) || ft_isdigit(**fmt))
 	{
 		flags = ft_merge_flags(flags, ft_read_flags(fmt));
-		padding = ft_read_num(fmt, ap);
+		if (ft_isdigit(**fmt) || **fmt == '*')
+			padding = ft_read_num(fmt, ap) ;
 		if (**fmt == '.')
 		{
 			precision = 0;
@@ -123,14 +135,6 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 				free(qualifiers);
 			qualifiers = swp;
 		}
-	}
-	if (!(swp = ft_read_qualifiers(fmt)))
-		return ((void*)(size_t)(0+ft_free(qualifiers, 0)));
-	else if (ft_strlen(swp) || ft_free(swp, 0))
-	{
-		if (qualifiers)
-			free(qualifiers);
-		qualifiers = swp;
 	}
 	if (!qualifiers)
 		qualifiers = ft_strdup("");

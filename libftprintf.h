@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/05 14:23:13 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/09 14:09:21 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -167,8 +167,8 @@ t_bool                              ft_lststradd(t_list **, char *);
 t_list                              *ft_lststrnew(unsigned int, ...);
 t_list                              *ft_vlststrnew(unsigned int, va_list);
 char                                *ft_wchar_to_utf(wchar_t);
-char                                *ft_numtoa(t_specifier_state, va_list, const char *, t_bool);
-char                                *ft_unumtoa(t_specifier_state, va_list, const char *, t_bool);
+char                                *ft_numtoa(t_specifier_state, va_list, const char *, char *);
+char                                *ft_unumtoa(t_specifier_state, va_list, const char *, char *);
 char                                *ft_strnew(unsigned int, ...);
 char                                *ft_vstrnew(unsigned int, va_list);
 char                                *ft_lststrjoin(t_list*);

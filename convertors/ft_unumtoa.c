@@ -1,6 +1,6 @@
 #include <libftprintf.h>
 
-char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, t_bool prefix)
+char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, char *prefix)
 {
 	char		*num;
 	char		*out;
@@ -38,10 +38,7 @@ char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, 
     if (prefix && state.flags.sharp)
     {
         t = PREFIXED_NUMBER;
-        if (ft_isupper(state.specifier))
-            swp = ft_strjoin("0X", num);
-        else
-            swp = ft_strjoin("0x", num);
+        swp = ft_strjoin(prefix, num);
         free(num);
     }
     else

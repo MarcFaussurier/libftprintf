@@ -12,7 +12,7 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
 	i = 0;
     y = 0;
     if (state.precision < 0 && state.precision != NO_PRECISION)
-        state.precision = 0;
+        state.precision = NO_PRECISION;
     if (state.padding < 0)
     {
         state.padding = -state.padding;
@@ -89,7 +89,7 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
         while(state.padding-- > 0)
             o[i++] = ' ';
     }
-    else if (type == STRING)
+    else if (type == STRING || type == WSTRING)
     {
         if (!input)
 			input = "(null)";
@@ -102,8 +102,15 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
 				o[i++] = state.flags.zero ? '0' : ' ';
         y = 0;
         while (y++ < len)
-				o[i++] = *input++;
-		while ( len < state.padding--)
+        {
+		        if (type == WSTRING && *input == -42)
+                {
+                    free(o);
+                    return (NULL);
+                }
+                o[i++] = *input++;
+        }
+        while ( len < state.padding--)
 				o[i++] = ' ';
     }
     else if (type == CHAR)

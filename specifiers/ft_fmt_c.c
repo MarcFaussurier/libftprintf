@@ -21,7 +21,7 @@ char			*ft_fmt_c(t_specifier_state state, va_list ap)
     if (!ft_strncmp(state.qualifiers, "l", 2))
     {
         y = va_arg(ap, wchar_t);
-        if (y > UCHAR_MAX)
+        if (y > UCHAR_MAX || y < 0)
             return (NULL);
         return (ft_stoa(state, CHAR, (char[2]) {y, '\0'}));
     }

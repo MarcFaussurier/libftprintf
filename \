@@ -19,7 +19,6 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
     char        *o;
     wchar_t     *y;
     size_t      b;
-    size_t      z;
 
     if (!ft_strncmp(state.qualifiers, "l", 2))
     {
@@ -30,24 +29,20 @@ char			*ft_fmt_s(t_specifier_state state, va_list ap)
 		{
 			while (y[b])
     	    {
-        	    //if (y[b] > UCHAR_MAX || y[b] < 0)
-			//		break;
+        	//    if (y[b] > UCHAR_MAX)
+			//		return (NULL);
 				b += 1;
         	}
-			i = malloc(b + 1);
-			z = b;
-            b = 0;
+			i = malloc(b * 4 + 1);
+			b = 0;
         	while (y[b])
         	{
-                if (y[b] > UCHAR_MAX || y[b] < 0)
-                    i[b] = -42;
-                else
-                    i[b] = y[b];
+            	i[b] = y[b];
             	b += 1;
-            }
+        	}
         	i[b] = 0;
 		}
-		o = ft_stoa(state, WSTRING, i);
+		o = ft_stoa(state, STRING, i);
         if (i)
 			free(i);
         return (o);

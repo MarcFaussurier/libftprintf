@@ -147,5 +147,6 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
         	.precision=precision, 
         	.no=no,
             .nulls=nulls,
-    	}, ap) + (++*fmt && 0) : ft_strdup("")) + ft_free(qualifiers, 0));
+    	    .force_prefix=FALSE,
+        }, ap) + (++*fmt && 0) : ft_strdup("")) + ft_free(qualifiers, 0));
 }

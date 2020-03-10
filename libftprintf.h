@@ -52,6 +52,7 @@ typedef enum                        e_fmt_types
     NUMBER,
     PREFIXED_NUMBER,
     FLOAT_NUMBER,
+    WSTRING,
     STRING,
     CHAR
 }                                   t_fmt_type;
@@ -143,6 +144,7 @@ typedef struct      	            s_specifier_state
     int                             precision;
     int				                no;
     t_list                          **nulls;
+    t_bool                          force_prefix;
 }                   	            t_specifier_state;
 typedef char*		                (*t_specifier)(t_specifier_state, va_list);
 typedef struct		                s_assoc_specifier

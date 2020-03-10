@@ -35,7 +35,7 @@ char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, 
 	if (!num)
 		return (NULL);
 	t = NUMBER;
-    if (prefix && state.flags.sharp)
+    if ((state.force_prefix || num[0] != '0') && prefix && state.flags.sharp)
     {
         t = PREFIXED_NUMBER;
         swp = ft_strjoin(prefix, num);

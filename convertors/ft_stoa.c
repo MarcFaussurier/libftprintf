@@ -23,7 +23,11 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
     {
         if (!input)
 			return (NULL);
-		if (state.flags.minus || (state.precision != NO_PRECISION && state.padding))
+        if (type == NUMBER && (!state.precision) && input[0] == '0')
+        {
+            input = "";
+        }
+        if (state.flags.minus || (state.precision != NO_PRECISION && state.padding))
             state.flags.zero = 0;
         len = ft_strlen(input);
         sign = 0;

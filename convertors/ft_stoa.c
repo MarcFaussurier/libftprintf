@@ -24,12 +24,12 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
         if (!input)
 			return (NULL);
         if (type == NUMBER && (!state.precision) && input[0] == '0')
-        {
             input = "";
-        }
-        if (state.flags.minus || (state.precision != NO_PRECISION && state.padding))
+		//  if (type == PREFIXED_NUMBER && input[1] == '0' && state.precision == NO_PRECISION)
+	//		input = "0";
+		if (state.flags.minus || (state.precision != NO_PRECISION && state.padding))
             state.flags.zero = 0;
-        len = ft_strlen(input);
+		len = ft_strlen(input);
         sign = 0;
         if (input[0] == '-')
         {

@@ -24,7 +24,7 @@ char            *ft_numtoa(t_specifier_state state, va_list ap, const char *b, c
 	if (!num)
 		return (NULL);
 	t = NUMBER;
-    if (num[0] != '0' && prefix && state.flags.sharp)
+    if ((state.force_prefix || num[0] != '0') && prefix && state.flags.sharp)
     {
         swp = ft_strjoin(prefix, num);
         free(num);

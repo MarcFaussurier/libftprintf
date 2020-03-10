@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 09:52:15 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/09 15:04:09 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/10 18:29:58 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,6 +33,8 @@ static t_flags	ft_read_flags(char const **fmt)
 			o.sharp = 1;
 		else if (c == ' ')
 			o.space = 1;
+		else if (c == '\'')
+			;	
 		else
         {
             *fmt -= 1;
@@ -114,7 +116,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	precision = NO_PRECISION;
 	flags = (t_flags) {0,0,0,0,0};
 	qualifiers = NULL;
-	while (ft_is_in_a(**fmt, (int[10]){'.', '+', '-', '#', ' ', '*', 'l', 'h', 'z', 'L'}, 10) || ft_isdigit(**fmt))
+	while (ft_is_in_a(**fmt, (int[11]){'\'', '.', '+', '-', '#', ' ', '*', 'l', 'h', 'z', 'L'}, 11) || ft_isdigit(**fmt))
 	{
 		flags = ft_merge_flags(flags, ft_read_flags(fmt));
 		if (ft_isdigit(**fmt) || **fmt == '*')
@@ -137,7 +139,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 		}
 	}
 	if (!qualifiers)
-		qualifiers = ft_strdup("");
+		qualifiers = ft_calloc(3, 1);
 	return ((ft_is_specifier(specifier = **fmt) ? 
 	(ft_get_specifier(specifier))((t_specifier_state) {
     		.flags=flags,

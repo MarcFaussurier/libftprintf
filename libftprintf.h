@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/09 14:09:21 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/03/10 18:30:02 by mfaussur    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,7 +22,6 @@
 # define b16 "0123456789abcdef"
 # define B2 b2
 # define B8 b8
-# define B9 b9
 # define B10 b10
 # define B16 "0123456789ABCDEF"
 # ifndef LDMAXPRECISION

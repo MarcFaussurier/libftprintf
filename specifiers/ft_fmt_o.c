@@ -2,5 +2,9 @@
 
 char        *ft_fmt_o(t_specifier_state state, va_list ap)
 {
-	return (ft_unumtoa(state, ap, b8, (char[2]){'0',0}));
+	if (state.flags.sharp && state.precision != NO_PRECISION)
+    {
+        state.precision -= 1;
+    }
+    return (ft_unumtoa(state, ap, b8, "0"));
 }

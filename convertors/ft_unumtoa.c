@@ -24,7 +24,7 @@ char            *ft_unumtoa(t_specifier_state state, va_list ap, const char *b, 
 	if (!num)
 		return (NULL);
 	t = NUMBER;
-	if (num[0] == '0' && prefix && prefix[1] == '0' && !prefix[1] && state.flags.sharp)
+	if (num[0] == '0' && prefix && prefix[0] == '0' && !prefix[1] && state.flags.sharp)
 	{
 		state.flags.sharp = 0;
 		t = PREFIXED_NUMBER;

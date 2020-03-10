@@ -16,9 +16,8 @@ Reproduction of printf, with 64 bits int and 80 bits long double. Also implement
 * gcc ... -D LDMAXPRECISION=1024 ... compilation will modify the max precision that printf will use for handling long doubles.
 * all functions that exist with a larger type will use the one with a larger type for avoiding repetitions 
 * %Lf&nbsp;is different from original %Lf flag under macos when the decimal part of a long double exeeds 16-18 digits
-* %ls and %lc dont support unicode after a setlocale() because we are not allowed to rely on it, so I use the default behaviour and I dont rely on any utf conversion, maybe that I will later
+* %ls and %lc dont support unicode after a setlocale() because we are not allowed to rely on it, so I use the default behaviour and I dont rely on any utf conversion. No garbage in - garbage out.
 * %e %a %g are not present yet
 ### credits
 * reactos for modf algo: https://github.com/mirror/reactos/blob/master/reactos/lib/sdk/crt/math/modf.c
-* utf16/32 to utf8: https://stackoverflow.com/questions/148403/utf8-to-from-wide-cha
 

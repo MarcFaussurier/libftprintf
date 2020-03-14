@@ -8,5 +8,6 @@ int             ft_vdprintf(int fd, const char *fmt, va_list ap)
 	oi = ft_vasprintf(&ob, fmt, ap);
 	if (oi)
         ft_putmem_fd(fd, ob, oi);
-	return (oi);
+    free(ob);
+    return (oi);
 }

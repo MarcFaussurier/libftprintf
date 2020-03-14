@@ -6,7 +6,7 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
     char        sign;
     int         i;
     int         y;
-    int         len;
+    size_t      len;
     t_null      *n;
 
 	i = 0;
@@ -65,7 +65,7 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
             state.precision = len;
         o = malloc(state.padding + state.precision  + ft_strlen(input) + 10);
 
-        if ( len > state.precision)
+        if ( (long long) len > state.precision)
             state.precision = len;
         state.padding -= state.precision;
 		if (!(state.flags.minus || state.flags.zero))
@@ -82,7 +82,7 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
         if (!state.flags.minus)
             while (state.padding-- > 0)
                 o[i++] = state.flags.zero ? '0' : ' ';
-        while (len <  state.precision--)
+        while ((long long)len <  state.precision--)
             o[i++] = '0';
         while (len-- > 0)
             o[i++] = input[y++];
@@ -98,10 +98,10 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
         len = ft_strnlen(input, state.precision);
         o = malloc(state.padding + len + 1);
         if (!state.flags.minus || state.flags.zero)
-			while (len < state.padding--)
+			while ((long long) len < state.padding--)
 				o[i++] = state.flags.zero ? '0' : ' ';
         y = 0;
-        while (y++ < len)
+        while (y++ < (long long) len)
         {
 		        if (type == WSTRING && *input == -42)
                 {
@@ -110,7 +110,7 @@ char            *ft_stoa(t_specifier_state state, t_fmt_type type, char *input)
                 }
                 o[i++] = *input++;
         }
-        while ( len < state.padding--)
+        while ( (long long) len < state.padding--)
 				o[i++] = ' ';
     }
     else if (type == CHAR)

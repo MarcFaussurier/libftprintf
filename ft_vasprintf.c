@@ -49,10 +49,10 @@ static char         *ft_insert_nulls(t_list *str, t_list **nulls, char *s)
 
 int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
 {
-	int				oi;
     char            *prev;
     t_list          *str;
     t_list          *nulls;
+    int             oi;
 
 	if (!ft_boot_specifiers())
 		return (-ft_free_g_specifiers());
@@ -61,23 +61,22 @@ int					ft_vasprintf(char **ob, const char *fmt, va_list ap)
     str = NULL;
     *ob = NULL;
     prev = (char*)fmt;
-	oi = 0;
     nulls = NULL;
     while (*fmt)
-        if (*fmt++ == '%' && ++oi)
+        if (*fmt++ == '%')
         {
             if (!ft_lststradd(&str, ft_substr(prev, 0, (fmt - 1) - prev)) ||
-                !ft_lststradd(&str, ft_argtoa(&fmt, ap, oi, &nulls)))
+                !ft_lststradd(&str, ft_argtoa(&fmt, str, &nulls, ap)))
 	    {
 			*ob = ft_strdup("");
 		    return (-((!AT_EXIT && ft_free_g_specifiers()) || 1));
 	    }
 	    prev = (void*)fmt;
         }
-    if (prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev)))
+    if ((prev != fmt && !ft_lststradd(&str, ft_substr(prev, 0, fmt - prev))) || (!(*ob = ft_lststrjoin(str))))
         oi = -42;
     else
-        oi = (!(*ob = ft_lststrjoin(str))) ? -42 : ft_strlen(*ob);
+        oi = ft_strlen(*ob);
    if (oi > 0)
         *ob = ft_insert_nulls(str, &nulls, *ob);
    else

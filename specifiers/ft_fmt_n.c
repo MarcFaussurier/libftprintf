@@ -15,10 +15,13 @@
 
 char			*ft_fmt_n(t_specifier_state state, va_list ap)
 {
-	int			*ptr;
+    int         *ptr;
+    t_list      *str;
 
-	ptr = va_arg(ap, int*);
-	if (ptr)
-		*ptr = state.no;
-	return (ft_strdup(""));
+    str = state.str;
+    ptr = va_arg(ap, int*);
+    if (ptr && ((*ptr = 0) || 1))
+        while ((str && ((*ptr += ft_strlen((char*)str->content)) || 1)))
+            str = str->next;
+    return (ft_strdup(""));
 }

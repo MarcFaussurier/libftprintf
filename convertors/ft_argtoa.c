@@ -103,7 +103,7 @@ static t_flags	ft_merge_flags(t_flags a, t_flags b)
 	});
 }
 
-char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
+char			*ft_argtoa(char const **fmt, t_list *str, t_list **nulls, va_list ap)
 {
 	t_flags		flags;
 	char		*qualifiers;
@@ -116,7 +116,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 	precision = NO_PRECISION;
 	flags = (t_flags) {0,0,0,0,0};
 	qualifiers = NULL;
-	while (ft_is_in_a(**fmt, (int[11]){'\'', '.', '+', '-', '#', ' ', '*', 'l', 'h', 'z', 'L'}, 11) || ft_isdigit(**fmt))
+	while (ft_strchr("'.+-# *lhzL", **fmt) || ft_isdigit(**fmt))
 	{
 		flags = ft_merge_flags(flags, ft_read_flags(fmt));
 		if (ft_isdigit(**fmt) || **fmt == '*')
@@ -131,7 +131,8 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 		}
 		if (!(swp = ft_read_qualifiers(fmt)))
 			return ((void*)(size_t)(0+ft_free(qualifiers, 0)));
-		else if (ft_strlen(swp) || ft_free(swp, 0))
+		
+        else if (ft_strlen(swp) || ft_free(swp, 0))
 		{
 			if (qualifiers)
 				free(qualifiers);
@@ -147,7 +148,7 @@ char			*ft_argtoa(char const **fmt, va_list ap, int no, t_list **nulls)
 			.specifier=specifier,
         	.padding=padding, 
         	.precision=precision, 
-        	.no=no,
+        	.str=str,
             .nulls=nulls,
     	    .force_prefix=FALSE,
         }, ap) + (++*fmt && 0) : ft_strdup("")) + ft_free(qualifiers, 0));

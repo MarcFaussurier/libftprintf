@@ -1571,5 +1571,67 @@ printf("%i\n", np);
 (test(&n, "012%c3456%s789%%012%i3456%x789%u012%p456789%e012%f3456789%g0123456789%o01%lc3456%ls789%n012%c3456%s789%%012%i3456%x789%u012%p456789%e012%f3456789%g0123456789%o01%lc3456%ls789%n", 'A', "TEST", 42, 0x42, 42, (void*)42, 4.2, -4.2, 4.101, 042, 35211, y, &z, 'A', "TEST", -21, -0x21, 0, (void*)0x101, 4.2, -4.2, 4.101, 042, 35211, y, &z));
 ft_printf("%d\n", ft_printf("1string 1 %s string 2 %s\n", "toto", "bonjour"));
 printf("%d\n", printf("1string 1 %s string 2 %s\n", "toto", "bonjour"));
+
+int po;
+int pa;
+po = 0;
+pa = 0;
+char    *str;
+
+int     padding;
+
+padding = SHRT_MAX + 1;
+
+ft_asprintf(&str, "test <<  | hello %*s %lln %i | ", padding, NULL, &po, po);
+free(str);
+ft_asprintf(&str, "test <<  | hello %*s %lln %i | ", padding, NULL, &pa, pa);
+free(str);
+if (po != pa)
+    ft_printf("(lln) Error %i != %i \n", po, pa);
+else
+    ft_printf("(lln) Success %i == %i \n", po, pa);
+
+
+
+ft_asprintf(&str, "test <<  | hello %*s %ln %i | ", padding, NULL, &po, po);
+free(str);
+ft_asprintf(&str, "test <<  | hello %*s %ln %i | ", padding, NULL, &pa, pa);
+free(str);
+if (po != pa)
+    ft_printf("(l) Error %i != %i \n", po, pa);
+else
+    ft_printf("(l) Success %i == %i \n", po, pa);
+
+
+
+ft_asprintf(&str, "test <<  | hello %*s %n %i | ", padding, NULL, &po, po);
+free(str);
+ft_asprintf(&str, "test <<  | hello %*s %n %i | ", padding, NULL, &pa, pa);
+free(str);
+if (po != pa)
+    ft_printf("Error %i != %i \n", po, pa);
+else
+    ft_printf("Success %i == %i \n", po, pa);
+
+
+
+ft_asprintf(&str, "test <<  | hello %*s %hn %i | ", padding, NULL, &po, po);
+free(str);
+ft_asprintf(&str, "test <<  | hello %*s %hn %i | ", padding, NULL, &pa, pa);
+free(str);
+if (po != pa)
+    ft_printf("(h) Error %i != %i \n", po, pa);
+else
+    ft_printf("(h) Success %i == %i \n", po, pa);
+
+
+ft_asprintf(&str, "test <<  | hello %*s %hhun %i | ", padding, NULL, &po, po);
+free(str);
+ft_asprintf(&str, "test <<  | hello %*s %hhun %i | ", padding, NULL, &pa, pa);
+free(str);
+if (po != pa)
+    ft_printf("(hh) Error %i != %i \n", po, pa);
+else
+    ft_printf("(hh) Success %i == %i \n", po, pa);
 return exitmsg(n);
 }

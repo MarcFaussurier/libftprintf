@@ -139,11 +139,11 @@ typedef struct      	            s_specifier_state
     t_flags                         flags;
     char                            *qualifiers;
     char			                specifier;
-    int                             padding;
-    int                             precision;
-    int				                no;
+    long long                       padding;
+    long long                       precision;
     t_list                          **nulls;
     t_bool                          force_prefix;
+    t_list                          *str;
 }                   	            t_specifier_state;
 typedef char*		                (*t_specifier)(t_specifier_state, va_list);
 typedef struct		                s_assoc_specifier
@@ -226,7 +226,7 @@ char                                *ft_litoa(long int);
 char                                *ft_hitoa(short);
 char                                *ft_hhitoa(char);
 char		                        *ft_stoa(t_specifier_state, t_fmt_type, char *);
-char		                        *ft_argtoa(char const **, va_list, int, t_list**);
+char		                        *ft_argtoa(char const **, t_list *str, t_list **nulls, va_list ap);
 int                                 ft_vdprintf(int, const char *, va_list);
 int                                 ft_dprintf(int, const char *, ...);
 int	 	    	                    ft_printf(const char *, ...);

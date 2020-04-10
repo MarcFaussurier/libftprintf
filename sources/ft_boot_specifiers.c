@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_boot_convertors.c                             .::    .:/ .      .::   */
+/*   ft_boot_specifiers.c                               :+:      :+:    :+:   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 12:30:03 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/05 12:27:01 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/04/10 15:44:35 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ t_bool			ft_boot_specifiers()
     ft_register_specifier((t_assoc_specifier){'x', &ft_fmt_x});
     ft_register_specifier((t_assoc_specifier){'o', &ft_fmt_o});
     ft_register_specifier((t_assoc_specifier){'b', &ft_fmt_b});
-    //   ft_register_specifier((t_assoc_specifier){'f', &ft_fmt_f});
+    ft_register_specifier((t_assoc_specifier){'f', &ft_fmt_f});
 //    ft_register_specifier((t_assoc_specifier){'g', &ft_fmt_g});
     return (TRUE);
 }

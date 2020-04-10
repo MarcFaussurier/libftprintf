@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   libftprintf.h                                    .::    .:/ .      .::   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/10 18:30:02 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/04/10 12:02:00 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -99,26 +99,22 @@ typedef union                       u_long_double
     {
         union
         {
-            unsigned long long      value:              64;
+            unsigned long long      value:              63;
             struct
             {
                 unsigned long long  value:              62;
-                unsigned long long  y:                  1;
-                unsigned long long  i:                  1;
-            }                       s_bb;
-            struct
-            {
-                unsigned long long  value:              63;
                 unsigned long long  i:                  1;
             }                       s_b;
             struct
             {
-                unsigned long long  low:               32;
-                unsigned long long  high:              32;
-            }                       s_pair;
-        }                           u_mantisa;
-        unsigned long long          exponent:           15;
-        unsigned long long          sign:               1;
+                unsigned long long  value:              61;
+                unsigned long long  y:                  1;
+                unsigned long long  i:                  1;
+            }                       s_bb;
+        }                           u_fraction;
+        unsigned long long          integer_part:       1;
+        unsigned short int          exponent:           15;
+        unsigned short int          sign:               1;
     }                               s_parts;
 }                                   t_long_double;
 typedef struct		                s_flags

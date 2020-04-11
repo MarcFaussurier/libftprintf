@@ -5,6 +5,17 @@ int             main()
     long double n;
     long double p;
 
+    n = -229.4242;
+    printf("%Lf\n", ft_modfl(n, &p));
+
+    printf("%s\n", ft_modld_toa(n, &n, &p, b10));
+
+
+    /*
+
+    n = -229.42;
+    ft_printf("%Lf\n", n);
+    printf("%Lf | r=%Lf i=%Lf\n", n, ft_modfl(n, &p), p);
     n = 229;
     ft_printf("%Lf\n", n);
     printf("%Lf | r=%Lf i=%Lf\n", n, ft_modfl(n, &p), p);
@@ -38,4 +49,5 @@ int             main()
     n = 1299852221564.8458747;
     ft_printf("%Lf\n", n);
     printf("%Lf | r=%Lf i=%Lf\n", n, ft_modfl(n, &p), p);
+*/
 }

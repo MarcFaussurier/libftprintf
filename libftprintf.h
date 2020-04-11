@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/04/10 12:02:00 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/04/11 16:06:58 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -163,6 +163,8 @@ t_bool			                    ft_boot_specifiers();
 t_bool                              ft_lststradd(t_list **, char *);
 t_list                              *ft_lststrnew(unsigned int, ...);
 t_list                              *ft_vlststrnew(unsigned int, va_list);
+char                                *ft_modld_toa(long double n, long double *i, long double *r, const char *b);
+char                                *ft_read_decimal(long double n, const char *b, size_t bl);
 char                                *ft_wchar_to_utf(wchar_t);
 char                                *ft_numtoa(t_specifier_state, va_list, const char *, char *);
 char                                *ft_unumtoa(t_specifier_state, va_list, const char *, char *);

@@ -25,6 +25,7 @@ char            *ft_read_decimal(long double n, const char *b, size_t bl)
         k -= c * ft_pow(bl, -s);
         s += 1;
     }
+    printf("number of digits afterdot: %zu\n", s);
     out = malloc(s + 2);
 	k = n;
     s = 1;
@@ -52,7 +53,7 @@ char            *ft_modld_toa(long double n, long double *i, long double *r, con
 
     o[1] = ".";
 
-    bl = b ? ft_strlen(b) : 0;
+    bl = b ? ft_strlen(b) : 10;
     if (n == 1)
     {
         *i = 1;
@@ -78,7 +79,7 @@ char            *ft_modld_toa(long double n, long double *i, long double *r, con
     while (k >= 1)
     {
         p += 1;
-        k = k / 10;
+        k = k / bl;
     }
     s = p;
     if (b)
@@ -93,12 +94,10 @@ char            *ft_modld_toa(long double n, long double *i, long double *r, con
     k = n;
     while (s >= 0)
     {
-        e = ft_pow(10, s);
+        e = ft_pow(bl, s);
         c = k / e;
         if (b)
-        {
             o[0][p - s] = b[c];
-        }
         k -= c * e;
         s -= 1;
     }

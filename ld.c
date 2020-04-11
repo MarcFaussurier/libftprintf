@@ -2,15 +2,26 @@
 
 int             main()
 {
+    long double   x;
     long double n;
     long double p;
 
-    n = -229.4242;
-    printf("%Lf\n", ft_modfl(n, &p));
+    x = -229.4242;
+    printf("%Lf | %Lf\n", ft_modfl(x, &p));
 
-    printf("%s\n", ft_modld_toa(n, &n, &p, b10));
+    printf("%s | %.257Lf\n", ft_modld_toa(x, &n, &p, b10), x);
+    printf("%s\n", ft_modld_toa(x, &n, &p, b16));
+    
+    x = -229.4243;
+    printf("%Lf\n", ft_modfl(x, &p));
 
-
+    printf("%s | %.257Lf\n", ft_modld_toa(x, &n, &p, b10), x);
+    printf("%s\n", ft_modld_toa(x, &n, &p, b16));
+    char *s;
+    asprintf(&s, "%.10La\n", x);
+    printf("x: %Lf | s: %s\n", x, s);
+    sscanf(s, "%La", &x);
+    printf("%Lf\n", x);
     /*
 
     n = -229.42;

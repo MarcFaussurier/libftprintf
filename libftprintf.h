@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/04/11 16:06:58 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/05/25 14:45:30 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -170,6 +170,7 @@ char                                *ft_numtoa(t_specifier_state, va_list, const
 char                                *ft_unumtoa(t_specifier_state, va_list, const char *, char *);
 char                                *ft_strnew(unsigned int, ...);
 char                                *ft_vstrnew(unsigned int, va_list);
+char                                *ft_strrev(char *str);
 char                                *ft_lststrjoin(t_list*);
 char                                *ft_wchar_to_UTF8(wchar_t*);
 long double                         ft_pow(long double, short);

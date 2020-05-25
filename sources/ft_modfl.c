@@ -11,11 +11,7 @@ char            *ft_read_decimal(long double n, const char *b, size_t bl)
 	if (n == (long double) 0)
         return (ft_strdup("0"));
     if (n >= 1 || n < 0)
-    {
-        printf("inputerror ft_rd:14 %Lf\n", n);
         return (ft_strdup("ERROR INVALID INPUT"));
-    }
-    printf("printing decimal... %Lf\n", n);
     bl = ft_strlen(b);
     k = n;
     s = 1;
@@ -23,14 +19,13 @@ char            *ft_read_decimal(long double n, const char *b, size_t bl)
     {
         c = k * ft_pow(bl, s);
         k -= c * ft_pow(bl, -s);
-        s += 1;
-    }
-    printf("number of digits afterdot: %zu\n", s);
-    out = malloc(s + 2);
-	k = n;
-    s = 1;
+        s += 1;                                         
+    }                                                   
+    out = malloc(s + 2);                                
+    k = n;                                              
+    s = 1;                                              
     while (k != ((long double) 0) && s <= LDMAXPRECISION)
-    {
+    {                                                   
         c = k * ft_pow(bl, s);
         out[s - 1] = b[c];
         k -= c * ft_pow(bl, -s);
@@ -51,8 +46,8 @@ char            *ft_modld_toa(long double n, long double *i, long double *r, con
     t_bool          isn;
     char            *o[4];
 
+    isn = FALSE;
     o[1] = ".";
-
     bl = b ? ft_strlen(b) : 10;
     if (n == 1)
     {
@@ -90,7 +85,6 @@ char            *ft_modld_toa(long double n, long double *i, long double *r, con
         if (isn)
             o[0][0] = '-';
     }
-
     k = n;
     while (s >= 0)
     {

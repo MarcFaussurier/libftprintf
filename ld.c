@@ -7,7 +7,7 @@ int             main()
     long double p;
 
     x = -229.4242;
-    printf("%Lf | %Lf\n", ft_modfl(x, &p));
+   // printf("%Lf | %Lf\n", ft_modfl(x, &p));
 
     printf("%s | %.257Lf\n", ft_modld_toa(x, &n, &p, b10), x);
     printf("%s\n", ft_modld_toa(x, &n, &p, b16));
@@ -22,6 +22,7 @@ int             main()
     printf("x: %Lf | s: %s\n", x, s);
     sscanf(s, "%La", &x);
     printf("%Lf\n", x);
+    ft_printf("ok %Lf", (long double) 0.42L);
     /*
 
     n = -229.42;

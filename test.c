@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   test.c                                           .::    .:/ .      .::   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/03/10 18:35:14 by mfaussur    ###    #+. /#+    ###.fr     */
+/*   Updated: 2020/05/25 15:18:09 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -1545,24 +1545,27 @@ test(&n, "neg8 %*.*s\n", -1586, 15, "coucou");
 test(&n, "neg9 %*.*s\n", 15856, 155, "coucou");
 test(&n, "neg10 %*.*s\n", -15586, 15, "coucou");
 test(&n, "neg11 %*.*s\n", -15586, 15, "coucou");
-test(&n, "neg1 %*d\n", -9, 150);
-test(&n, "neg2 %*.*d\n", -9, 4, 1555);
+test(&n, "neg1 %*d\n", -9, 150);             
+test(&n, "neg2 %*.*d\n", -9, 4, 1555);       
 test(&n, "neg3 %*d\n", -9, -255);
-test(&n, "neg4 %*.*d\n", 0, 0, -30);
-test(&n, "neg5 %*d\n", -100, -589);
-test(&n, "neg6 %*d\n", -156, 15555);
-test(&n, "neg7 %*.*d\n", -1586, 15, 0);
-test(&n, "neg8 %*.*d\n", -1586, 15, 300);
-test(&n, "neg9 %*.*d\n", 15856, 155, -3000);
-test(&n, "neg10 %*.*d\n", -15586, 15, 150);
-test(&n, "neg11 %*.*d\n", -15586, 15, 0);
+test(&n, "neg4 %*.*d\n", 0, 0, -30);         
+test(&n, "neg5 %*d\n", -100, -589);          
+test(&n, "neg6 %*d\n", -156, 15555);         
+test(&n, "neg7 %*.*d\n", -1586, 15, 0);      
+test(&n, "neg8 %*.*d\n", -1586, 15, 300);    
+test(&n, "neg9 %*.*d\n", 15856, 155, -3000);                   
+test(&n, "neg10 %*.*d\n", -15586, 15, 150);                    
+test(&n, "neg11 %*.*d\n", -15586, 15, 0);                      
 test(&n, "***************%*s%*d**************%*u*************\n", 10, "coucou", 10, 10, -50, 20);
-test(&n, "taaa %100s\n", "hello");
-int np;
-np = 0;
-printf("%s %s %*s %hhn  \n", NULL,NULL, 5000000, NULL, &np);
-printf("%i\n", np);
-
+test(&n, "taaa %100s\n", "hello");                             
+int np;                                                        
+np = 0;                                                        
+printf("%s %s %*s %hhn  \n", NULL,NULL, 5000000, NULL, &np);   
+printf("%i\n", np);                          
+(test(&n, "ok %Lf", (long double)0.42L));    
+(test(&n, "ok %Lf", (long double)0.99999999999998L));    
+(test(&n, "ok %Lf", (long double)0.4255555555555555555555555555555555555L));
+(test(&n, "ok %Lf", (long double)0.4222222222222222222222222222222222222L));
 (test(&n, "|%#01o| |%#0.10o| |%#010o| |%#0-10o| |%#0+10o| |%#0+10.o| |%#0-10.o|\n", 0, 0, 0, 0, 0, 0, 0));
 (test(&n, "|%#01.o| |%02.o| |%-03.o| |%1.o| |%2.o| |%-.1o| |%-.2o|\n", 0, 0, 0, 0, 0, 0, 0));
 (test(&n, "|%+- +-0#+ -0 +0 -+ +0+ -+-+# 0+0-0+0-#0+ 0+ 15.8o| : %%+- +-0#+ -0 +0 -+ +0+ -+-+# 0+0-0+0-#0+ 0+ 15.8o\n", nbr));
@@ -1625,9 +1628,9 @@ else
     ft_printf("(h) Success %i == %i \n", po, pa);
 
 
-ft_asprintf(&str, "test <<  | hello %*s %hhun %i | ", padding, NULL, &po, po);
+ft_asprintf(&str, "test <<  | hello %*s %hhn %i | ", padding, NULL, &po, po);
 free(str);
-ft_asprintf(&str, "test <<  | hello %*s %hhun %i | ", padding, NULL, &pa, pa);
+ft_asprintf(&str, "test <<  | hello %*s %hhn %i | ", padding, NULL, &pa, pa);
 free(str);
 if (po != pa)
     ft_printf("(hh) Error %i != %i \n", po, pa);

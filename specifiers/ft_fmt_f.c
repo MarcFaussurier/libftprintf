@@ -50,9 +50,10 @@ char            *ft_fmt_f(t_specifier_state state, va_list ap)
     if (state.precision == NO_PRECISION || !state.precision)
         state.precision = 6;                  
     state.precision += ft_strchr(num, '.') - num + 1;
+    state.flags.zero = 0;
     out = ft_stoa(state, STRING, num);        
     free(num);                                
-    ft_round_f(out);                          
+    ft_round_f(out);   
     return (out);
 }
 

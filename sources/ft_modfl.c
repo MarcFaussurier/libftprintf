@@ -86,12 +86,13 @@ char            *ft_modld_toa(long double n, long double *i, long double *r, con
             o[0][0] = '-';
     }
     k = n;
+    s -= 1;
     while (s >= 0)
     {
         e = ft_pow(bl, s);
         c = k / e;
         if (b)
-            o[0][p - s] = b[c];
+            o[0][p - s - 1] = b[c];
         k -= c * e;
         s -= 1;
     }

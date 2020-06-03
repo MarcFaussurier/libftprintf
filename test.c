@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/05/25 15:18:09 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/06/03 22:33:48 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -1563,7 +1563,13 @@ np = 0;
 printf("%s %s %*s %hhn  \n", NULL,NULL, 5000000, NULL, &np);   
 printf("%i\n", np);                          
 (test(&n, "ok %Lf", (long double)0.42L));    
-(test(&n, "ok %Lf", (long double)0.99999999999998L));    
+(test(&n, "ok %Lf", (long double)0.1L));   
+(test(&n, "ok %Lf", (long double)-15.1L));   
+(test(&n, "ok %Lf", (long double)15.1L));   
+(test(&n, "ok %Lf", (long double)-151.1L));   
+(test(&n, "ok %Lf", (long double)151.1L));   
+(test(&n, "ok %.6Lf", (long double)0.1L));   
+(test(&n, "ok %Lf", (long double)0.9999999999999999999999999999999999999L));    
 (test(&n, "ok %Lf", (long double)0.4255555555555555555555555555555555555L));
 (test(&n, "ok %Lf", (long double)0.4222222222222222222222222222222222222L));
 (test(&n, "|%#01o| |%#0.10o| |%#010o| |%#0-10o| |%#0+10o| |%#0+10.o| |%#0-10.o|\n", 0, 0, 0, 0, 0, 0, 0));

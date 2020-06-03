@@ -65,6 +65,7 @@ char            *ft_fmt_f(t_specifier_state state, va_list ap)
     }
     swp[y] = 0;
     out = ft_stoa(state, STRING, swp);        
+    free(swp);
     free(num);                                
     ft_round_f(out);   
     return (out);

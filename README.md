@@ -11,7 +11,16 @@ Reproduction of printf, with 64 bits int and 80 bits long double. Also implement
 * delete a specifier simply before calling your printf using ft_delete_specifier()
 
 ### notes
-* %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regular padding/precision :)
+* %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regular padding/precision. Also 
+```c
+ft_printf("%#b", sizeof(long double), &x)
+```
+will display the long double x. But for regular types, for example 
+```c
+ft_printf("%zb", &x)
+```
+will be enough for a size_t.
+
 * gcc ... -D AT_EXIT=1 ... compilation flag will enable the use of a global variable for storing specifier to callback associations, this global variable will then be freed at exit, using stdlib.h's atexit()
 * gcc ... -D LDMAXPRECISION=1024 ... compilation will modify the max precision that printf will use for handling long doubles.
 * all functions that exist with a larger type will use the one with a larger type for avoiding repetitions 

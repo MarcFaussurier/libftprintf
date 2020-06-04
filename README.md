@@ -1,5 +1,5 @@
 ## libftprintf de [mfaussur](mailto:mfaussur@student.42lyon.fr?subject=[GitHub:%20libftprintf]%20) 🇫🇷🇪🇺🌍
-Reproduction of closed-source official apple's macos printf, with 64-bits integers, 80-bits floating points, undefined behaviours, and a new %b specifier to work with binary data so easily (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility.
+Reproduction of official closed-source apple's macos printf, with 64-bits integers, 80-bits floating points, undefined behaviours, and a new %b specifier to work with binary data so easily (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility.
 
 
 ### primitives

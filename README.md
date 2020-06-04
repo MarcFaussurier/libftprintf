@@ -1,5 +1,5 @@
 ## libftprintf
-Reproduction of printf, with 64-bits integers, 80-bits floating points, and a new %b specifier (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility.
+Reproduction of printf, with 64-bits integers, 80-bits floating points, and a new %b specifier to work with binary data so easily (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility.
 
 ### primitives
 * unistd.h&nbsp;&nbsp;&nbsp;&nbsp;read()&nbsp;&nbsp;&nbsp;write()

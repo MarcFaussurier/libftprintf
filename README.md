@@ -34,7 +34,8 @@ ft_printf("%zb", &x)
 * %Lf&nbsp;is different from original %Lf flag under macos when the decimal part of a long double exeeds 16-18 digits
 * %ls and %lc dont support unicode after a setlocale() because we are not allowed to rely on it, so I use the default behaviour and I dont rely on any utf conversion. No garbage in - garbage out.
 
+
 ## Coming soon 
-[ ] %e
-[ ] %a 
-[ ] %g
+- [ ] %e
+- [ ] %a 
+- [ ] %g

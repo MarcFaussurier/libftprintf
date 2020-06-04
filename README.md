@@ -13,7 +13,7 @@ Reproduction of official apple's closed-source printf used in MacOS 10.13, with 
 Both funtions rely on AT_EXIT=1 (cf. notes). 
 
 ### notes
-* %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regulars padding/precision. Also 
+* %b for working with binary data a pointer. 
 ```c
 long double x;
 
@@ -21,7 +21,7 @@ x = 1;
 ft_printf("%#b", sizeof(long double), &x)
 ->  01101000 11001010 01101011 10111111 00011000 10100100 00111111 11111111 10000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
 ```
-will display the long double x. But for regular types, you can also use the regular qualifiers.
+For regular types, you can also use the regular qualifiers.
 ```c
 size_t x;
 

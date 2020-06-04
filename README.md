@@ -19,7 +19,7 @@ x = 1;
 ft_printf("%#b", sizeof(long double), &x)
 ->  01101000 11001010 01101011 10111111 00011000 10100100 00111111 11111111 10000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
 ```
-will display the long double x. But for regular types, for example 
+will display the long double x. But for regular types, you can also use the regular qualifiers.
 ```c
 size_t x;
 

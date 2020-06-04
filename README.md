@@ -1,6 +1,5 @@
 ## libftprintf de [mfaussur](mailto:mfaussur@student.42lyon.fr?subject=[GitHub:%20libftprintf]%20) 🇫🇷🇪🇺🌍
-Reproduction of official apple's closed-source printf used in MacOS 10.13, with 64-bits integers, 80-bits floating points, undefined behaviours, and a new %b specifier to work with binary data so easily (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility.
-
+Reproduction of official apple's closed-source printf used in MacOS 10.13, with 64-bits integers, 80-bits floating points, undefined behaviours, and a new %b specifier to work with binary data so easily (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility. This project targets the AINSI C99 specification.
 
 ### primitives
 * unistd.h&nbsp;&nbsp;&nbsp;&nbsp;read()&nbsp;&nbsp;&nbsp;write()

@@ -11,6 +11,8 @@ Reproduction of official apple's closed-source printf used in MacOS 10.13, with 
 * register a specifier simply before calling your printf using ft_register_specifier()
 * delete a specifier simply before calling your printf using ft_delete_specifier()
 
+Both funtions rely on AT_EXIT=1 (cf. notes). 
+
 ### notes
 * %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regulars padding/precision. Also 
 ```c

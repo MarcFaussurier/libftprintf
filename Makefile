@@ -29,6 +29,10 @@ norme:
 test:		$(NAME) $(CSRC)	$(TEST_SRC)	
 	$(CC) $(TEST_SRC) $(NAME) -o $(TEST)
 	./$(TEST)
+rtest:
+	./$(TEST)
+valtest:
+	valgrind --leak-check=full ./$(TEST)
 $(NAME):	$(COBJ)
 	@cd libft && make bonus
 	$(AR) $(NAME) $(COBJ) $(shell ls libft/*.o)

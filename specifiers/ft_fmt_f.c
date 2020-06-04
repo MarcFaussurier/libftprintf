@@ -31,13 +31,13 @@ void            ft_round_f(char *num)
     return ;
 }
 
-char            *ft_fmt_f(t_specifier_state state, va_list ap)
+char                *ft_fmt_f(t_specifier_state state, va_list ap)
 {
-    char    *num;
-    char    *out;
-    char    *swp;
-    size_t  y;
-    size_t  z;
+    char            *num;
+    char            *out;
+    char            *swp;
+    size_t          y;
+    size_t          z;
 
     if (!ft_strlen(state.qualifiers))
         num = ft_ftoa((float) va_arg(ap, double));
@@ -51,23 +51,30 @@ char            *ft_fmt_f(t_specifier_state state, va_list ap)
         return (NULL);                        
     if (state.precision == NO_PRECISION || !state.precision)
         state.precision = 6;                  
-    state.precision += ft_strchr(num, '.') - num + 1;
-    swp = malloc(state.precision);
-    y = 0;
-    z = ft_strlen(num);
-    while (y < (size_t)(state.precision))
+    if (ft_strchr(num, '.'))
     {
-        if (y < z)
-            swp[y] = num[y];
-        else
-            swp[y] = '0';
-        y += 1;
+        state.precision += ft_strchr(num, '.') - num + 1;
+        swp = malloc(state.precision);
+        y = 0;
+        z = ft_strlen(num);
+        while (y < (size_t)(state.precision))
+        {
+            if (y < z)
+                swp[y] = num[y];
+            else
+                swp[y] = '0';
+            y += 1;
+        }
+        swp[y] = 0;
+        out = ft_stoa(state, STRING, swp);        
+        free(swp);
+        free(num);                                
+        ft_round_f(out);   
     }
-    swp[y] = 0;
-    out = ft_stoa(state, STRING, swp);        
-    free(swp);
-    free(num);                                
-    ft_round_f(out);   
+    else
+    {
+        out = ft_stoa(state, STRING, num);        
+    }
     return (out);
 }
 
@@ -77,10 +84,9 @@ char            *ft_fmt_f(t_specifier_state state, va_list ap)
 
 
 
-                                              
-                                              
-                                              
-                                              
-                                              
-                                              
-                                              
+
+
+
+
+
+

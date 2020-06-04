@@ -23,7 +23,6 @@ char        *ft_fmt_b(t_specifier_state state, va_list ap)
         size = sizeof(char);
     else
         size = sizeof(int);
-    printf("size: %zu | sizeofint: %zu | qualifiers: %s \n", size, sizeof(int), state.qualifiers);
     arg = va_arg(ap, void*);
     swp = ft_btoa(arg, size);
     output = ft_stoa(state, STRING, swp);

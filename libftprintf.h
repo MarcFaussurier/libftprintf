@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/06/04 10:56:50 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/06/04 14:37:08 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,15 +38,11 @@
 # define zz "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
 typedef enum                        e_ld_states
 {
-    NORMAL,
-    DENORMAL,
-    ZERO,
-    INFINITY,
-    NOT_A_NUMBER,
-    QUIET_NOT_A_NUMBER,
-    QUIET_NOT_A_NUMBER_INVALID_OP,
-    CANT_BE_GEN,
-    INVALID_OP
+    FP_NORMAL,
+    FP_SUBNORMAL,
+    FP_ZERO,
+    FP_INFINITE,
+    FP_NAN,
 }                                   t_ld_state;
 typedef enum                        e_fmt_types
 {
@@ -55,7 +51,7 @@ typedef enum                        e_fmt_types
     FLOAT_NUMBER,
     WSTRING,
     STRING,
-    CHAR
+    CHAR,
 }                                   t_fmt_type;
 typedef union                       u_wchar
 {

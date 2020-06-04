@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/06/04 10:16:54 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/06/04 16:08:27 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -1562,8 +1562,14 @@ int np;
 np = 0;                                                        
 printf("%s %s %*s %hhn  \n", NULL,NULL, 5000000, NULL, &np);   
 printf("%i\n", np);                          
-(test(&n, "ok %Lf", (long double)0.42L));    
-(test(&n, "ok %Lf", (long double)0.1L));   
+
+ft_printf("mine: %Lf\n", ((long double)0L / 0));
+printf("libc: %Lf\n", ((long double)0L / 0));
+
+ft_printf("mine: %Lf\n", ((long double)1L / 0));
+printf("libc: %Lf\n\n\n", ((long double)1L / 0));
+(test(&n, "ok %Lf\n", (long double)0.42L));    
+(test(&n, "ok %Lf\n", (long double)0.1L));   
 long double         pf = (long double)1/0L;
 printf("str: %Lf\t\t    state: %i\n", pf, ft_read_state_ld(pf));
 (test(&n, "ok %Lf", (long double)-15.1L));   

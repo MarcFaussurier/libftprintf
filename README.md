@@ -37,7 +37,7 @@ ft_printf("%zb", &x)
 * %ls and %lc dont support unicode after a setlocale() because we are not allowed to rely on it (cf. primitives), so I use the default behaviour and I dont rely on any utf conversion. No garbage in - garbage out.
 
 
-### Coming soon 
+### coming soon 
 - [ ] %e
 - [ ] %a 
 - [ ] %g

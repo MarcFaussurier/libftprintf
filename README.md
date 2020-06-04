@@ -1,4 +1,4 @@
-## [mfaussur's](mailto:mfaussur@student.42lyon.fr?subject=[GitHub:%20libftprintf]%20) libftprintf
+## [mfaussur](mailto:mfaussur@student.42lyon.fr?subject=[GitHub:%20libftprintf]%20)'s libftprintf
 Reproduction of printf, with 64-bits integers, 80-bits floating points, and a new %b specifier to work with binary data so easily (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility.
 
 

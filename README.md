@@ -11,7 +11,7 @@ Reproduction of printf, with 64-bits integers, 80-bits floating points, and a ne
 * delete a specifier simply before calling your printf using ft_delete_specifier()
 
 ### notes
-* %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regular padding/precision. Also 
+* %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regulars padding/precision. Also 
 ```c
 long double x;
 

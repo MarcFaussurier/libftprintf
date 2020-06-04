@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/12 09:18:18 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/06/04 16:08:27 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/06/04 18:31:19 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -1565,6 +1565,9 @@ printf("%i\n", np);
 
 ft_printf("mine: %Lf\n", ((long double)0L / 0));
 printf("libc: %Lf\n", ((long double)0L / 0));
+
+ft_printf("mine: %Lf\n", ((long double)-1L / 0));
+printf("libc: %Lf\n\n\n", ((long double)-1L / 0));
 
 ft_printf("mine: %Lf\n", ((long double)1L / 0));
 printf("libc: %Lf\n\n\n", ((long double)1L / 0));

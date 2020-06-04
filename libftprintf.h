@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/06/04 14:37:08 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/06/04 18:33:30 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,9 +39,10 @@
 typedef enum                        e_ld_states
 {
     FP_NORMAL,
-    FP_SUBNORMAL,
     FP_ZERO,
-    FP_INFINITE,
+    FP_INFINITY,
+    FP_MINUS_INFINITY,
+    FP_SUBNORMAL,
     FP_NAN,
 }                                   t_ld_state;
 typedef enum                        e_fmt_types

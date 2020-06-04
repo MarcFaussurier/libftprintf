@@ -8,6 +8,10 @@ char            *ft_ldtoa(long double n)
     if (ft_isnanl(n))
         return (ft_strdup("nan"));
     else if (ft_isinfl(n))
-        return (ft_strdup("inf"));
+    {
+        if (n > 0)
+            return (ft_strdup("inf"));
+        return (ft_strdup("-inf"));
+    }
     return (ft_modld_toa(n, &i, &r, b10));
 }

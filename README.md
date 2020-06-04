@@ -1,5 +1,5 @@
 ## libftprintf
-Reproduction of printf, with 64 bits int and 80 bits long double. Also implementation speed was not a goal, priority was more in code clarity and extensibility. This project is still under construction.
+Reproduction of printf, with 64-bits integers, 80-bits floating points, and a new %b specifier (cf. notes). Also implementation speed was not a goal, priority was more in code clarity and extensibility.
 
 ### primitives
 * unistd.h&nbsp;&nbsp;&nbsp;&nbsp;read()&nbsp;&nbsp;&nbsp;write()
@@ -33,4 +33,8 @@ ft_printf("%zb", &x)
 * all functions that exist with a larger type will use the one with a larger type for avoiding repetitions 
 * %Lf&nbsp;is different from original %Lf flag under macos when the decimal part of a long double exeeds 16-18 digits
 * %ls and %lc dont support unicode after a setlocale() because we are not allowed to rely on it, so I use the default behaviour and I dont rely on any utf conversion. No garbage in - garbage out.
-* %e %a %g are not present yet
+
+## Coming soon 
+[ ] %e
+[ ] %a 
+[ ] %g

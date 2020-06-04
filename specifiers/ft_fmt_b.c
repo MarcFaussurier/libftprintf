@@ -7,26 +7,24 @@ char        *ft_fmt_b(t_specifier_state state, va_list ap)
     size_t  size;
     void    *arg;
 
-    arg = va_arg(ap, void*);
     if (state.flags.sharp)
-    {
-
         size = va_arg(ap, size_t);
-        printf("found sharp... %zu\n", size);
-    }
-    else if (!ft_strlen(state.qualifiers) || !ft_strncmp(state.qualifiers, "l", 2))
-        size = 4;
-    else if (!ft_strncmp(state.qualifiers, 
-                "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllll",
-                ft_strlen(state.qualifiers)
-                ))
-        size = ft_strlen(state.qualifiers) + 4;
+    else if (!ft_strlen(state.qualifiers))
+        size = sizeof(int);
+    else if (!ft_strncmp(state.qualifiers, zz, ft_strlen(state.qualifiers)))
+        size = sizeof(size_t);
+    else if (!ft_strncmp(state.qualifiers, "ll", 2) || !ft_strncmp(state.qualifiers, "zl", 2))
+        size = sizeof (long long);
+    else if (!ft_strncmp(state.qualifiers, "l", 2))
+        size = sizeof (long);
     else if (!ft_strncmp(state.qualifiers, "h", 2))
-        size = 2;
+        size = sizeof(short);
+    else if (!ft_strncmp(state.qualifiers, "hh", 3))
+        size = sizeof(char);
     else
-        size = 1;
-
-    printf("size: %zu | %Lf | %zu\n", size, *((long double*)arg), sizeof(long double));
+        size = sizeof(int);
+    printf("size: %zu | sizeofint: %zu | qualifiers: %s \n", size, sizeof(int), state.qualifiers);
+    arg = va_arg(ap, void*);
     swp = ft_btoa(arg, size);
     output = ft_stoa(state, STRING, swp);
     free(swp);

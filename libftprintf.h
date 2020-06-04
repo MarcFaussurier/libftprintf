@@ -6,7 +6,7 @@
 /*   By: mfaussur <mfaussur@student.le-101.>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2020/02/05 08:27:16 by mfaussur     #+#   ##    ##    #+#       */
-/*   Updated: 2020/05/25 14:45:30 by mfaussur         ###   ########lyon.fr   */
+/*   Updated: 2020/06/04 10:56:50 by mfaussur         ###   ########lyon.fr   */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,6 +34,8 @@
 # ifndef AT_EXIT
 #  define AT_EXIT 0
 # endif
+# define ll "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"
+# define zz "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
 typedef enum                        e_ld_states
 {
     NORMAL,

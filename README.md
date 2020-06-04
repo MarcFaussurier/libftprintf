@@ -13,7 +13,7 @@ Reproduction of official apple's closed-source printf used in MacOS 10.13, with 
 Both funtions rely on AT_EXIT=1 (cf. notes). 
 
 ### notes
-* %b for working with binary data using a pointer. 
+* use %b to work with binary data using a pointer. 
 ```c
 long double x;
 

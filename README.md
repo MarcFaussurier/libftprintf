@@ -14,10 +14,12 @@ Reproduction of printf, with 64 bits int and 80 bits long double. Also implement
 * %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regular padding/precision. Also 
 ```c
 ft_printf("%#b", sizeof(long double), &x)
+->  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 00000000 00000000 00000000 00000000 00000000
 ```
 will display the long double x. But for regular types, for example 
 ```c
 ft_printf("%zb", &x)
+->  00000000 00000000 00000000 00000001
 ```
 will be enough for a size_t.
 

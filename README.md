@@ -13,15 +13,20 @@ Reproduction of printf, with 64 bits int and 80 bits long double. Also implement
 ### notes
 * %b for displaying binary representation of a mem area using a pointer, with a space between each byte, qualifiers for its size, and regular padding/precision. Also 
 ```c
+long double x;
+
+x = 1;
 ft_printf("%#b", sizeof(long double), &x)
-->  00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 00000000 00000000 00000000 00000000 00000000
+->  01101000 11001010 01101011 10111111 00011000 10100100 00111111 11111111 10000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
 ```
 will display the long double x. But for regular types, for example 
 ```c
+size_t x;
+
+x = 1;
 ft_printf("%zb", &x)
 ->  00000000 00000000 00000000 00000001
 ```
-will be enough for a size_t.
 
 * gcc ... -D AT_EXIT=1 ... compilation flag will enable the use of a global variable for storing specifier to callback associations, this global variable will then be freed at exit, using stdlib.h's atexit()
 * gcc ... -D LDMAXPRECISION=1024 ... compilation will modify the max precision that printf will use for handling long doubles.

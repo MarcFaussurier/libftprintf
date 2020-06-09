@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mfaussur <mfaussur@student.le-101.fr>      +#+  +:+       +#+        */
+/*   By: mfaussur <mfaussur@student.le-101.>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 10:10:37 by mfaussur          #+#    #+#             */
 /*   Updated: 2020/04/10 10:10:40 by mfaussur         ###   ########lyon.fr   */

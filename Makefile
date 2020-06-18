@@ -34,6 +34,8 @@ rtest:
 valtest:
 	valgrind --leak-check=full ./$(TEST)
 $(NAME):	$(COBJ)
+	/usr/bin/git submodule init
+	/usr/bin/git submodule update
 	@cd libft && make bonus
 	$(AR) $(NAME) $(COBJ) $(shell ls libft/*.o)
 	ranlib $(NAME)

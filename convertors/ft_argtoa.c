@@ -65,7 +65,6 @@ static char*	        ft_read_qualifiers(char const **fmt)
 {
 	char                *qualifiers;
 	unsigned char		i;
-    t_list              *o;
 	char				max;
 	unsigned char		y;
 
